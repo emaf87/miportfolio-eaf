@@ -1,0 +1,20 @@
+{
+	"nameForm": "Emmanuel F",
+    "nacionality" : "argentino/italiano",
+	"edad": 34,
+	"city": "valencia",
+    "education":[{ 
+        "grade":"universitario",
+	    "degreeForm": "tecnico electronico",
+	    "lugar": "utn",
+        "started": 2006,
+        "ended":2015},
+        {
+        "grade":"secundario",
+        "degreeForm": "Bachiller tecnico",
+	    "lugar": "ESIL",
+        "started": 2000,
+        "ended":2005}],
+
+    "img":"https://appsdejoseluis.com/wp-content/uploads/2020/04/face_co.png"
+}

@@ -1,0 +1,262 @@
+/*--------DETAILS--------*/
+
+li {
+  list-style: none;
+}
+
+#details {
+  display: block;
+  background-color: rgba(88, 152, 220, 0.775);
+  padding: 5rem 0;
+  box-shadow: 0 0 10px 10px rgba(88, 152, 220, 0.775);
+  animation: menu 4s ease-in 1;
+}
+
+.details-text {
+  font-size: 2.5rem;
+  font-family: 'Bebas Neue', cursive;
+  text-align: center;
+  
+}
+
+.datos-div{
+  width: 100%;
+  margin: 0 auto;
+}
+
+.datos-div p{
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 75%;
+  margin: 0 auto;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+strong{
+ margin-right: 10px;
+}
+
+.datos-ul{
+  padding: 15px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  margin: 0 auto;
+  max-width: 75%;
+
+}
+
+
+.details-tb{
+  display: flex;
+}
+
+.btn-edit {
+  margin-left: 20px;
+  background: none;
+  border: none;
+}
+
+.details-title {
+  font-size: 5rem;
+  width: 100%;
+  text-align: center;
+  margin: 7rem 0 5rem 0;
+  font-family: 'Titan One', cursive;
+}
+
+.details-acerca {
+  text-align: center;
+}
+
+.new-div{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.newform-div{
+  width: 75%;
+  
+}
+
+.details-div {
+  max-width: 100%;
+  flex-grow: 1;
+  margin: 0;
+  text-align: left;
+  
+}
+
+
+.exp-div{
+  
+  display: inline-flex;
+  margin: 20px 20%;
+  justify-content: left;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  
+
+}
+
+.img-div{
+  display: flex;
+  align-items: center;
+}
+
+.div-cero{
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  color: white;
+  letter-spacing: 2px;
+}
+
+.align-div{
+  display: flex;
+  align-items: center;
+}
+
+.align-div ul{
+  margin: 0;
+}
+
+.datos-edit {
+  width: 100%;
+  
+}
+
+.datos-edit input {
+  display: block;
+  margin: 0 auto 20px auto;
+}
+
+
+
+.details-img {
+  border-radius: 5px;
+ 
+}
+
+.agregar-btn {
+  border-radius: 50%;
+  border: rgb(0, 0, 0) 3px solid;
+  width: 4rem;
+  height: 4rem;
+  box-shadow: 0px 0px 7px 5px rgb(3, 99, 21);
+}
+
+input {
+  width: 100%;
+  text-align: center;
+  border-radius: 5px;
+  border: none;
+  margin-top: 5px;
+}
+
+
+
+h1 button {
+  border: none;
+  background: none;
+}
+
+form div {
+  width: 100%;
+
+}
+
+
+
+form {
+  width: 100%;
+  text-align: center;
+}
+.div-text{
+  margin: 0 auto;
+}
+
+.div-text input {
+  max-width: 75%;
+}
+
+.butn-form {
+
+  margin-top: 20px;
+  padding: 3px 10px;
+  border-radius: 5px;
+
+  font-family: sans-serif;
+  font-weight: bold;
+  letter-spacing: 5px;
+}
+
+.guardar {
+  color: white;
+  background-color: rgb(33, 105, 18);
+  margin-right: 20px;
+}
+
+.cancelar {
+  color: white;
+  background-color: black;
+}
+
+.inputForm {
+  width: 100%;
+}
+
+.inputForm li{
+  margin-top: 10px;
+} 
+
+.elim1{
+  width: 4rem;
+  height: 4rem;
+}
+
+.elim2{
+  display: none;
+  overflow: hidden;
+  width: 3.2rem;
+  height: 4rem;
+  background-color: rgba(180, 174, 174, 0);
+}
+
+.btn-elim:hover .elim1{
+display: none;
+overflow: hidden;
+}
+
+
+.btn-elim:hover .elim2{
+display: block;
+margin-bottom: -1.2rem;
+transform: scale(110%);
+
+}
+
+.btn-elim{
+ border: none;
+  background-color: rgba(180, 174, 174, 0);
+  margin-left: 10px;
+}
+.btn-edit img{
+  width: 6rem;
+  height: 3rem;
+}
+
+.btn-edit:hover{
+  transform: scale(110%);
+}
+
+.agregar-btn:hover{
+  transform: scale(110%);
+}
+
+.btn-elim:hover{
+  
+  background-color: red;
+  padding: 5px 5px 15px 5px;
+  border-radius: 25%;
+  }

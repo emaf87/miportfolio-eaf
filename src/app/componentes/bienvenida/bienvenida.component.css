@@ -1,0 +1,41 @@
+/*----------WELCOME-----*/
+
+#welcome-section {
+  font-family: 'Fredoka One', cursive;
+  overflow: hidden;
+  width: 100%;
+  max-height: 700px;
+  background: black;
+  color: white;
+  text-align: center;
+  letter-spacing: 1rem;
+  box-shadow: 0 0 10px 10px gray;
+  animation: menu 4s ease-in 1;
+}
+
+.welcome-img {
+  z-index: 0;
+  width: 50%;
+  float: right;
+
+}
+
+.welcome-img img {
+  margin-top: -5rem;
+  height: 90rem;
+  border-radius: 70% 50%;
+}
+
+.welcome-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  line-height: 12rem;
+  transform: scale(120%);
+}
+
+.welcome-text h4 {
+  font-weight: normal;
+
+}

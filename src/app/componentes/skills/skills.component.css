@@ -1,0 +1,201 @@
+section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    animation: menu 4s ease-in 1;
+    background-color:  rgba(3, 99, 21, 0.674);
+    box-shadow: 0 0 10px 10px rgba(13, 62, 22,0.8);
+    padding: 50px 0 100px 0;
+}
+
+.div-cero{
+  font-size: 2.5rem;
+  font-family: 'Bebas Neue', cursive;
+  color: white;
+  letter-spacing: 2px;
+}
+
+p{
+  font-size: 5rem;
+  font-family: 'Titan One', cursive;
+  font-weight: normal;
+}
+
+.new-div{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.newform-div{
+  width: 75%;
+  
+}
+
+.skill{
+    font-size: 2rem;
+    width: 50%;
+    margin: 5rem auto;
+    text-align: center;
+}
+
+ul li{
+    list-style: none;
+    margin-top: 15px;
+}
+
+button{
+    background: none;
+    border: none;
+    margin-left: 20px;
+    align-content: center;
+}
+
+
+  .agregar-btn{
+    border-radius: 50%;
+    border: rgb(0, 0, 0) 3px solid;
+    width: 4rem;
+    height: 4rem;
+    box-shadow: 0px 0px 7px 5px rgba(120, 9, 9, 0.789);
+    
+  }
+  
+  input{
+    width: 100%;
+    border-radius: 5px;
+    margin-top: 5px;
+    text-align: center;
+    font-weight: bold;
+  }
+
+ 
+
+  h1 button{
+    border: none;
+    background: none;
+  }
+
+  form div{
+    width: 100%;
+  }
+
+
+
+ form{
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+ }
+
+ .div-text input{
+  max-width: 75%;
+ }
+
+ .butn-form{
+  
+  margin-top: 20px;
+  padding: 3px 10px;
+  border-radius: 5px;
+  
+  font-family: sans-serif;
+  font-weight: bold;
+  letter-spacing: 5px;
+}
+
+.guardar{
+  color:white;
+  background-color: rgb(33, 105, 18);
+  margin-right: 20px;
+}
+
+.cancelar{
+  color: white;
+  background-color: black;
+}
+
+.inputForm{
+  width: 100%;
+}
+
+.skill-space {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.progress{
+    height: 3rem;
+    font-size: 2rem;
+    border-radius: 15px;
+}
+
+.progress-bar{
+    background-color: red;
+    animation: barra 4s 1 linear;
+}
+
+
+  
+  .elim1{
+    height:4rem ;
+     width:4rem;
+  }
+  .elim2{
+    display: none;
+    overflow: hidden;
+    height:4rem;
+     width:3rem;
+  }
+
+ 
+  
+ .btn-elim:hover .elim1{
+  display: none;
+  overflow: hidden;
+ }
+
+
+ .btn-elim:hover .elim2{
+  display: block;
+  margin-right: 10px;
+ }
+
+
+.btn-edit:hover{
+  transform: scale(110%,110%);
+}
+
+.agregar-btn:hover{
+  transform: scale(110%);
+}
+
+@keyframes barra{
+    0%{
+      
+      transform:translate(-100%);
+    }
+  
+
+  
+    100%{
+      transform:translate(0%);
+    }
+
+}
+
+.btn-edit img{
+  max-width: 6rem;
+  height: 3rem;
+  
+}
+
+.btn-elim:hover{
+  margin-top: -10px;
+  padding: 5px 5px 5px 5px;
+  border-radius: 25%;
+  background-color: red;
+  }

@@ -1,0 +1,70 @@
+<section id='projects' class='section'>
+  <div class="fondo-blanco">
+
+    <div class='projects-sec-title'>
+      <p>HTML & CSS Projects<button *ngIf="isUserLogin" (click)="toogleNewProyect()"><img class="agregar-btn"
+            src="../../../assets/img/agregar2.jpg" alt="agregar"></button></p>
+    </div>
+
+    <div *ngIf="isNewProyect" class="new-div">
+      <ul>
+        <form class="inputForm" [formGroup]="proyectForm" (ngSubmit)="onSaveNewProyect($event)">
+          <li>Nombre del nuevo proyecto: <input class="input-form" type="text" formControlnameForm="nameFormForm"></li>
+          <li>Direccion URL: <input class="input-form" type="text" formControlnameForm="urlForm"></li>
+          <li>Imagen: <input class="input-form" type="text" formControlnameForm="imgForm"></li>
+          <button class="butn-form guardar" type="submit">Guardar</button><button class="butn-form cancelar"
+            type="reset" (click)="toogleNewProyect()">Cancelar</button>
+        </form>
+      </ul>
+    </div>
+
+    <div class="project-ti">
+      <div *ngFor="let proy of proyectsList, index as i">
+        <div class="fondo-ext" *ngIf="proy.id!=0 && isProyectEdit!=proy.id">
+          <div class="btn-div">
+            <button class="btn-edit" *ngIf="isUserLogin && isProyectEdit!=proy.id" (click)="toogleProyectEdit(proy.id, i)">
+              <img src="../../../assets/img/edit2.png" alt="edit">
+            </button>
+            <button class="btn-elim" *ngIf="isUserLogin && isProyectEdit!=proy.id" type="submit"
+              (click)="onDeleteProyect(i)">
+              <img src="../../../assets/img/eliminar.png" alt="edit" class="elim1">
+              <img src="../../../assets/img/eliminar-hover.png" alt="edit" class="elim2">
+            </button>
+          </div>
+
+          <div class="card">
+            <a [href]="proy.url">
+              <div class='project-div'>
+                <div class='project-div-img'>
+                  <img class='project-img' src="../../../assets/img/{{proy.img}}">
+                </div>
+                <div class='project-div-title'>
+                  <div class='project-title'>{{proy.nameForm}}</div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div *ngIf="isProyectEdit==proy.id && proy.id!=0" class="new-div">
+          <ul>
+            <form class="inputForm" [formGroup]="proyectForm" (ngSubmit)="onSaveProyectEdit($event, i)">
+              <li>Nombre del proyecto: <input class="input-form" type="text" formControlnameForm="nameFormForm">
+              </li>
+              <li>Direccion URL: <input class="input-form" type="text" formControlnameForm="urlForm"></li>
+              <li>Imagen: <input class="input-form" type="text" formControlnameForm="imgForm"></li>
+              <button class="butn-form guardar" type="submit">Guardar</button><button class="butn-form cancelar"
+                type="reset" (click)="toogleProyectEdit(0,0)">Cancelar</button>
+            </form>
+          </ul>
+        </div>
+        <div *ngIf="proy.id==0 && !isUserLogin" class="div-cero">
+          <h2>Inicie sesión para agregar un nuevo proyecto</h2>
+        </div>
+        <div *ngIf="proy.id==0 && isUserLogin && !isNewProyect" class="div-cero">
+          <h2>Agregue un nuevo proyecto para visualizarlo aquí</h2>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
