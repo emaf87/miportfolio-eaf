@@ -16,8 +16,8 @@
         <li *ngIf="personalDetailsList[0].degree!=''"><strong>Titulo: </strong> {{personalDetailsList[0].degree}}</li>
         <li *ngIf="personalDetailsList[0].city!=''"><strong>Originario de: </strong> {{personalDetailsList[0].city}}
         </li>
-        <li *ngIf="personalDetailsList[0].nacionality!=''"><strong>Nacionalidad </strong>
-          {{personalDetailsList[0].nacionality}}</li>
+        <li *ngIf="personalDetailsList[0].nationality!=''"><strong>Nacionalidad </strong>
+          {{personalDetailsList[0].nationality}}</li>
       </ul>
     </div>
 
@@ -28,7 +28,7 @@
       <div class="div-text"><strong>Apellido: </strong><input type="text" formControlName="lastnameForm"></div>
       <div class="div-text"><strong>Titulo: </strong><input type="text" formControlName="degreeForm"></div>
       <div class="div-text"><strong>Originario de:</strong> <input type="text" formControlName="cityForm"></div>
-      <div class="div-text"><strong>Nacionalidad: </strong><input type="text" formControlName="nacionalityForm"></div>
+      <div class="div-text"><strong>Nacionalidad: </strong><input type="text" formControlName="nationalityForm"></div>
 
       <div class="div-btn">
         <button class="butn-form guardar" type="submit">Guardar</button>
@@ -38,7 +38,7 @@
   </div>
 
 
-  <!------------------------------------SECCION experience-------------------------------------------->
+  <!------------------------------------SECCION EXPERIENCIA-------------------------------------------->
 
   <div class='details-text'>
     <h1 class='details-title'>Experiencia <button *ngIf="isUserLogin" (click)="toogleNewExperience()"><img
@@ -118,7 +118,7 @@
   </div>
   <hr>
 
-  <!------------------------------------SECCION education-------------------------------------------->
+  <!------------------------------------SECCION EDUCACION-------------------------------------------->
   <div class="details-text">
     <h1 class='details-title'>Educación <button *ngIf="isUserLogin" (click)="toogleNewEducation()">
         <img class="agregar-btn" src="../../../assets/img/agregar2.jpg" alt="agregar">
@@ -180,7 +180,7 @@
               <li><strong>Institución:</strong> <input class="input-form" type="text"
                   formControlName="educationInstitutionForm"></li>
               <li><strong>Fecha started:</strong><input class="input-form" type="text"
-                  formControlName="experienceStartedForm"></li>
+                  formControlName="educationStartedForm"></li>
               <li><strong> Fecha ended:</strong><input class="input-form" type="text"
                   formControlName="educationEndedForm"></li>
               <li><strong>Logo:</strong><input class="input-form" type="text" formControlName="educationLogoForm"></li>

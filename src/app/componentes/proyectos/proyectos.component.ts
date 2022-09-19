@@ -24,9 +24,9 @@ export class ProyectosComponent implements OnInit {
     private formBuilder: FormBuilder) {
 
     this.proyectForm = this.formBuilder.group({
-      nameFormForm: ['', Validators.required],
+      nameForm: ['', Validators.required],
       urlForm: ['', Validators.required],
-      imgForm: ['', Validators.required]
+      imageForm: ['', Validators.required]
     })
 
   }
@@ -38,7 +38,7 @@ export class ProyectosComponent implements OnInit {
     this.apiDbService.readDataBase(4).subscribe(data => {
       this.proyectsList = data;
       if (Object.values(this.proyectsList).length == 0) {
-        this.proyectsList.push({ "id": 0, "nameForm": '', "url": '', "img": '' });
+        this.proyectsList.push({ "id": 0, "name": '', "url": '', "image": '' });
       }
     })
   }
@@ -48,9 +48,9 @@ export class ProyectosComponent implements OnInit {
     this.isProyectEdit = id;
     if (this.isProyectEdit != 0) {
       this.proyectForm = this.formBuilder.group({
-        nameFormForm: [this.proyectsList[index].nameForm, Validators.required],
+        nameForm: [this.proyectsList[index].name, Validators.required],
         urlForm: [this.proyectsList[index].url, Validators.required],
-        imgForm: [this.proyectsList[index].img, Validators.required]
+        imageForm: [this.proyectsList[index].image, Validators.required]
       });
     }
   }
@@ -65,9 +65,9 @@ export class ProyectosComponent implements OnInit {
 
   onSaveProyectEdit(event: Event, index: number) {
     event.preventDefault;
-    this.proyectsList[index].nameForm = this.proyectForm.get('nameFormForm')?.value;
+    this.proyectsList[index].name = this.proyectForm.get('nameForm')?.value;
     this.proyectsList[index].url = this.proyectForm.get('urlForm')?.value;
-    this.proyectsList[index].img = this.proyectForm.get('imgForm')?.value;
+    this.proyectsList[index].image = this.proyectForm.get('imageForm')?.value;
     this.isProyectEdit = 0;
     this.apiDbService.editInformation(this.proyectsList[index], 4, this.proyectsList[index].id).subscribe({
       next: () => this.ngOnInit(),
@@ -81,9 +81,9 @@ export class ProyectosComponent implements OnInit {
   onSaveNewProyect(event: Event) {
     event.preventDefault;
     this.proyectsList[0].id = 0;
-    this.proyectsList[0].nameForm = this.proyectForm.get('nameFormForm')?.value;
+    this.proyectsList[0].name = this.proyectForm.get('nameForm')?.value;
     this.proyectsList[0].url = this.proyectForm.get('urlForm')?.value;
-    this.proyectsList[0].img = this.proyectForm.get('imgForm')?.value;
+    this.proyectsList[0].image = this.proyectForm.get('imageForm')?.value;
     this.isNewProyect = false;
     this.apiDbService.newInformation(this.proyectsList[0], 4).subscribe({
       next: () => this.ngOnInit(),

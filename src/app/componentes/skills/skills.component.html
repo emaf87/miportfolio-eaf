@@ -6,9 +6,9 @@
     <div *ngIf="isNewSkill" class="new-div">
         <ul class="newform-div">
             <form class="inputForm" [formGroup]="skillForm" (ngSubmit)="onNewSkill($event)">
-                <li>nameForm de la nueva habilidad: <input class="input-form" type="text" formControlnameForm="nameFormForm">
+                <li>Nombre de la nueva habilidad: <input class="input-form" type="text" formControlName="nameForm">
                 </li>
-                <li>Valor (0-100/agregar signo %): <input class="input-form" type="text" formControlnameForm="valorForm">
+                <li>Valor (0-100/agregar signo %): <input class="input-form" type="text" formControlName="valueForm">
                 </li>
                 <button class="butn-form guardar" type="submit">Guardar</button><button class="butn-form cancelar"
                     type="reset" (click)="toogleNewSkill()">Cancelar</button>
@@ -17,7 +17,7 @@
     </div>
     <div class="skill" *ngFor="let skill of skillsList, index as i">
         <div *ngIf="isSkillEdit!=skill.id" class="skill-space">
-            <h1>{{skill.nameForm}}</h1>
+            <h1>{{skill.name}}</h1>
             <button class="btn-edit" *ngIf="isUserLogin && isSkillEdit!=skill.id"
                 (click)="toogleSkillEdit(skill.id, i)">
                 <img src="../../../assets/img/edit2.png" alt="edit">
@@ -33,13 +33,13 @@
         <div class="skillbar" *ngIf="skill.id!=0">
             <div class="progress " *ngIf="isSkillEdit!=skill.id">
                 <div class="progress-bar progress-bar-striped" role="progressbar" aria-label="Example with label"
-                    [style.width]="skill.valor" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{skill.valor}}
+                    [style.width]="skill.value" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{skill.value}}
                 </div>
             </div>
             <ul *ngIf="isSkillEdit==skill.id">
                 <form class="inputForm" [formGroup]="skillForm" (ngSubmit)="onSaveEditSkill($event, i)">
-                    <li>nameForm de habilidad: <input class="input-form" type="text" formControlnameForm="nameFormForm"></li>
-                    <li>Valor (agregar signo %): <input class="input-form" type="text" formControlnameForm="valorForm"></li>
+                    <li>Nombre de habilidad: <input class="input-form" type="text" formControlName="nameForm"></li>
+                    <li>Valor (agregar signo %): <input class="input-form" type="text" formControlName="valuerForm"></li>
                     <button class="butn-form guardar" type="submit">Guardar</button>
                     <button class="butn-form cancelar" type="reset" (click)="toogleSkillEdit(0, 0)">Cancelar</button>
                 </form>

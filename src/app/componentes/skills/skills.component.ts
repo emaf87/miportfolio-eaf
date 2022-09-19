@@ -19,12 +19,11 @@ export class SkillsComponent implements OnInit {
   isNewSkill = false;
 
   constructor(private apiDbService: ApiDbService,
-    private formBuilder: FormBuilder,
-    private router: Router) {
+    private formBuilder: FormBuilder) {
 
     this.skillForm = this.formBuilder.group({
-      nameFormForm: ['', [Validators.required]],
-      valorForm: ['', [Validators.required]]
+      nameForm: ['', [Validators.required]],
+      valueForm: ['', [Validators.required]]
     })
   }
 
@@ -34,9 +33,6 @@ export class SkillsComponent implements OnInit {
 
     this.apiDbService.readDataBase(3).subscribe(data => {
       this.skillsList = data;
-     /* if (Object.values(this.skillsList).length == 0) {                        //Si la DB esta vacia 
-        //this.skillsList.push({ "id": 0, "nameForm": '', "valor": '' });         //inyecta un elemento vacio
-      }*/
     });
   }
 
@@ -47,8 +43,8 @@ export class SkillsComponent implements OnInit {
     this.isNewSkill = false;
     if (this.isSkillEdit != 0) {
       this.skillForm = this.formBuilder.group({
-        nameFormForm: [this.skillsList[index].nameForm, [Validators.required]],
-        valorForm: [this.skillsList[index].valor, [Validators.required]]
+        nameForm: [this.skillsList[index].nameForm, [Validators.required]],
+        valueForm: [this.skillsList[index].valor, [Validators.required]]
       });
     }
   }
@@ -64,8 +60,8 @@ export class SkillsComponent implements OnInit {
   onSaveEditSkill(event: Event, index: number) {
     event.preventDefault;
     this.isSkillEdit = 0;
-    this.skillsList[index].nameForm = this.skillForm.get('nameFormForm')?.value;
-    this.skillsList[index].valor = this.skillForm.get('valorForm')?.value;
+    this.skillsList[index].nameForm = this.skillForm.get('nameForm')?.value;
+    this.skillsList[index].valor = this.skillForm.get('valueForm')?.value;
     this.skillForm.reset();
     this.apiDbService.editInformation(this.skillsList[index], 3, this.skillsList[index].id).subscribe({
       next: () => this.ngOnInit(),
@@ -73,13 +69,13 @@ export class SkillsComponent implements OnInit {
     });
   }
 
- 
+
 
   //--------------------------------------GUARDAR NUEVA SKILL-------------------------------
 
   onNewSkill(event: Event) {
     event.preventDefault;
-    this.skillsList.push({ "id": 0, "nameForm": this.skillForm.get('nameFormForm')?.value, "valor": this.skillForm.get('valorForm')?.value })
+    this.skillsList.push({ "id": 0, "nameForm": this.skillForm.get('nameForm')?.value, "valor": this.skillForm.get('valueForm')?.value })
     this.toogleNewSkill();
     this.apiDbService.newInformation(this.skillsList[this.skillsList.length - 1], 3).subscribe({
       next: () => this.ngOnInit(),

@@ -31,7 +31,7 @@ export class DatosComponent implements OnInit {
       degreeForm: ['', [Validators.required]],
       cityForm: ['', [Validators.required]],
       aboutMeForm: ['', [Validators.required]],
-      nacionalityForm: ['', [Validators.required]]
+      nationalityForm: ['', [Validators.required]]
     });
 
     this.educationForm = this.formBuilder.group({
@@ -61,7 +61,7 @@ export class DatosComponent implements OnInit {
         if (Object.values(data).length == 0) {
           this.personalDetailsList.push({
             "id": 0, "name": "", "lastname": "", "degree": "", "city": "",
-            "nacionality": "", "aboutMe": ""
+            "nationality": "", "aboutMe": ""
           });
         }
         else {
@@ -88,7 +88,7 @@ export class DatosComponent implements OnInit {
 
       if (Object.values(this.experienceList).length == 0) {
         this.experienceList.push({
-          "id_exp": 0, "job": "", "company": "", "starded": "", "ended": "", "logo": ""
+          "id_exp": 0, "job": "", "company": "", "started": "", "ended": "", "logo": ""
         });
       }
     });
@@ -108,7 +108,7 @@ export class DatosComponent implements OnInit {
       degreeForm: [this.personalDetailsList[0].degree, [Validators.required]],
       cityForm: [this.personalDetailsList[0].city, [Validators.required]],
       aboutMeForm: [this.personalDetailsList[0].aboutMe, [Validators.required]],
-      nacionalityForm: [this.personalDetailsList[0].nacionality, [Validators.required]]
+      nationalityForm: [this.personalDetailsList[0].nationality, [Validators.required]]
     })
   }
 
@@ -118,9 +118,9 @@ export class DatosComponent implements OnInit {
 
     this.educationForm = this.formBuilder.group({
       educationGradeForm: [this.educationList[index].grade, [Validators.required]],
-      degreeForm: [this.educationList[index].degree, [Validators.required]],
+      educationDegreeForm: [this.educationList[index].degree, [Validators.required]],
       educationInstitutionForm: [this.educationList[index].institution, [Validators.required]],
-      experienceStartedForm: [this.educationList[index].starded, [Validators.required]],
+      educationStartedForm: [this.educationList[index].started, [Validators.required]],
       educationEndedForm: [this.educationList[index].ended, [Validators.required]],
       educationLogoForm: [this.educationList[index].logo, [Validators.required]],
     });
@@ -133,20 +133,20 @@ export class DatosComponent implements OnInit {
     this.experienceForm = this.formBuilder.group({
       experienceJobForm: [this.experienceList[index].job, [Validators.required]],
       experienceCompanyForm: [this.experienceList[index].company, [Validators.required]],
-      experienceStartedForm: [this.experienceList[index].starded, [Validators.required]],
-      educationEndedForm: [this.experienceList[index].ended, [Validators.required]],
-      educationLogoForm: [this.experienceList[index].logo, [Validators.required]]
+      experienceStartedForm: [this.experienceList[index].started, [Validators.required]],
+      experienceEndedForm: [this.experienceList[index].ended, [Validators.required]],
+      experienceLogoForm: [this.experienceList[index].logo, [Validators.required]]
     })
   }
 
   /*----------------------------------FUNCIONES EXTRAS-----------------------*/
 
   readPersonalDetailsForm() {
-    this.personalDetailsList[0].nameForm = this.personalDetailsForm.get('nameForm')?.value;
-    this.personalDetailsList[0].lastnameFormForm = this.personalDetailsForm.get('lastnameForm')?.value;
+    this.personalDetailsList[0].name = this.personalDetailsForm.get('nameForm')?.value;
+    this.personalDetailsList[0].lastname = this.personalDetailsForm.get('lastnameForm')?.value;
     this.personalDetailsList[0].degree = this.personalDetailsForm.get('degreeForm')?.value;
     this.personalDetailsList[0].city = this.personalDetailsForm.get('cityForm')?.value;
-    this.personalDetailsList[0].nacionality = this.personalDetailsForm.get('nacionalityForm')?.value;
+    this.personalDetailsList[0].nationality = this.personalDetailsForm.get('nationalityForm')?.value;
     this.personalDetailsList[0].aboutMe = this.personalDetailsForm.get('aboutMeForm')?.value;
 
   }
@@ -156,8 +156,8 @@ export class DatosComponent implements OnInit {
     this.experienceList[index].job = this.experienceForm.get('experienceJobForm')?.value;
     this.experienceList[index].company = this.experienceForm.get('experienceCompanyForm')?.value;
     this.experienceList[index].started = this.experienceForm.get('experienceStartedForm')?.value;
-    this.experienceList[index].ended = this.experienceForm.get('educationEndedForm')?.value;
-    this.experienceList[index].logo = this.experienceForm.get('logoForm')?.value;
+    this.experienceList[index].ended = this.experienceForm.get('experienceEndedForm')?.value;
+    this.experienceList[index].logo = this.experienceForm.get('experienceLogoForm')?.value;
   }
 
   readEducationForm(index: number) {
@@ -195,6 +195,7 @@ export class DatosComponent implements OnInit {
   onSavePersonalDetails(event: Event) {
     event.preventDefault;
     this.readPersonalDetailsForm();
+    console.log(this.personalDetailsList[0])
     this.isPersonalDetailsEdit = false;
     if (this.personalDetailsList[0].id != 0) {
       this.apiDbService.editInformation(this.personalDetailsList[0], 0, this.personalDetailsList[0].id).subscribe({
