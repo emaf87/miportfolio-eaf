@@ -11,18 +11,18 @@ import { Router } from '@angular/router';
 export class ApiDbService {
 
   requestOptions: any;
-  /*
+  
     urls = {
-      urlDatos: "https://stormy-sea-00314.herokuapp.com/datos", urlEdu: "https://stormy-sea-00314.herokuapp.com/education",
-      urlExp: "https://stormy-sea-00314.herokuapp.com/experience", urlSkills: "https://stormy-sea-00314.herokuapp.com/skills",
-      urlProy: "https://stormy-sea-00314.herokuapp.com/proyecto"
-    }*/
+      urlDatos: "https://stormy-sea-00314.herokuapp.com/api/personaldetails", urlEdu: "https://stormy-sea-00314.herokuapp.com/api/education",
+      urlExp: "https://stormy-sea-00314.herokuapp.com/api/experience", urlSkills: "https://stormy-sea-00314.herokuapp.com/api/skills",
+      urlProy: "https://stormy-sea-00314.herokuapp.com/api/proyect"
+    }
 
-  urls = {
+ /* urls = {
     urlDatos: "http://localhost:8080/api/personaldetails", urlEdu: "http://localhost:8080/api/education",
     urlExp: "http://localhost:8080/api/experience", urlSkills: "http://localhost:8080/api/skills",
     urlProy: "http://localhost:8080/api/proyect"
-  }
+  }*/
 
   constructor(private http: HttpClient) { }
 

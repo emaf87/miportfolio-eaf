@@ -5,8 +5,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AutenticacionService {
-  //url = "https://stormy-sea-00314.herokuapp.com/user";
-  url = "http://localhost:8080/auth";
+  url = "https://stormy-sea-00314.herokuapp.com/auth";
+  //url = "http://localhost:8080/auth";
 
   constructor(private http: HttpClient) {
      console.log("El servicio de autenticacion esta corriendo");
@@ -16,9 +16,9 @@ export class AutenticacionService {
   iniciarSesion(info: any) {
     return this.http.post(this.url + "/login", info);
   }
-
+/*
   registrarNuevoUser(user:any){
     return this.http.post(this.url, user);
-  }
+  }*/
 
 }
