@@ -1,6 +1,6 @@
 <section>
     <p>Habilidades <button *ngIf="isUserLogin && !isNewSkill" (click)="toogleNewSkill()"><img class="agregar-btn"
-                src="../../../assets/img/agregar2.jpg" alt="agregar" height="50" width="50"></button>
+                src="../../../assets/img/agregar2.jpg" alt="Add-img" height="50" width="50"></button>
     </p>
 
     <div *ngIf="isNewSkill" class="new-div">
@@ -8,7 +8,7 @@
             <form class="inputForm" [formGroup]="skillForm" (ngSubmit)="onNewSkill($event)">
                 <li>Nombre de la nueva habilidad: <input class="input-form" type="text" formControlName="nameForm">
                 </li>
-                <li>Valor (0-100/agregar signo %): <input class="input-form" type="text" formControlName="valueForm">
+                <li>Valor (0-100): <input class="input-form" type="text" formControlName="valueForm">
                 </li>
                 <button class="butn-form guardar" type="submit">Guardar</button><button class="butn-form cancelar"
                     type="reset" (click)="toogleNewSkill()">Cancelar</button>
@@ -20,14 +20,14 @@
             <h1>{{skill.name}}</h1>
             <button class="btn-edit" *ngIf="isUserLogin && isSkillEdit!=skill.id"
                 (click)="toogleSkillEdit(skill.id, i)">
-                <img src="../../../assets/img/edit2.png" alt="edit">
+                <img src="../../../assets/img/edit2.png" alt="Edit-img">
             </button>
             <button class="btn-elim" *ngIf="isUserLogin && isSkillEdit!=skill.id" type="submit"
                 (click)="onDeleteSkill(i)">
 
-                <img src="../../../assets/img/eliminar.png" alt="edit" class="elim1">
+                <img src="../../../assets/img/eliminar.png" alt="Delete-img" class="elim1">
 
-                <img src="../../../assets/img/eliminar-hover.png" alt="edit" class="elim2">
+                <img src="../../../assets/img/eliminar-hover.png" alt="Delete-img" class="elim2">
             </button>
         </div>
         <div class="skillbar" *ngIf="skill.id!=0">
@@ -39,7 +39,7 @@
             <ul *ngIf="isSkillEdit==skill.id">
                 <form class="inputForm" [formGroup]="skillForm" (ngSubmit)="onSaveEditSkill($event, i)">
                     <li>Nombre de habilidad: <input class="input-form" type="text" formControlName="nameForm"></li>
-                    <li>Valor (agregar signo %): <input class="input-form" type="text" formControlName="valuerForm"></li>
+                    <li>Valor (0-100): <input class="input-form" type="text" formControlName="valueForm"></li>
                     <button class="butn-form guardar" type="submit">Guardar</button>
                     <button class="butn-form cancelar" type="reset" (click)="toogleSkillEdit(0, 0)">Cancelar</button>
                 </form>

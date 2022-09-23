@@ -3,7 +3,7 @@
   <div class='details-text'>
 
     <h1 class='details-title'>Sobre mi <button *ngIf="isUserLogin" class="btn-edit" name="acercaEdit" type="submit"
-        (click)="tooglePersonalDetailsEdit()"><img src="../../../assets/img/edit2.png" alt="edit" height="40"
+        (click)="tooglePersonalDetailsEdit()"><img src="../../../assets/img/edit2.png" alt="edit-img" height="40"
           width="70"></button>
     </h1>
     <div class="datos-div" *ngIf="!isPersonalDetailsEdit && personalDetailsList[0].id!=0">
@@ -42,7 +42,7 @@
 
   <div class='details-text'>
     <h1 class='details-title'>Experiencia <button *ngIf="isUserLogin" (click)="toogleNewExperience()"><img
-          class="agregar-btn" src="../../../assets/img/agregar2.jpg" alt="agregar"></button>
+          class="agregar-btn" src="../../../assets/img/agregar2.jpg" alt="Add-Img"></button>
     </h1>
 
     <div *ngIf="isNewExperience" class="new-div">
@@ -67,8 +67,7 @@
       <div *ngIf="experience.id_exp!=0" class="exp-div">
 
         <div class="img-div" *ngIf="isExperienceEdit!=experience.id_exp">
-          <img class="details-img" src="../../../assets/img/{{experience.logo}}" alt="{{experience.institution}}"
-            width="70">
+          <img class="details-img" src="../../../assets/img/{{experience.logo}}" alt="Co. Logo" width="70">
         </div>
         <div class="align-div">
           <ul *ngIf="isExperienceEdit!=experience.id_exp">
@@ -99,12 +98,12 @@
         <div class="align-div">
           <button class="btn-edit" *ngIf="isUserLogin && isExperienceEdit!=experience.id_exp"
             (click)="toogleExperienceEdit(experience.id_exp, i)">
-            <img src="../../../assets/img/edit2.png" alt="edit">
+            <img src="../../../assets/img/edit2.png" alt="edit-img">
           </button>
           <button class="btn-elim" *ngIf="isUserLogin && isExperienceEdit!=experience.id_exp" type="submit"
             (click)="onDeleteExperience(i)">
-            <img src="../../../assets/img/eliminar.png" alt="edit" class="elim1 ">
-            <img src="../../../assets/img/eliminar-hover.png" alt="edit" class="elim2 btn-b">
+            <img src="../../../assets/img/eliminar.png" alt="delete-img" class="elim1 ">
+            <img src="../../../assets/img/eliminar-hover.png" alt="delete-img" class="elim2 btn-b">
           </button>
         </div>
       </div>
@@ -121,7 +120,7 @@
   <!------------------------------------SECCION EDUCACION-------------------------------------------->
   <div class="details-text">
     <h1 class='details-title'>Educación <button *ngIf="isUserLogin" (click)="toogleNewEducation()">
-        <img class="agregar-btn" src="../../../assets/img/agregar2.jpg" alt="agregar">
+        <img class="agregar-btn" src="../../../assets/img/agregar2.jpg" alt="Add-img">
       </button>
     </h1>
 
@@ -148,22 +147,20 @@
       <div *ngIf="education.id_edu!=0" class="exp-div">
 
         <div class="img-div" *ngIf="isEducationEdit!=education.id_edu">
-          <img class="details-img" src="../../../assets/img/{{education.logo}}" alt="{{education.institution}}"
-            width="70">
+          <img class="details-img" src="../../../assets/img/{{education.logo}}" alt="Edu Logo" width="70">
         </div>
 
         <div class="align-div">
           <ul *ngIf="isEducationEdit!=education.id_edu">
-            <li><strong>id: </strong>{{education.id_edu}}</li>
             <li><strong>Nivel:</strong> {{education.grade}}</li>
             <li><strong>Título:</strong> {{education.degree}}
               <button class="btn-edit" *ngIf="isUserLogin" type="submit"
                 (click)="toogleEducationEdit(education.id_edu, i)">
-                <img src="../../../assets/img/edit2.png" alt="edit">
+                <img src="../../../assets/img/edit2.png" alt="edit-img">
               </button>
               <button class="btn-elim" *ngIf="isUserLogin" type="submit" (click)="onEliminarEdu(i)">
-                <img src="../../../assets/img/eliminar.png" alt="edit" class="elim1 ">
-                <img src="../../../assets/img/eliminar-hover.png" alt="edit" class="elim2 btn-b">
+                <img src="../../../assets/img/eliminar.png" alt="delete-img" class="elim1 ">
+                <img src="../../../assets/img/eliminar-hover.png" alt="delete-img" class="elim2 btn-b">
               </button>
             </li>
             <li><strong>Institución:</strong> {{education.institution}}</li>

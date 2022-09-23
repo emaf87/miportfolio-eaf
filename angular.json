@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "personalDetailsList": {
+    "miportfolio": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/personalDetailsList",
+            "outputPath": "dist/miportfolio",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -62,8 +62,8 @@
               "optimization": false,
               "vendorChunk": true,
               "extractLicenses": false,
-              "sourceMap": true
-             
+              "sourceMap": true,
+              "namedChunks": true
             }
           },
           "defaultConfiguration": "production"
@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "personalDetailsList:build:production"
+              "browserTarget": "miportfolio:build:production"
             },
             "development": {
-              "browserTarget": "personalDetailsList:build:development"
+              "browserTarget": "miportfolio:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "personalDetailsList:build"
+            "browserTarget": "miportfolio:build"
           }
         },
         "test": {
@@ -106,5 +106,8 @@
       }
     }
   },
-  "defaultProject": "personalDetailsList"
+
+  "cli": {
+    "analytics": false
+  }
 }

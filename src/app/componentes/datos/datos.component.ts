@@ -189,7 +189,6 @@ export class DatosComponent implements OnInit {
     this.educationForm.reset();
   }
 
-
   /*---------------FUNCIONES PARA EL GUARDADO DE DATOS-------------------------*/
 
   onSavePersonalDetails(event: Event) {
@@ -199,13 +198,13 @@ export class DatosComponent implements OnInit {
     this.isPersonalDetailsEdit = false;
     if (this.personalDetailsList[0].id != 0) {
       this.apiDbService.editInformation(this.personalDetailsList[0], 0, this.personalDetailsList[0].id).subscribe({
-        next: () => this.ngOnInit(),
+        next: () => window.location.reload(),
         error: () => alert("Error: La edicion no se guardó en la base de datos")
       });
     }
     else {
       this.apiDbService.newInformation(this.personalDetailsList[0], 0).subscribe({
-        next: () => this.ngOnInit(),
+        next: () => window.location.reload(),
         error: () => alert("Error: Los datos no se guardaron en la base de datos")
       });
     }
@@ -216,7 +215,7 @@ export class DatosComponent implements OnInit {
     this.readEducationForm(index);
     this.isEducationEdit = 0;
     this.apiDbService.editInformation(this.educationList[index], 1, this.educationList[index].id_edu).subscribe({
-      next: () => this.ngOnInit(),
+      next: () => alert("Edición guardada!"),
       error: () => alert("Error: Los datos no se guardaron en la base de datos")
     });
   }
@@ -226,7 +225,7 @@ export class DatosComponent implements OnInit {
     this.readExperienceForm(index);
     this.isExperienceEdit = 0;
     this.apiDbService.editInformation(this.experienceList[index], 2, this.experienceList[index].id_exp).subscribe({
-      next: () => this.ngOnInit(),
+      next: () => alert("Edición guardada!"),
       error: () => alert("Error: Los datos no se guardaron en la base de datos")
     });
   }
@@ -237,7 +236,10 @@ export class DatosComponent implements OnInit {
     this.readEducationForm(0);
     this.educationList[0].id_edu = 0;
     this.apiDbService.newInformation(this.educationList[0], 1).subscribe({
-      next: () => this.ngOnInit(),
+      next: () => {
+        alert("Nueva entrada de educación guardada");
+        this.ngOnInit();
+      },
       error: () => alert("Error: Los datos no se guardaron en la base de datos")
     });
   }
@@ -248,7 +250,10 @@ export class DatosComponent implements OnInit {
     this.experienceList[0].id_exp = 0;
     console.log(this.experienceList[0]);
     this.apiDbService.newInformation(this.experienceList[0], 2).subscribe({
-      next: () => this.ngOnInit(),
+      next: () => {
+        alert("Nueva entrada de experiencia guardada");
+        this.ngOnInit();
+      },
       error: () => alert("Error: El dato no se guardó en la base de datos")
     });
   }
@@ -257,7 +262,7 @@ export class DatosComponent implements OnInit {
   /*-----------------------FUNCION ELIMINAR DATOS--------------------------*/
 
   onDeleteExperience(index: number) {
-    if (confirm("Deseas eliminar la experience con el job: " + this.experienceList[index].job + "?")) {
+    if (confirm("Deseas eliminar la experience con el puesto: " + this.experienceList[index].job + "?")) {
       this.apiDbService.deleteInformation(this.experienceList[index].id_exp, 2).subscribe({
         next: () => this.ngOnInit(),
         error: () => alert("Error: El dato no se eliminó en la base de datos")
@@ -266,7 +271,7 @@ export class DatosComponent implements OnInit {
   }
 
   onEliminarEdu(index: number) {
-    if (confirm("Deseas eliminar la education con el título: " + this.educationList[index].job + "?")) {
+    if (confirm("Deseas eliminar la educación con el título: " + this.educationList[index].degree + "?")) {
       this.apiDbService.deleteInformation(this.educationList[index].id_edu, 1).subscribe({
         next: () => this.ngOnInit(),
         error: () => alert("Error: El dato no se eliminó en la base de datos")

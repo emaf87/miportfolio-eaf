@@ -18,23 +18,30 @@
     "@angular/platform-browser": "~13.3.0",
     "@angular/platform-browser-dynamic": "~13.3.0",
     "@angular/router": "~13.3.0",
+    "@sendgrid/helpers": "^7.7.0",
+    "@sendgrid/mail": "^7.7.0",
     "bootstrap": "^5.2.0",
-    "rxjs": "~7.5.0",
+    "https": "^1.0.0",
+    "https-agent": "^1.0.0",
+    "querystring": "^0.2.1",
+    "rxjs": "7.5.6",
+    "ts-node": "^10.9.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~13.3.7",
-    "@angular/cli": "~13.3.7",
+    "@angular-devkit/build-angular": "13.3.9",
+    "@angular/cli": "^14.2.3",
     "@angular/compiler-cli": "~13.3.0",
     "@types/jasmine": "~3.10.0",
-    "@types/node": "^12.11.1",
+    "@types/node": "^12.20.55",
     "jasmine-core": "~4.0.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.1.0",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
-    "typescript": "~4.6.2"
+    "rimraf": "^3.0.2",
+    "typescript": "4.6.4"
   }
 }

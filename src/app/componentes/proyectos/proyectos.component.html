@@ -3,7 +3,7 @@
 
     <div class='projects-sec-title'>
       <p>HTML & CSS Projects<button *ngIf="isUserLogin" (click)="toogleNewProyect()"><img class="agregar-btn"
-            src="../../../assets/img/agregar2.jpg" alt="agregar"></button></p>
+            src="../../../assets/img/agregar2.jpg" alt="Add-img"></button></p>
     </div>
 
     <div *ngIf="isNewProyect" class="new-div">
@@ -24,12 +24,12 @@
           <div class="btn-div">
             <button class="btn-edit" *ngIf="isUserLogin && isProyectEdit!=proy.id"
               (click)="toogleProyectEdit(proy.id, i)">
-              <img src="../../../assets/img/edit2.png" alt="edit">
+              <img src="../../../assets/img/edit2.png" alt="Edit-img">
             </button>
             <button class="btn-elim" *ngIf="isUserLogin && isProyectEdit!=proy.id" type="submit"
               (click)="onDeleteProyect(i)">
-              <img src="../../../assets/img/eliminar.png" alt="edit" class="elim1">
-              <img src="../../../assets/img/eliminar-hover.png" alt="edit" class="elim2">
+              <img src="../../../assets/img/eliminar.png" alt="Delete-img" class="elim1">
+              <img src="../../../assets/img/eliminar-hover.png" alt="Delete-img" class="elim2">
             </button>
           </div>
 
@@ -38,7 +38,7 @@
             <a [href]="proy.url">
               <div class='project-div'>
                 <div class='project-div-img'>
-                  <img class='project-img' src="../../../assets/img/{{proy.image}}">
+                  <img class='project-img' src="../../../assets/img/{{proy.image}}" alt="-----Proy-img">
                 </div>
                 <div class='project-div-title'>
                   <div class='project-title'>{{proy.name}}</div>

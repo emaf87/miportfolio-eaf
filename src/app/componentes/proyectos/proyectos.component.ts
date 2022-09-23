@@ -70,7 +70,7 @@ export class ProyectosComponent implements OnInit {
     this.proyectsList[index].image = this.proyectForm.get('imageForm')?.value;
     this.isProyectEdit = 0;
     this.apiDbService.editInformation(this.proyectsList[index], 4, this.proyectsList[index].id).subscribe({
-      next: () => this.ngOnInit(),
+      next: () => alert("Edición guardada"),
       error: () => alert("Error: La edicion no se guardó en la base de datos")
     });
   }
@@ -86,7 +86,10 @@ export class ProyectosComponent implements OnInit {
     this.proyectsList[0].image = this.proyectForm.get('imageForm')?.value;
     this.isNewProyect = false;
     this.apiDbService.newInformation(this.proyectsList[0], 4).subscribe({
-      next: () => this.ngOnInit(),
+      next: () => {
+        alert("Proyecto guardado")
+        this.ngOnInit()
+      },
       error: () => alert("Error: El proyecto no se guardó en la base de datos")
     });
 

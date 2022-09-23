@@ -29,6 +29,9 @@ export class ApiDbService {
   /*---------------LECTURA DE DATOS--------------------------*/
 
   readDataBase(urlId:number): Observable<any> {
+    console.log("urls")
+    
+    console.log(Object.values(this.urls)[urlId])
     return this.http.get<any>(Object.values(this.urls)[urlId]);
   }
 
