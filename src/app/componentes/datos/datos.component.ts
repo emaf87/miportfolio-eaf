@@ -8,9 +8,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./datos.component.css']
 })
 export class DatosComponent implements OnInit {
-  personalDetailsList: any = [];
-  educationList: any = [];
-  experienceList: any = [];
+  personalDetailsList: any = [{
+    "id": 0, "name": "", "lastname": "", "degree": "", "city": "",
+    "nationality": "", "aboutMe": ""
+  }];
+  educationList: any = [{
+    "id_edu": 0, "grade": '', "degree": '', "institution": '',
+    "started": '', "ended": '', "logo": ''
+  }];
+  experienceList: any = [{
+    "id_exp": 0, "job": "", "company": "", "started": "", "ended": "", "logo": ""
+  }];
   isPersonalDetailsEdit = false;
   isEducationEdit: number = 0;
   isExperienceEdit: number = 0;
@@ -58,13 +66,7 @@ export class DatosComponent implements OnInit {
     this.apiDbService.readDataBase(0).subscribe({
       next: data => {
         this.personalDetailsList = data;
-        if (Object.values(data).length == 0) {
-          this.personalDetailsList.push({
-            "id": 0, "name": "", "lastname": "", "degree": "", "city": "",
-            "nationality": "", "aboutMe": ""
-          });
-        }
-        else {
+        if (Object.values(data).length != 0) {
           this.personalDetailsList = data;
         }
       },
@@ -72,27 +74,19 @@ export class DatosComponent implements OnInit {
     });
 
     this.apiDbService.readDataBase(1).subscribe(data => {
-      this.educationList = data;
-      this.educationList.reverse();
-      if (Object.values(this.educationList).length == 0) {
-        this.educationList.push({
-          "id_edu": 0, "grade": '', "degree": '', "institution": '',
-          "started": '', "ended": '', "logo": ''
-        });
+      if (Object.values(this.educationList).length != 0) {
+        this.educationList = data;
+        this.educationList.reverse();
       }
     });
 
     this.apiDbService.readDataBase(2).subscribe(data => {
-      this.experienceList = data;
-      this.experienceList.reverse();
-
-      if (Object.values(this.experienceList).length == 0) {
-        this.experienceList.push({
-          "id_exp": 0, "job": "", "company": "", "started": "", "ended": "", "logo": ""
-        });
+      if (Object.values(this.experienceList).length != 0) {
+        this.experienceList = data;
+        this.experienceList.reverse();
       }
     });
-
+    
     this.resetExtraVariables();
   }
 

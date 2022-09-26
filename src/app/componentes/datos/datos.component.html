@@ -6,7 +6,7 @@
         (click)="tooglePersonalDetailsEdit()"><img src="../../../assets/img/edit2.png" alt="edit-img" height="40"
           width="70"></button>
     </h1>
-    <div class="datos-div" *ngIf="!isPersonalDetailsEdit && personalDetailsList[0].id!=0">
+    <div class="datos-div" *ngIf="!isPersonalDetailsEdit && (personalDetailsList[0].id)!=0">
       <p *ngIf="personalDetailsList[0].aboutMe==''">Haga click en edit para agregar informacion</p>
       <p *ngIf="personalDetailsList[0].aboutMe!=''">{{personalDetailsList[0].aboutMe}}</p>
       <br>

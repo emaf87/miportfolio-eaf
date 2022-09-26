@@ -1,9 +1,6 @@
-import { Component, OnInit, Input, Renderer2, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ApiDbService } from 'src/app/servicios/api-db.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { stringify } from 'querystring';
-
-
 
 @Component({
   selector: 'app-skills',

@@ -1,24 +1,24 @@
-<header>
+<header [@.disabled]="isUserLogin">
   <nav id='navbar'>
-    <div class='logo'>
-      <div class='logo-img'>
+    <div class='logo' >
+      <div class='logo-img' @logo >
         <h1 class='logo-img1'>></h1>
         <h1 class='logo-img2'>_</h1>
       </div>
-      <div class='logo-text'>
+      <div class='logo-text'@oculto>
         <p class='t1'>Argentina Programa</p>
         <p>#Yo Programo</p>
       </div>
     </div>
-    <div class='nav-menu'>
-      <a href='https://www.facebook.com/Emaf87/' target="_blank" class='nav-link'><img
+    <div class='nav-menu' >
+      <a href='https://www.facebook.com/Emaf87/' target="_blank" class='nav-link' @oculto><img
           src="../assets/img/social_media_facebook_fb_icon_129002.png" class="fb" alt="Facebook-logo"></a>
-      <a href='https://www.linkedin.com/in/emmanuel-ferretti-693183a9/' target="_blank" class='nav-link'><img
+      <a href='https://www.linkedin.com/in/emmanuel-ferretti-693183a9/' target="_blank" class='nav-link' @oculto><img
           src="../assets/img/linkedin_icon-icons.com_53609.png" alt="Linkedin-img" class="in"></a>
-      <a href='https://github.com/emaf87' target="_blank" class='nav-link'><img
+      <a href='https://github.com/emaf87' target="_blank" class='nav-link' @oculto><img
           src="../assets/img/github_git_icon_145985.png" alt="Github-logo" class="git"></a>
-      <a routerLink="/login" *ngIf="!isUserLogin" class='nav-link'>Login</a>
-      <a class='nav-link' *ngIf="isUserLogin" (click)="onLogOut()">Logout</a>
+      <a routerLink="/login" *ngIf="!isUserLogin" class='nav-link' @oculto>Login</a>
+      <a class='nav-link' *ngIf="isUserLogin" (click)="onLogOut()" >Logout</a>
 
     </div>
     <div class='ita'></div>

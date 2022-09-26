@@ -14,6 +14,8 @@ import { PortfolioComponent } from './componentes/portfolio/portfolio.component'
 import { ReactiveFormsModule } from '@angular/forms';
 import { SkillsComponent } from './componentes/skills/skills.component';
 import { TokenInterceptorService } from './servicios/token-interceptor.service';
+import { CuerpoPortfolioComponent } from './cuerpo-portfolio/cuerpo-portfolio.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -29,10 +31,12 @@ import { TokenInterceptorService } from './servicios/token-interceptor.service';
     ContactoComponent,
     IniciarSesionComponent,
     PortfolioComponent,
-    SkillsComponent
+    SkillsComponent,
+    CuerpoPortfolioComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,

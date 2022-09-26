@@ -63,30 +63,19 @@ main{
 
 
 
-/*---------------------------------------ANIMATION-----------------------------------------*/
+/*---------------------------------------ANIMATION-----------------------------------------
 
 @keyframes logo{
   0%{
-    transform:rotate(0deg);
-    transform:translate(100vw,0);
+    transform:rotate(0deg) translate(100vw,0);
   }
-
- 
-
   80%{
     transform:translate(-5vw,0);
-    
   }
-
    82%{
-    transform:translate(0,0);
-    transform:rotate(-360deg);
-  }
-
-  
+    transform:translate(0,0) rotate(-360deg);
+   }
 }
-
-
 @keyframes menu{
    0%{
     opacity: 0;
@@ -100,7 +89,7 @@ main{
   }
 }
 
-
+*/
 
 
 /*--------------------------------MEDIA QUERY--------------------------------------------*/

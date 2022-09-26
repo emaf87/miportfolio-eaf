@@ -1,12 +1,5 @@
-  
-  <h1></h1> 
-  
-  <app-encabezado [isUserLogin]="isUserLogin"></app-encabezado>
-  <main>
-    <app-bienvenida></app-bienvenida>
-    <app-datos [isUserLogin]="isUserLogin"></app-datos>
-    <app-skills [isUserLogin]="isUserLogin"></app-skills>
-    <app-proyectos [isUserLogin]="isUserLogin"></app-proyectos>
-   
-    
-  </main> 
+
+<app-encabezado [isUserLogin]="isUserLogin"></app-encabezado>
+<main>
+    <app-cuerpo-portfolio [isUserLogin]="isUserLogin" @oculto [@.disabled]="isUserLogin"></app-cuerpo-portfolio>
+</main>
