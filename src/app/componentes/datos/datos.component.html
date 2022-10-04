@@ -58,9 +58,9 @@
               formControlName="experienceCompanyForm" placeholder="Google">
           </li>
           <li><strong>Fecha inicio: </strong><input class="input__element" type="month"
-              formControlName="experienceStartedForm" placeholder="Mes/Año"> </li>
+              formControlName="experienceStartedForm" placeholder="YYYY-MM"> </li>
           <li><strong>Fecha fin:</strong> <input class="input__element" type="month"
-              formControlName="experienceEndedForm" placeholder="Mes/Año">
+              formControlName="experienceEndedForm" placeholder="YYYY-MM">
           </li>
           <li><strong>Logo URL: </strong><input class="input__element" type="text" placeholder="www.cloud.com/imagen"
               formControlName="experienceLogoForm">
@@ -99,9 +99,9 @@
             <li><strong>Empresa: </strong><input class="input__element" type="text"
                 formControlName="experienceCompanyForm"></li>
             <li><strong>Fecha inicio: </strong><input class="input__element" type="month"
-                formControlName="experienceStartedForm" placeholder="Mes/Año"></li>
+                formControlName="experienceStartedForm" placeholder="YYYY-MM"></li>
             <li><strong>Fecha fin:</strong> <input class="input__element" type="month"
-                formControlName="experienceEndedForm" placeholder="Mes/Año"></li>
+                formControlName="experienceEndedForm" placeholder="YYYY-MM"></li>
             <li><strong>Logo URL:</strong> <input class="input__element" type="text"
                 formControlName="experienceLogoForm">
             </li>
@@ -141,9 +141,9 @@
               formControlName="educationInstitutionForm" placeholder="Universidad Nacional">
           </li>
           <li><strong>Fecha inicio:</strong><input class="input__element" type="month"
-              formControlName="educationStartedForm" placeholder="Mes/Año"></li>
+              formControlName="educationStartedForm" placeholder="YYYY-MM"></li>
           <li><strong>Fecha fin:</strong><input class="input__element" type="month" formControlName="educationEndedForm"
-              placeholder="Mes/Año">
+              placeholder="YYYY-MM">
           </li>
           <li><strong>Logo URL:</strong><input class="input__element" type="text" formControlName="educationLogoForm"
               placeholder="www.cloud.com/imagen"></li>
@@ -163,7 +163,7 @@
             <li><strong>Nivel:</strong> {{education.grade}}</li>
             <li><strong>Título:</strong> {{education.degree}}</li>
             <li><strong>Institución:</strong> {{education.institution}}</li>
-            <li><strong>Fecha:</strong> {{education.started}} - {{education.ended}}</li>
+            <li><strong>Fecha:</strong> {{education.started}} / {{education.ended}}</li>
           </ul>
         </div>
         <div class="card__buttons" *ngIf="isUserLogin && isEducationEdit!=education.id_edu">
