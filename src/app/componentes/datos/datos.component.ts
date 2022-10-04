@@ -8,17 +8,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./datos.component.css']
 })
 export class DatosComponent implements OnInit {
-  personalDetailsList: any = [{
-    "id": 0, "name": "", "lastname": "", "degree": "", "city": "",
-    "nationality": "", "aboutMe": ""
-  }];
-  educationList: any = [{
-    "id_edu": 0, "grade": '', "degree": '', "institution": '',
-    "started": '', "ended": '', "logo": ''
-  }];
-  experienceList: any = [{
-    "id_exp": 0, "job": "", "company": "", "started": "", "ended": "", "logo": ""
-  }];
+  personalDetailsList: any = [];
+  educationList: any = [];
+  experienceList: any = [];
   isPersonalDetailsEdit = false;
   isEducationEdit: number = 0;
   isExperienceEdit: number = 0;
@@ -62,6 +54,19 @@ export class DatosComponent implements OnInit {
 
   ngOnInit(): void {
     /*-----------------------------------LECTURA EN BASE DE DATOS--------------------------------------------*/
+    this.personalDetailsList = [{
+      "id": 0, "name": "", "lastname": "", "degree": "", "city": "",
+      "nationality": "", "aboutMe": ""
+    }];
+
+    this.educationList = [{
+      "id_edu": 0, "grade": "", "degree": "", "institution": "",
+      "started": "", "ended": "", "logo": ""
+    }];
+
+    this.experienceList = [{
+      "id_exp": 0, "job": "", "company": "", "started": "", "ended": "", "logo": ""
+    }];
 
     this.apiDbService.readDataBase(0).subscribe({
       next: data => {
@@ -70,24 +75,29 @@ export class DatosComponent implements OnInit {
           this.personalDetailsList = data;
         }
       },
-      error: () => alert("Base de datos no conectada")
+      //error: () => alert("Base de datos no conectada")
     });
 
     this.apiDbService.readDataBase(1).subscribe(data => {
-      if (Object.values(this.educationList).length != 0) {
+      if (Object.values(data).length != 0) {
         this.educationList = data;
         this.educationList.reverse();
       }
+      console.log(this.educationList)
+
     });
 
     this.apiDbService.readDataBase(2).subscribe(data => {
-      if (Object.values(this.experienceList).length != 0) {
+      if (Object.values(data).length != 0) {
         this.experienceList = data;
         this.experienceList.reverse();
       }
+      console.log(this.experienceList)
     });
-    
+
     this.resetExtraVariables();
+    console.log("reset variables")
+
   }
 
   /*------------------------ FUNCIONES PARA MODIFICACION DE VARIABLE PARA EDICION---------------------------*/
@@ -142,7 +152,6 @@ export class DatosComponent implements OnInit {
     this.personalDetailsList[0].city = this.personalDetailsForm.get('cityForm')?.value;
     this.personalDetailsList[0].nationality = this.personalDetailsForm.get('nationalityForm')?.value;
     this.personalDetailsList[0].aboutMe = this.personalDetailsForm.get('aboutMeForm')?.value;
-
   }
 
 
@@ -188,7 +197,6 @@ export class DatosComponent implements OnInit {
   onSavePersonalDetails(event: Event) {
     event.preventDefault;
     this.readPersonalDetailsForm();
-    console.log(this.personalDetailsList[0])
     this.isPersonalDetailsEdit = false;
     if (this.personalDetailsList[0].id != 0) {
       this.apiDbService.editInformation(this.personalDetailsList[0], 0, this.personalDetailsList[0].id).subscribe({
@@ -242,7 +250,6 @@ export class DatosComponent implements OnInit {
     event.preventDefault;
     this.readExperienceForm(0);
     this.experienceList[0].id_exp = 0;
-    console.log(this.experienceList[0]);
     this.apiDbService.newInformation(this.experienceList[0], 2).subscribe({
       next: () => {
         alert("Nueva entrada de experiencia guardada");
@@ -264,7 +271,7 @@ export class DatosComponent implements OnInit {
     }
   }
 
-  onEliminarEdu(index: number) {
+  onDeleteEducation(index: number) {
     if (confirm("Deseas eliminar la educación con el título: " + this.educationList[index].degree + "?")) {
       this.apiDbService.deleteInformation(this.educationList[index].id_edu, 1).subscribe({
         next: () => this.ngOnInit(),

@@ -1,9 +1,7 @@
 /*-------PROJECTS-----------*/
 
 #projects {
-
-  
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: black;
   min-width: 100vw;
   background-image: url(https://cdn-3.expansion.mx/dims4/default/751df04/2147483647/strip/true/crop/1254x836+0+0/resize/1800x1200!/format/webp/quality/90/?url=https%3A%2F%2Fcdn-3.expansion.mx%2F23%2F02%2F062b88e04f0b9ddb490703868f80%2Fideas-proyectos.jpg);
@@ -11,38 +9,31 @@
   background-size: cover;
   font-family: 'Roboto', sans-serif;
   box-shadow: 0 0 10px 10px rgba(188, 204, 222, 0.775);
-  animation: menu 4s ease-in 1;
   display: flex;
   flex-direction: column;
   justify-items: center;
 }
-.fondo-blanco{
+
+.projects__fondo {
   background-color: rgba(255, 255, 255, 0.5);
   padding-bottom: 50px;
 }
 
-
-.projects-sec-title {
+.fondo__title {
   color: rgb(0, 0, 0);
   width: 100%;
   text-align: center;
-  margin: 3rem 0 12rem 0;
+  margin: 3rem 0 7rem 0;
 }
 
-.projects-sec-title p{
- background-color: rgba(255, 255, 255, 0.2);
+.fondo__title p {
+  background-color: rgba(255, 255, 255, 0.2);
   font-size: 5rem;
   font-family: 'Titan One', cursive;
   font-weight: normal;
   width: 75%;
   margin: 0 auto;
   text-shadow: 3px 3px 5px rgb(3, 99, 21);
-}
-button{
-  background: none;
-  border: none;
-  
-  align-content: center;
 }
 
 .agregar-btn {
@@ -54,22 +45,48 @@ button{
   margin-left: 20px;
 }
 
-.new-div{
+button {
+  background: none;
+  border: none;
+  align-content: center;
+}
+
+.fondo__new-element {
+  width: 100vw;
   display: flex;
   text-align: center;
   justify-content: center;
   margin-bottom: 50px;
-  
 }
 
-ul li{
+.new-element__form {
+  width: 80%;
+  text-align: center;
+  color: white;
+  padding: 15px 0;
+  margin: 0 auto;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.85);
+  border-radius: 10px;
+}
+
+.form__list {
+  width: 90%;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.form__list li {
   list-style: none;
-  margin: 15px;
+  margin: 0;
 }
 
-ul{
-  width: 75%;
- 
+.list__input {
+  width: 100%;
+  border-radius: 5px;
+  margin-top: 5px;
+  text-align: center;
+  font-weight: bold;
 }
 
 a {
@@ -80,48 +97,27 @@ a {
   position: relative;
 }
 
-
-form{
-  width: 100%;
-  text-align: center;
-  padding: 15px 0;
-  font-weight: bold;
-  background-color: rgba(0, 255, 255, 0.727);
-  border-radius: 10px;
- }
-
-input{
-  width: 100%;
-  border-radius: 5px;
-  margin-top: 5px;
-  text-align: center;
-  font-weight: bold;
-  
-}
-
-
-.butn-form{
-  
+.butn-form {
   margin-top: 20px;
   padding: 3px 10px;
   border-radius: 5px;
+  border: white solid 1px;
   font-family: sans-serif;
-  
   letter-spacing: 5px;
 }
 
-.guardar{
-  color:white;
+.guardar {
+  color: white;
   background-color: rgb(33, 105, 18);
   margin-right: 20px;
 }
 
-.cancelar{
+.cancelar {
   color: white;
-  background-color: black;
+  background-color: gray;
 }
 
-.project-ti {
+.fondo__board {
   width: 75%;
   display: flex;
   flex-wrap: wrap;
@@ -132,17 +128,11 @@ input{
   margin: 0 auto;
 }
 
-
-
-.fondo-ext{
-
+.card__conjunto {
   padding-top: 5px;
- 
-
 }
 
-
-.card {
+.conjunto__interior {
   width: 25rem;
   height: 20rem;
   margin: 5px 40px 30px 40px;
@@ -154,52 +144,48 @@ input{
   justify-content: center;
 }
 
-.project-div{
+.interior__proj-div {
   overflow: hidden;
 }
 
-.btn-edit{
+.buttons__edit {
   background-color: rgba(0, 128, 0, 0.7);
   border-top: solid black 3px;
-  border-bottom: solid black 3px;;
+  border-bottom: solid black 3px;
   border-right: solid black 1.5px;
   border-left: solid black 3px;
   padding: 5px;
   border-radius: 45% 0 0 45%;
 }
 
-.btn-elim{
+.buttons__elim {
   background-color: rgba(0, 128, 0, 0.7);
   border-top: solid black 3px;
-  border-bottom: solid black 3px;;
+  border-bottom: solid black 3px;
   border-right: solid black 3px;
   border-left: solid black 1.5px;
   padding: 5px;
   border-radius: 0 50% 50% 0;
 }
 
-.btn-edit img{
+.buttons__edit img {
   max-width: 6rem;
   height: 3rem;
-  
 }
 
-.project-div-img {
+.proj-div__img-div {
   position: absolute;
   border: none;
-
 }
 
-.project-img {
+.img-div__img {
   width: 26rem;
- /* height: 21;*/
   padding: 0;
   margin: 0;
   object-fit: fill;
-
 }
 
-.project-div-title {
+.project-div__title {
   background-color: rgb(0, 0, 255);
   transform-origin: top left;
   transform: scaley(-1) rotate(-90deg);
@@ -212,61 +198,31 @@ input{
   text-align: center;
 }
 
-.project-title {
+.title__transform {
   transform: scaley(-1) rotate(-180deg);
   color: white;
   display: block;
   margin: 0 auto;
-  
 }
 
-.btn-div{
+.conjunto__buttons {
   display: flex;
   justify-content: center;
-  
 }
 
-
-.elim1{
-  height:4rem ;
-   width:4rem;
+.elim__normal {
+  height: 4rem;
+  width: 4rem;
 }
-.elim2{
+
+.elim__hover {
   display: none;
   overflow: hidden;
-  height:4rem;
-   width:3rem;
+  height: 4rem;
+  width: 3rem;
 }
 
-
-
-.btn-elim:hover .elim1{
-display: none;
-overflow: hidden;
-}
-
-
-.btn-elim:hover .elim2{
-display: block;
-margin-right: 10px;
-}
-
-.btn-elim:hover{
-  
-background-color: red;
-}
-
-
-.btn-edit:hover{
-transform: scale(110%,110%);
-background-color: rgb(0, 128, 0);
-}
-
-.agregar-btn:hover{
-  transform: scale(110%);
-}
-
-.div-cero{
+.div-cero {
   font-size: 2.5rem;
   font-family: 'Bebas Neue', cursive;
   color: white;
@@ -276,4 +232,41 @@ background-color: rgb(0, 128, 0);
   text-shadow: black 3px 3px 3px;
   border-radius: 5px;
   border: black solid 2px;
+}
+
+.buttons__elim:hover .elim__normal {
+  display: none;
+  overflow: hidden;
+}
+
+.buttons__elim:hover .elim__hover {
+  display: block;
+  margin-right: 10px;
+}
+
+.buttons__elim:hover {
+  background-color: red;
+}
+
+.buttons__edit:hover {
+  transform: scale(110%, 110%);
+  background-color: rgb(0, 128, 0);
+}
+
+.agregar-btn:hover {
+  transform: scale(110%);
+}
+
+.guardar:disabled {
+  background-color: rgba(127, 164, 120);
+}
+
+.guardar:not([disabled]):hover {
+  background-color: cornflowerblue;
+  border: 1px solid cornflowerblue;
+}
+
+.cancelar:hover {
+  background-color: white;
+  color: black;
 }

@@ -1,148 +1,10 @@
 /*--------DETAILS--------*/
 
-li {
-  list-style: none;
-}
-
-#details {
+section {
   display: block;
   background-color: rgba(88, 152, 220, 0.775);
   padding: 5rem 0;
   box-shadow: 0 0 10px 10px rgba(88, 152, 220, 0.775);
-  animation: menu 4s ease-in 1;
-}
-
-.details-text {
-  font-size: 2.5rem;
-  font-family: 'Signika Negative', sans-serif;
-  text-align: center;
-}
-
-.datos-div{
-  width: 100%;
-  margin: 0 auto;
-}
-
-.datos-div p{
-  background-color: rgba(255, 255, 255, 0.5);
-  width: 75%;
-  margin: 0 auto;
-  padding: 15px;
-  border-radius: 10px;
-}
-
-strong{
- margin-right: 10px;
-}
-
-.datos-ul{
-  padding: 15px;
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.5);
-  margin: 0 auto;
-  max-width: 75%;
-
-}
-
-
-.details-tb{
-  display: flex;
-}
-
-.btn-edit {
-  margin-left: 20px;
-  background: none;
-  border: none;
-}
-
-.details-title {
-  font-size: 5rem;
-  width: 100%;
-  text-align: center;
-  margin: 7rem 0 5rem 0;
-  font-family: 'Titan One', cursive;
-}
-
-.details-acerca {
-  text-align: center;
-}
-
-.new-div{
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-.newform-div{
-  width: 75%;
-  
-}
-
-.details-div {
-  max-width: 100%;
-  flex-grow: 1;
-  margin: 0;
-  text-align: left;
-  
-}
-
-
-.exp-div{
-  
-  display: inline-flex;
-  margin: 20px 20%;
-  justify-content: left;
-  padding: 15px;
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.5);
-  
-
-}
-
-.img-div{
-  display: flex;
-  align-items: center;
-}
-
-.div-cero{
-  width: 100%;
-  text-align: center;
-  margin: 0;
-  color: white;
-  letter-spacing: 2px;
-}
-
-.align-div{
-  display: flex;
-  align-items: center;
-}
-
-.align-div ul{
-  margin: 0;
-}
-
-.datos-edit {
-  width: 100%;
-  
-}
-
-.datos-edit input {
-  display: block;
-  margin: 0 auto 20px auto;
-}
-
-
-
-.details-img {
-  border-radius: 5px;
- 
-}
-
-.agregar-btn {
-  border-radius: 50%;
-  border: rgb(0, 0, 0) 3px solid;
-  width: 4rem;
-  height: 4rem;
-  box-shadow: 0px 0px 7px 5px rgb(3, 99, 21);
 }
 
 input {
@@ -154,37 +16,109 @@ input {
 }
 
 
+li {
+  list-style: none;
+}
 
-h1 button {
+
+.details {
+  font-size: 2.5rem;
+  font-family: 'Signika Negative', sans-serif;
+  text-align: center;
+}
+
+.details__title {
+  font-size: 5rem;
+  width: 100%;
+  text-align: center;
+  margin: 5rem 0;
+  font-family: 'Titan One', cursive;
+}
+
+.details__title button {
   border: none;
   background: none;
 }
 
-form div {
-  width: 100%;
-
+.agregar-btn {
+  border-radius: 50%;
+  border: rgb(0, 0, 0) 3px solid;
+  width: 4rem;
+  height: 4rem;
+  box-shadow: 0px 0px 7px 5px rgb(3, 99, 21);
 }
 
-
-
-form {
-  width: 100%;
-  text-align: center;
-}
-.div-text{
+.details__datos,
+.new__form {
+  width: 70%;
   margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  padding: 2rem 0;
 }
 
-.div-text input {
+.details__datos p {
+  width: 85%;
+  margin: 0 auto;
+  padding: 1.5rem;
+  border-radius: 10px;
+}
+
+.hr-mod {
+  margin: 0 auto;
+  width: 70%;
+}
+
+.datos__lista {
+  padding: 15px;
+  border-radius: 10px;
+  margin: 0 auto;
   max-width: 75%;
 }
 
-.butn-form {
+strong {
+  margin-right: 10px;
+}
 
+
+.input__element {
+  display: block;
+  margin: 0 auto 20px auto;
+}
+
+.edit__input {
+  margin: 0 auto;
+  width: 90%;
+}
+
+.btn-edit,
+.btn-edit-mod {
+  background: none;
+  border: none;
+}
+
+.btn-edit {
+
+  width: 50%;
+}
+
+
+.btn-elim {
+  border: none;
+  background-color: rgba(180, 174, 174, 0);
+  width: 50%;
+}
+
+.btn-edit img,
+.btn-edit-mod img {
+  width: 6rem;
+  height: 3rem;
+}
+
+.butn-form {
   margin-top: 20px;
   padding: 3px 10px;
   border-radius: 5px;
-
   font-family: sans-serif;
   font-weight: bold;
   letter-spacing: 5px;
@@ -201,20 +135,104 @@ form {
   background-color: black;
 }
 
-.inputForm {
+.details__new {
+  display: flex;
+  justify-content: center;
   width: 100%;
 }
 
-.inputForm li{
-  margin-top: 10px;
-} 
+.form__input {
+  width: 90%;
+  padding: 0;
+  margin: 0 auto;
+}
 
-.elim1{
+.form__input li {
+  margin-top: 10px;
+}
+
+.details__for {
+  max-width: 100%;
+  text-align: left;
+}
+
+.for__card {
+  display: flex;
+  max-width: 70%;
+  margin: 20px auto;
+  padding: 15px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.card__img-div {
+  width: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img-div__img {
+  border-radius: 5px;
+  width: 8rem;
+}
+
+.card__data {
+  display: flex;
+  align-items: center;
+  width: 70%;
+}
+
+.card__data ul {
+  margin: 0;
+}
+
+.card__buttons {
+  width: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.details__edit {
+  min-width: 90%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.details__edit ul {
+  padding: 0;
+}
+
+.for__no-element {
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  color: white;
+  letter-spacing: 2px;
+}
+
+.guardar:disabled {
+  background-color: rgb(33, 105, 18, 0.5);
+
+}
+
+.guardar:not([disabled]):hover {
+  color: black;
+  background-color: orange;
+}
+
+.cancelar:hover {
+  color: black;
+  background-color: white;
+}
+
+.btn-elim__normal {
   width: 4rem;
   height: 4rem;
 }
 
-.elim2{
+.btn-elim__hover {
   display: none;
   overflow: hidden;
   width: 3.2rem;
@@ -222,40 +240,30 @@ form {
   background-color: rgba(180, 174, 174, 0);
 }
 
-.btn-elim:hover .elim1{
-display: none;
-overflow: hidden;
+.btn-elim:hover .btn-elim__normal {
+  display: none;
+  overflow: hidden;
 }
 
 
-.btn-elim:hover .elim2{
-display: block;
-margin-bottom: -1.2rem;
-transform: scale(110%);
+.btn-elim:hover .btn-elim__hover {
+  display: block;
+  margin-bottom: -1.2rem;
+  transform: scale(110%);
 
 }
 
-.btn-elim{
- border: none;
-  background-color: rgba(180, 174, 174, 0);
-  margin-left: 10px;
-}
-.btn-edit img{
-  width: 6rem;
-  height: 3rem;
-}
-
-.btn-edit:hover{
+.btn-edit:hover,
+.btn-edit-mod:hover {
   transform: scale(110%);
 }
 
-.agregar-btn:hover{
+.agregar-btn:hover {
   transform: scale(110%);
 }
 
-.btn-elim:hover{
-  
+.btn-elim:hover {
   background-color: red;
   padding: 5px 5px 15px 5px;
   border-radius: 25%;
-  }
+}

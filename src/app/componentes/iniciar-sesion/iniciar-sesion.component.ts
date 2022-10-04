@@ -30,7 +30,6 @@ export class IniciarSesionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     if (sessionStorage.getItem('token') != null) {
       this.onReturn();
     }
@@ -46,8 +45,6 @@ export class IniciarSesionComponent implements OnInit {
 
   onEnviar(event: Event) {
     event.preventDefault;
-    console.log(this.loginForm.value);
-
     this.authService.iniciarSesion(this.loginForm.value).subscribe({
       next: (data) => {
         this.valor = Object.values(data)[0];

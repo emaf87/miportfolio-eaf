@@ -1,37 +1,41 @@
-<section id='details' class='section'>
-
-  <div class='details-text'>
-
-    <h1 class='details-title'>Sobre mi <button *ngIf="isUserLogin" class="btn-edit" name="acercaEdit" type="submit"
-        (click)="tooglePersonalDetailsEdit()"><img src="../../../assets/img/edit2.png" alt="edit-img" height="40"
-          width="70"></button>
+<section>
+  <div class='details'>
+    <h1 class='details__title'>Sobre mi <button *ngIf="isUserLogin && !isPersonalDetailsEdit" class="btn-edit-mod"
+        name="acercaEdit" type="submit" (click)="tooglePersonalDetailsEdit()"><img src="../../../assets/img/edit2.png"
+          alt="edit-img" height="40" width="70"></button>
     </h1>
-    <div class="datos-div" *ngIf="!isPersonalDetailsEdit && (personalDetailsList[0].id)!=0">
+    <div class="details__datos" *ngIf="!isPersonalDetailsEdit && (personalDetailsList[0].id)!=0">
       <p *ngIf="personalDetailsList[0].aboutMe==''">Haga click en edit para agregar informacion</p>
       <p *ngIf="personalDetailsList[0].aboutMe!=''">{{personalDetailsList[0].aboutMe}}</p>
-      <br>
-      <ul class="datos-ul">
+      <hr class="hr-mod">
+      <ul class="datos__lista">
         <li *ngIf="personalDetailsList[0].name!=''"><strong>Nombre: </strong> {{personalDetailsList[0].name}}
           {{personalDetailsList[0].lastname}}</li>
         <li *ngIf="personalDetailsList[0].degree!=''"><strong>Titulo: </strong> {{personalDetailsList[0].degree}}</li>
-        <li *ngIf="personalDetailsList[0].city!=''"><strong>Originario de: </strong> {{personalDetailsList[0].city}}
+        <li *ngIf="personalDetailsList[0].city!=''"><strong>Lugar de nacimiento: </strong>
+          {{personalDetailsList[0].city}}
         </li>
-        <li *ngIf="personalDetailsList[0].nationality!=''"><strong>Nacionalidad </strong>
+        <li *ngIf="personalDetailsList[0].nationality!=''"><strong>Nacionalidad: </strong>
           {{personalDetailsList[0].nationality}}</li>
       </ul>
     </div>
-
-    <form class="datos-edit" *ngIf="isUserLogin && isPersonalDetailsEdit" [formGroup]="personalDetailsForm"
+    <form class="details__datos" *ngIf="isUserLogin && isPersonalDetailsEdit" [formGroup]="personalDetailsForm"
       (ngSubmit)="onSavePersonalDetails($event)">
-      <div class="div-text"><strong>Acerca de mi:</strong><input type="text" formControlName="aboutMeForm"></div>
-      <div class="div-text"><strong>Nombre: </strong><input type="text" formControlName="nameForm"></div>
-      <div class="div-text"><strong>Apellido: </strong><input type="text" formControlName="lastnameForm"></div>
-      <div class="div-text"><strong>Titulo: </strong><input type="text" formControlName="degreeForm"></div>
-      <div class="div-text"><strong>Originario de:</strong> <input type="text" formControlName="cityForm"></div>
-      <div class="div-text"><strong>Nacionalidad: </strong><input type="text" formControlName="nationalityForm"></div>
-
-      <div class="div-btn">
-        <button class="butn-form guardar" type="submit">Guardar</button>
+      <div class="edit__input"><strong>Acerca de mi:</strong><input class="input__element" type="text"
+          formControlName="aboutMeForm"></div>
+      <div class="edit__input"><strong>Nombre: </strong><input class="input__element" type="text"
+          formControlName="nameForm"></div>
+      <div class="edit__input"><strong>Apellido: </strong><input class="input__element" type="text"
+          formControlName="lastnameForm"></div>
+      <div class="edit__input"><strong>Titulo: </strong><input class="input__element" type="text"
+          formControlName="degreeForm"></div>
+      <div class="edit__input"><strong>Originario de:</strong> <input class="input__element" type="text"
+          formControlName="cityForm"></div>
+      <div class="edit__input"><strong>Nacionalidad: </strong><input class="input__element" type="text"
+          formControlName="nationalityForm">
+      </div>
+      <div class="edit__btn">
+        <button class="butn-form guardar" type="submit" [disabled]="personalDetailsForm.invalid">Guardar</button>
         <button class="butn-form cancelar" type="reset" (click)="resetExtraVariables()">Cancelar</button>
       </div>
     </form>
@@ -40,77 +44,77 @@
 
   <!------------------------------------SECCION EXPERIENCIA-------------------------------------------->
 
-  <div class='details-text'>
-    <h1 class='details-title'>Experiencia <button *ngIf="isUserLogin" (click)="toogleNewExperience()"><img
+  <div class='details'>
+    <h1 class='details__title'>Experiencia <button *ngIf="isUserLogin" (click)="toogleNewExperience()"><img
           class="agregar-btn" src="../../../assets/img/agregar2.jpg" alt="Add-Img"></button>
     </h1>
-
-    <div *ngIf="isNewExperience" class="new-div">
-      <ul class="newform-div">
-        <form class="inputForm" [formGroup]="experienceForm" (ngSubmit)="onNewExperience($event)">
-          <li><strong>Puesto: </strong><input class="input-form" type="text" formControlName="experienceJobForm"></li>
-          <li><strong>Empresa:</strong> <input class="input-form" type="text" formControlName="experienceCompanyForm">
+    <div *ngIf="isNewExperience" class="details__new">
+      <form class="new__form" [formGroup]="experienceForm" (ngSubmit)="onNewExperience($event)">
+        <ul class="form__input">
+          <li><strong>Puesto: </strong><input class="input__element" type="text" formControlName="experienceJobForm"
+              placeholder="Técnico en redes">
           </li>
-          <li><strong>Fecha inicio: </strong><input class="input-form" type="text"
-              formControlName="experienceStartedForm"> </li>
-          <li><strong>Fecha fin:</strong> <input class="input-form" type="text" formControlName="experienceEndedForm">
+          <li><strong>Empresa:</strong> <input class="input__element" type="text"
+              formControlName="experienceCompanyForm" placeholder="Google">
           </li>
-          <li><strong>Logo: </strong><input class="input-form" type="text" formControlName="experienceLogoForm"> </li>
-          <button class="butn-form guardar" type="submit">Guardar</button><button class="butn-form cancelar"
-            type="reset" (click)="resetExtraVariables()">Cancelar</button>
-        </form>
-      </ul>
+          <li><strong>Fecha inicio: </strong><input class="input__element" type="month"
+              formControlName="experienceStartedForm" placeholder="Mes/Año"> </li>
+          <li><strong>Fecha fin:</strong> <input class="input__element" type="month"
+              formControlName="experienceEndedForm" placeholder="Mes/Año">
+          </li>
+          <li><strong>Logo URL: </strong><input class="input__element" type="text" placeholder="www.cloud.com/imagen"
+              formControlName="experienceLogoForm">
+          </li>
+          <button class="butn-form guardar" type="submit" [disabled]="experienceForm.invalid">Guardar</button><button
+            class="butn-form cancelar" type="reset" (click)="resetExtraVariables()">Cancelar</button>
+        </ul>
+      </form>
     </div>
-
-
-    <div class='details-div' *ngFor="let experience of experienceList, index as i">
-      <div *ngIf="experience.id_exp!=0" class="exp-div">
-
-        <div class="img-div" *ngIf="isExperienceEdit!=experience.id_exp">
-          <img class="details-img" src="../../../assets/img/{{experience.logo}}" alt="Co. Logo" width="70">
+    <div class='details__for' *ngFor="let experience of experienceList, index as i">
+      <div *ngIf="experience.id_exp!=0" class="for__card">
+        <div class="card__img-div" *ngIf="isExperienceEdit!=experience.id_exp">
+          <img class="img-div__img" src="../../../assets/img/{{experience.logo}}" alt="Co. Logo">
         </div>
-        <div class="align-div">
-          <ul *ngIf="isExperienceEdit!=experience.id_exp">
+        <div class="card__data" *ngIf="isExperienceEdit!=experience.id_exp">
+          <ul>
             <li><strong>Puesto: </strong>{{experience.job}}</li>
             <li><strong>Empresa:</strong> {{experience.company}}</li>
-            <li><strong>Fecha:</strong> {{experience.started}} - {{experience.ended}}</li>
+            <li><strong>Fecha:</strong> {{experience.started}} / {{experience.ended}}</li>
           </ul>
         </div>
-        <div *ngIf="isExperienceEdit==experience.id_exp && isExperienceEdit!=0" class="datos-edit">
-          <ul>
-            <form class="inputForm" [formGroup]="experienceForm" (ngSubmit)="onSaveExperienceEdit($event, i)">
-              <li><strong>Puesto: </strong><input class="input-form" type="text" formControlName="experienceJobForm">
-              </li>
-              <li><strong>Empresa: </strong><input class="input-form" type="text"
-                  formControlName="experienceCompanyForm"></li>
-              <li><strong>Fecha inicio: </strong><input class="input-form" type="text"
-                  formControlName="experienceStartedForm">
-              </li>
-              <li><strong>Fecha fin:</strong> <input class="input-form" type="text"
-                  formControlName="experienceEndedForm"> </li>
-              <li><strong>Logo:</strong> <input class="input-form" type="text" formControlName="experienceLogoForm">
-              </li>
-              <button class="butn-form guardar" type="submit">Guardar</button><button class="butn-form cancelar"
-                type="reset" (click)="resetExtraVariables()">Cancelar</button>
-            </form>
-          </ul>
-        </div>
-        <div class="align-div">
-          <button class="btn-edit" *ngIf="isUserLogin && isExperienceEdit!=experience.id_exp"
-            (click)="toogleExperienceEdit(experience.id_exp, i)">
+        <div class="card__buttons" *ngIf="isUserLogin && isExperienceEdit!=experience.id_exp">
+          <button class="btn-edit" (click)="toogleExperienceEdit(experience.id_exp, i)">
             <img src="../../../assets/img/edit2.png" alt="edit-img">
           </button>
-          <button class="btn-elim" *ngIf="isUserLogin && isExperienceEdit!=experience.id_exp" type="submit"
-            (click)="onDeleteExperience(i)">
-            <img src="../../../assets/img/eliminar.png" alt="delete-img" class="elim1 ">
-            <img src="../../../assets/img/eliminar-hover.png" alt="delete-img" class="elim2 btn-b">
+          <button class="btn-elim" type="submit" (click)="onDeleteExperience(i)">
+            <img src="../../../assets/img/eliminar.png" alt="delete-img" class="btn-elim__normal ">
+            <img src="../../../assets/img/eliminar-hover.png" alt="delete-img" class="btn-elim__hover">
           </button>
         </div>
+        <form *ngIf="isExperienceEdit==experience.id_exp && isExperienceEdit!=0" class="details__edit"
+          [formGroup]="experienceForm" (ngSubmit)="onSaveExperienceEdit($event, i)">
+          <ul>
+            <li><strong>Puesto: </strong><input class="input__element" type="text" formControlName="experienceJobForm">
+            </li>
+            <li><strong>Empresa: </strong><input class="input__element" type="text"
+                formControlName="experienceCompanyForm"></li>
+            <li><strong>Fecha inicio: </strong><input class="input__element" type="month"
+                formControlName="experienceStartedForm" placeholder="Mes/Año"></li>
+            <li><strong>Fecha fin:</strong> <input class="input__element" type="month"
+                formControlName="experienceEndedForm" placeholder="Mes/Año"></li>
+            <li><strong>Logo URL:</strong> <input class="input__element" type="text"
+                formControlName="experienceLogoForm">
+            </li>
+            <button class="butn-form guardar" type="submit" [disabled]="experienceForm.invalid">Guardar</button><button
+              class="butn-form cancelar" type="reset" (click)="resetExtraVariables()">Cancelar</button>
+          </ul>
+        </form>
       </div>
-      <div *ngIf="experience.id_exp==0 && !isUserLogin " class="div-cero">
+
+      <div *ngIf="experience.id_exp==0 && !isUserLogin " class="for__no-element">
         <h2>Inicie sesión para agregar una nueva experience laboral</h2>
       </div>
-      <div *ngIf="experience.id_exp==0 && isUserLogin && !isNewExperience" class="div-cero">
+      <div *ngIf="experience.id_exp==0 && isUserLogin && !isNewExperience" class="for__no-element">
         <h2>Agregue una nueva experience laboral para visualizarla aquí</h2>
       </div>
     </div>
@@ -118,79 +122,89 @@
   <hr>
 
   <!------------------------------------SECCION EDUCACION-------------------------------------------->
-  <div class="details-text">
-    <h1 class='details-title'>Educación <button *ngIf="isUserLogin" (click)="toogleNewEducation()">
+  <div class="details">
+    <h1 class='details__title'>Educación <button *ngIf="isUserLogin" (click)="toogleNewEducation()">
         <img class="agregar-btn" src="../../../assets/img/agregar2.jpg" alt="Add-img">
       </button>
     </h1>
 
-    <div *ngIf="isNewEducation" class="new-div">
-      <ul class="newform-div">
-        <form class="inputForm" [formGroup]="educationForm" (ngSubmit)="onNewEducation($event)">
-          <li><strong>Nivel:</strong> <input class="input-form" type="text" formControlName="educationGradeForm"></li>
-          <li><strong>Título: </strong><input class="input-form" type="text" formControlName="educationDegreeForm"></li>
-          <li><strong>Institución: </strong><input class="input-form" type="text"
-              formControlName="educationInstitutionForm">
+    <div *ngIf="isNewEducation" class="details__new">
+      <form class="new__form" [formGroup]="educationForm" (ngSubmit)="onNewEducation($event)">
+        <ul class="form__input">
+          <li><strong>Nivel:</strong> <input class="input__element" type="text"
+              placeholder="Curso/Secundario/Universitario" formControlName="educationGradeForm">
           </li>
-          <li><strong>Fecha inicio:</strong><input class="input-form" type="text"
-              formControlName="educationStartedForm"></li>
-          <li><strong>Fecha fin:</strong><input class="input-form" type="text" formControlName="educationEndedForm">
+          <li><strong>Título: </strong><input class="input__element" type="text"
+              placeholder="Ingeniero en telecomunicaciones" formControlName="educationDegreeForm">
           </li>
-          <li><strong>Logo:</strong><input class="input-form" type="text" formControlName="educationLogoForm"></li>
-          <button class="butn-form guardar" type="submit">Guardar</button><button class="butn-form cancelar"
-            type="reset" (click)="resetExtraVariables()">Cancelar</button>
-        </form>
-      </ul>
+          <li><strong>Institución: </strong><input class="input__element" type="text"
+              formControlName="educationInstitutionForm" placeholder="Universidad Nacional">
+          </li>
+          <li><strong>Fecha inicio:</strong><input class="input__element" type="month"
+              formControlName="educationStartedForm" placeholder="Mes/Año"></li>
+          <li><strong>Fecha fin:</strong><input class="input__element" type="month" formControlName="educationEndedForm"
+              placeholder="Mes/Año">
+          </li>
+          <li><strong>Logo URL:</strong><input class="input__element" type="text" formControlName="educationLogoForm"
+              placeholder="www.cloud.com/imagen"></li>
+          <button class="butn-form guardar" type="submit" [disabled]="educationForm.invalid">Guardar</button><button
+            class="butn-form cancelar" type="reset" (click)="resetExtraVariables()">Cancelar</button>
+        </ul>
+      </form>
     </div>
 
-    <div class='details-div' *ngFor="let education of educationList, index as i">
-      <div *ngIf="education.id_edu!=0" class="exp-div">
-
-        <div class="img-div" *ngIf="isEducationEdit!=education.id_edu">
-          <img class="details-img" src="../../../assets/img/{{education.logo}}" alt="Edu Logo" width="70">
+    <div class='details__for' *ngFor="let education of educationList, index as i">
+      <div *ngIf="education.id_edu!=0" class="for__card">
+        <div class="card__img-div" *ngIf="isEducationEdit!=education.id_edu">
+          <img class="img-div__img" src="../../../assets/img/{{education.logo}}" alt="Edu Logo" width="70">
         </div>
-
-        <div class="align-div">
+        <div class="card__data">
           <ul *ngIf="isEducationEdit!=education.id_edu">
             <li><strong>Nivel:</strong> {{education.grade}}</li>
-            <li><strong>Título:</strong> {{education.degree}}
-              <button class="btn-edit" *ngIf="isUserLogin" type="submit"
-                (click)="toogleEducationEdit(education.id_edu, i)">
-                <img src="../../../assets/img/edit2.png" alt="edit-img">
-              </button>
-              <button class="btn-elim" *ngIf="isUserLogin" type="submit" (click)="onEliminarEdu(i)">
-                <img src="../../../assets/img/eliminar.png" alt="delete-img" class="elim1 ">
-                <img src="../../../assets/img/eliminar-hover.png" alt="delete-img" class="elim2 btn-b">
-              </button>
-            </li>
+            <li><strong>Título:</strong> {{education.degree}}</li>
             <li><strong>Institución:</strong> {{education.institution}}</li>
             <li><strong>Fecha:</strong> {{education.started}} - {{education.ended}}</li>
           </ul>
         </div>
-        <div *ngIf="isEducationEdit==education.id_edu && isEducationEdit!=0" class="datos-edit">
-          <ul>
-            <form class="inputForm" [formGroup]="educationForm" (ngSubmit)="onSaveEducationEdit($event, i)">
-              <li><strong>Nivel:</strong> <input class="input-form" type="text" formControlName="educationGradeForm">
+        <div class="card__buttons" *ngIf="isUserLogin && isEducationEdit!=education.id_edu">
+          <button class="btn-edit" type="submit" (click)="toogleEducationEdit(education.id_edu, i)">
+            <img src="../../../assets/img/edit2.png" alt="edit-img">
+          </button>
+          <button class="btn-elim" type="submit" (click)="onDeleteEducation(i)">
+            <img src="../../../assets/img/eliminar.png" alt="delete-img" class="btn-elim__normal ">
+            <img src="../../../assets/img/eliminar-hover.png" alt="delete-img" class="btn-elim__hover">
+          </button>
+        </div>
+        <div *ngIf="isEducationEdit==education.id_edu && isEducationEdit!=0" class="details__edit">
+          <form [formGroup]="educationForm" (ngSubmit)="onSaveEducationEdit($event, i)">
+            <ul class="form__input">
+              <li><strong>Nivel:</strong> <input class="input__element" type="text"
+                  formControlName="educationGradeForm">
               </li>
-              <li><strong>Título:</strong><input class="input-form" type="text" formControlName="educationDegreeForm">
+              <li><strong>Título:</strong><input class="input__element" type="text"
+                  formControlName="educationDegreeForm">
               </li>
-              <li><strong>Institución:</strong> <input class="input-form" type="text"
-                  formControlName="educationInstitutionForm"></li>
-              <li><strong>Fecha started:</strong><input class="input-form" type="text"
-                  formControlName="educationStartedForm"></li>
-              <li><strong> Fecha ended:</strong><input class="input-form" type="text"
+              <li><strong>Institución:</strong> <input class="input__element" type="text"
+                  formControlName="educationInstitutionForm" required></li>
+              <li><strong>Fecha inicio:</strong><input class="input__element" type="month"
+                  formControlName="educationStartedForm" required></li>
+              <li><strong> Fecha fin:</strong><input class="input__element" type="month"
                   formControlName="educationEndedForm"></li>
-              <li><strong>Logo:</strong><input class="input-form" type="text" formControlName="educationLogoForm"></li>
-              <button class="butn-form guardar" type="submit">Guardar</button>
-              <button class="butn-form cancelar" type="reset" (click)="resetExtraVariables()">Cancelar</button>
-            </form>
-          </ul>
+              <li><strong>Logo URL:</strong><input class="input__element" type="text"
+                  formControlName="educationLogoForm">
+              </li>
+              <div class="card__align">
+                <button class="butn-form guardar" type="submit" [disabled]="educationForm.invalid">Guardar</button>
+                <button class="butn-form cancelar" type="reset" (click)="resetExtraVariables()">Cancelar</button>
+              </div>
+            </ul>
+          </form>
         </div>
       </div>
-      <div *ngIf="educationList.id_edu==0 && !isUserLogin " class="div-cero">
+      <div *ngIf="education.id_edu==0 && !isUserLogin " class="for__no-element">
         <h2>Inicie sesión para agregar una nuevo elemento de educación</h2>
       </div>
-      <div *ngIf="education.id_edu==0 && isUserLogin && !isNewEducation" class="div-cero">
+      <div *ngIf="education.id_edu==0 && isUserLogin && !isNewEducation" class="for__no-element">
         <h2>Agregue un nuevo elemento de educación para visualizarlo aquí</h2>
       </div>
     </div>

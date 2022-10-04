@@ -9,7 +9,6 @@ export class CuerpoPortfolioComponent implements OnInit {
 
   constructor() { }
   @Input() isUserLogin!: boolean;
-  
 
   ngOnInit(): void {
   }

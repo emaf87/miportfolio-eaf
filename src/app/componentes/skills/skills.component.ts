@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ApiDbService } from 'src/app/servicios/api-db.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+
 @Component({
   selector: 'app-skills',
   templateUrl: './skills.component.html',
@@ -34,25 +35,25 @@ export class SkillsComponent implements OnInit {
     });
   }
 
+  get Name() {
+    return this.skillForm.get('nameForm');
+  }
+
+  get Value() {
+    return this.skillForm.get('valueForm');
+  }
   //-----------------------FUNCIONES EXTRAS-------------------------------------
 
   toogleSkillEdit(id: number, index: number) {
     this.isSkillEdit = id;
     this.isNewSkill = false;
     if (this.isSkillEdit != 0) {
-      
+
       let str = (this.skillsList[index].value).split("%", 2)
-      console.log(str[0])
-      //console.log(stringify(this.skillsList[index].value))
-
-      console.log(str)
-
-      //let str = 'ff';
       this.skillForm = this.formBuilder.group({
         nameForm: [this.skillsList[index].name, [Validators.required]],
         valueForm: [str[0], [Validators.required]]
       });
-      console.log(this.skillForm.get(['valueForm']))
     }
   }
 
@@ -73,13 +74,11 @@ export class SkillsComponent implements OnInit {
     this.apiDbService.editInformation(this.skillsList[index], 3, this.skillsList[index].id).subscribe({
       next: () => {
         alert("Edición guardada");
-       // this.ngOnInit();
+        // this.ngOnInit();
       },
       error: () => alert("Error: La edicion no se realizó")
     });
   }
-
-
 
   //--------------------------------------GUARDAR NUEVA SKILL-------------------------------
 
@@ -106,6 +105,5 @@ export class SkillsComponent implements OnInit {
       });
     }
   }
-
 }
 

@@ -1,20 +1,36 @@
-.botones button{
+.botones button {
     margin-left: 15px;
-
 }
 
-.login-div{
-padding-top: 50px;
-   width: 100vw;
+.login {
+    padding-top: 50px;
+    width: 100vw;
     height: 100vh;
     background-color: beige;
 }
 
-.login-int{
+h1 {
+    font-size: 3.5rem;
+}
+
+.login__int {
     background-color: rgb(255, 255, 255);
     box-shadow: 0px 0px 7px 5px gray;
     width: 50%;
-    margin:0 auto;
+    margin: 0 auto;
     border-radius: 10px;
     padding: 20px 10px;
+}
+
+.form-label {
+    font-size: 2rem;
+}
+
+.form-control,
+button {
+    font-size: 1.75rem;
+}
+
+.text-danger {
+    font-size: 1.5rem;
 }

@@ -1,12 +1,12 @@
-<div class="login-div">
-  <div class="login-int">
+<div class="login">
+  <div class="login__int">
     <h1 class="m-5">Iniciar sesión</h1>
     <form [formGroup]="loginForm" class="m-5" (ngSubmit)="onEnviar($event)">
       <div class="mb-3">
         <label class="form-label">Email</label>
         <input type="email" formControlName="email" class="form-control" nameForm="email" aria-describedby="emailHelp"
-          [ngClass]="{'is-invalid':Email?.errors && Email?.touched, 
-      'is-valid':!Email?.errors && Email?.touched}">
+          [ngClass]="{'is-invalid':Email?.errors && Email?.touched, 'is-valid':!Email?.errors && Email?.touched}"
+          required>
         <div *ngIf="Email?.errors && Email?.touched">
           <p *ngIf="Email?.hasError('required')" class="text-danger">
             El email es requerido
@@ -19,8 +19,7 @@
       <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Contraseña</label>
         <input type="password" formControlName="password" class="form-control" [ngClass]="{'is-invalid':Password?.errors && Password?.touched, 
-    'is-valid':!Password?.errors && Password?.touched}">
-
+    'is-valid':!Password?.errors && Password?.touched}" required>
         <div *ngIf="Password?.errors && Password?.touched">
           <p *ngIf="Password?.hasError('required')" class="text-danger">
             La contraseña es requerida
@@ -31,7 +30,7 @@
         </div>
       </div>
       <div class="botones">
-        <button type="submit" class="btn btn-primary">Enviar</button>
+        <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Enviar</button>
         <button type="reset" class="btn btn-secondary" (click)="onReturn()">Volver</button>
       </div>
     </form>
