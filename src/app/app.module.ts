@@ -7,14 +7,13 @@ import { EncabezadoComponent } from './componentes/encabezado/encabezado.compone
 import { BienvenidaComponent } from './componentes/bienvenida/bienvenida.component';
 import { DatosComponent } from './componentes/datos/datos.component';
 import { ProyectosComponent } from './componentes/proyectos/proyectos.component';
-import { ContactoComponent } from './componentes/contacto/contacto.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { IniciarSesionComponent } from './componentes/iniciar-sesion/iniciar-sesion.component';
 import { PortfolioComponent } from './componentes/portfolio/portfolio.component'  
 import { ReactiveFormsModule } from '@angular/forms';
 import { SkillsComponent } from './componentes/skills/skills.component';
 import { TokenInterceptorService } from './servicios/token-interceptor.service';
-import { CuerpoPortfolioComponent } from './cuerpo-portfolio/cuerpo-portfolio.component';
+import { CuerpoPortfolioComponent } from './componentes/cuerpo-portfolio/cuerpo-portfolio.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -28,7 +27,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BienvenidaComponent,
     DatosComponent,
     ProyectosComponent,
-    ContactoComponent,
     IniciarSesionComponent,
     PortfolioComponent,
     SkillsComponent,
@@ -40,7 +38,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    
    ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi:true}],
   bootstrap: [AppComponent]
