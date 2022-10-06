@@ -15,7 +15,7 @@ import { SkillsComponent } from './componentes/skills/skills.component';
 import { TokenInterceptorService } from './servicios/token-interceptor.service';
 import { CuerpoPortfolioComponent } from './componentes/cuerpo-portfolio/cuerpo-portfolio.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import {DragDropModule} from '@angular/cdk/drag-drop'
 
 
 
@@ -38,6 +38,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    DragDropModule
    ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi:true}],
   bootstrap: [AppComponent]
