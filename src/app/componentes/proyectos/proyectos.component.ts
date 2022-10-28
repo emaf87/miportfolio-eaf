@@ -97,7 +97,6 @@ export class ProyectosComponent implements OnInit {
   }
 
   toogleShowDetails(id: number, index:number) {
-    console.log(id);
     this.isShowDetails = id;
     this.setFormValues(index);
   }
@@ -111,13 +110,10 @@ export class ProyectosComponent implements OnInit {
     this.projectsList[index].date = this.projectForm.get('dateForm')?.value;
     this.projectsList[index].url = this.projectForm.get('urlForm')?.value;
     this.projectsList[index].image = this.projectForm.get('imageForm')?.value;
-    console.log(this.projectsList[index]);
     this.apiDbService.editInformation(this.projectsList[index], 4, this.projectsList[index].id).subscribe({
       next: () => {
         this.isProjectEdit = 0;
         this.projectForm.reset();
-        console.log(this.projectsList[index]);
-
       },
       error: () => this.dataBaseError = true
     });
@@ -127,14 +123,11 @@ export class ProyectosComponent implements OnInit {
 
   onSaveNewproject(event: Event) {
     event.preventDefault;
-    console.log(this.projectsList[0])
-
     this.projectsList.push({
       "id": 0, "rowIndex": this.projectsList.length, "name": this.projectForm.get('nameForm')?.value,
       "description": this.projectForm.get('descriptionForm')?.value, "date":this.projectForm.get('dateForm')?.value,
        "url": this.projectForm.get('urlForm')?.value, "image": this.projectForm.get('imageForm')?.value
     });
-    console.log(this.projectsList)
     this.apiDbService.newInformation(this.projectsList[this.projectsList.length - 1], 4).subscribe({
       next: () => {
         this.isNewProject = false;
@@ -169,10 +162,7 @@ export class ProyectosComponent implements OnInit {
     const dropList = event.container;
     const dragIndex = drag.data;
     const dropIndex = dropList.data;
-
     this.dragDropInfo = { dragIndex, dropIndex };
-    console.log('dragEntered', { dragIndex, dropIndex });
-
     const phContainer = dropList.element.nativeElement;
     const phElement = phContainer.querySelector('.cdk-drag-placeholder');
 
@@ -208,7 +198,6 @@ export class ProyectosComponent implements OnInit {
   dragDropped(event: CdkDragDrop<number>) {
     if (!this.dropListReceiverElement) {
       for (let i = 0; i < this.projectsList.length; i++) {
-        console.log(this.projectsList[i]);
         this.projectsList[i].rowIndex = i;
       }
       this.apiDbService.saveCompleteList(4, this.projectsList).subscribe({

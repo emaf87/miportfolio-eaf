@@ -115,7 +115,6 @@ export class SkillsComponent implements OnInit {
     event.preventDefault;
     this.newSkillData = [{ "id": 0, "rowIndex": this.skillsList.length, "name": this.skillForm.get('nameForm')?.value,
      "value": this.skillForm.get('valueForm')?.value}];
-    console.log(this.newSkillData);
     this.apiDbService.newInformation(this.newSkillData[0], 3).subscribe({
       next: () => {
         this.toogleNewSkill();
@@ -129,7 +128,6 @@ export class SkillsComponent implements OnInit {
 
   onDeleteSkill(index: number) {
     if (confirm("Deseas eliminar la habilidad " + this.skillsList[index].name + "?")) {
-      console.log(this.skillsList[index].id);
       this.apiDbService.deleteInformation(this.skillsList[index].id, 3).subscribe({
         next: () => {
           this.skillsList.splice(index, 1);
@@ -152,10 +150,7 @@ export class SkillsComponent implements OnInit {
     const dropList = event.container;
     const dragIndex = drag.data;
     const dropIndex = dropList.data;
-
     this.dragDropInfo = { dragIndex, dropIndex };
-    console.log('dragEntered', { dragIndex, dropIndex });
-
     const phContainer = dropList.element.nativeElement;
     const phElement = phContainer.querySelector('.cdk-drag-placeholder');
 
@@ -190,9 +185,7 @@ export class SkillsComponent implements OnInit {
 
   dragDropped(event: CdkDragDrop<number>) {
     if (!this.dropListReceiverElement) {
-      console.log("soltar")
       for (let i = 0; i < this.skillsList.length; i++) {
-        console.log(this.skillsList[i]);
         this.skillsList[i].rowIndex = i;
       }
       this.apiDbService.saveCompleteList(3, this.skillsList).subscribe({

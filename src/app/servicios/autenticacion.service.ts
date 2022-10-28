@@ -10,7 +10,7 @@ export class AutenticacionService {
   url = "http://localhost:8080/auth";
 
   constructor(private http: HttpClient) {
-    console.log("El servicio de autenticacion esta corriendo");
+    
   }
 
   iniciarSesion(info: any) {

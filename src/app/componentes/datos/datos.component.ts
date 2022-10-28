@@ -325,7 +325,7 @@ export class DatosComponent implements OnInit {
     const dropIndex = dropList.data;
 
     this.dragDropInfo = { dragIndex, dropIndex };
-   // console.log('dragEntered', { dragIndex, dropIndex });
+ 
 
     const phContainer = dropList.element.nativeElement;
     const phElement = phContainer.querySelector('.cdk-drag-placeholder');
@@ -361,7 +361,7 @@ export class DatosComponent implements OnInit {
 
   dragDropped(event: CdkDragDrop<number>, urlId: number, list: any) {
     if (!this.dropListReceiverElement) {
-      console.log("soltar")
+     
       for (let i = 0; i < list.length; i++) {
         list[i].rowIndex = i;
       }

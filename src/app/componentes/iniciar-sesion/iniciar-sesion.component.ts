@@ -55,7 +55,6 @@ export class IniciarSesionComponent implements OnInit {
       },
       error: (error) => {
         this.errorCode = error.status;
-        console.log(this.errorCode);
       }
     })
   }
