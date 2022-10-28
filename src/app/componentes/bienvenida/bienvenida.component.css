@@ -11,6 +11,7 @@
   box-shadow: 0 0 10px 10px gray;
   display: flex;
   justify-content: space-between;
+  
 }
 
 .welcome__img {

@@ -19,59 +19,94 @@
           {{personalDetailsList[0].nationality}}</li>
       </ul>
     </div>
-    <form class="details__datos" *ngIf="isUserLogin && isPersonalDetailsEdit" [formGroup]="personalDetailsForm"
+    <form class="details__datos" [ngClass]="{'db-error':(dataBaseError && isPersonalDetailsEdit)}"
+      *ngIf="isUserLogin && isPersonalDetailsEdit" [formGroup]="personalDetailsForm"
       (ngSubmit)="onSavePersonalDetails($event)">
-      <div class="edit__input"><strong>Acerca de mi:</strong><input class="input__element" type="text"
-          formControlName="aboutMeForm"></div>
-      <div class="edit__input"><strong>Nombre: </strong><input class="input__element" type="text"
-          formControlName="nameForm"></div>
-      <div class="edit__input"><strong>Apellido: </strong><input class="input__element" type="text"
-          formControlName="lastnameForm"></div>
-      <div class="edit__input"><strong>Titulo: </strong><input class="input__element" type="text"
-          formControlName="degreeForm"></div>
-      <div class="edit__input"><strong>Originario de:</strong> <input class="input__element" type="text"
-          formControlName="cityForm"></div>
-      <div class="edit__input"><strong>Nacionalidad: </strong><input class="input__element" type="text"
-          formControlName="nationalityForm">
-      </div>
-      <div class="edit__btn">
-        <button class="butn-form guardar" type="submit" [disabled]="personalDetailsForm.invalid">Guardar</button>
-        <button class="butn-form cancelar" type="reset" (click)="resetExtraVariables()">Cancelar</button>
-      </div>
+      <ul>
+        <li class="edit__input"><strong>Acerca de mi:</strong><input class="input__element form-control" type="text"
+            formControlName="aboutMeForm"
+            [ngClass]="{'is-invalid':personalDetailsForm.get('aboutMeForm')?.errors && personalDetailsForm.get('aboutMeForm')?.touched}">
+        </li>
+        <li class="edit__input"><strong>Nombre: </strong><input class="input__element form-control" type="text"
+            formControlName="nameForm"
+            [ngClass]="{'is-invalid':personalDetailsForm.get('nameForm')?.errors && personalDetailsForm.get('nameForm')?.touched}">
+        </li>
+        <li class="edit__input"><strong>Apellido: </strong><input class="input__element form-control" type="text"
+            formControlName="lastnameForm"
+            [ngClass]="{'is-invalid':personalDetailsForm.get('lastnameForm')?.errors && personalDetailsForm.get('lastnameForm')?.touched}">
+        </li>
+        <li class="edit__input"><strong>Titulo: </strong><input class="input__element form-control" type="text"
+            formControlName="degreeForm"
+            [ngClass]="{'is-invalid':personalDetailsForm.get('degreeForm')?.errors && personalDetailsForm.get('degreeForm')?.touched}">
+        </li>
+        <li class="edit__input"><strong>Originario de:</strong> <input class="input__element form-control" type="text"
+            formControlName="cityForm"
+            [ngClass]="{'is-invalid':personalDetailsForm.get('cityForm')?.errors && personalDetailsForm.get('cityForm')?.touched}">
+        </li>
+        <li class="edit__input"><strong>Nacionalidad: </strong><input class="input__element form-control" type="text"
+            formControlName="nationalityForm"
+            [ngClass]="{'is-invalid':personalDetailsForm.get('nationalityForm')?.errors && personalDetailsForm.get('nationalityForm')?.touched}">
+        </li>
+        <li class="edit__btn">
+          <button class="butn-form guardar" type="submit" [disabled]="personalDetailsForm.invalid">Guardar</button>
+          <button class="butn-form cancelar" type="reset" (click)="resetExtraVariables()">Cancelar</button>
+        </li>
+        <li *ngIf="personalDetailsForm.invalid && personalDetailsForm?.touched" class="error__text">Todos los campos son
+          obligatorios</li>
+          <br *ngIf="dataBaseError">
+        <li *ngIf="dataBaseError" class="dberror__text">Error: Los datos no se guardaron</li>
+      </ul>
     </form>
   </div>
 
 
   <!------------------------------------SECCION EXPERIENCIA-------------------------------------------->
 
-  <div class='details'>
-    <h1 class='details__title'>Experiencia <button *ngIf="isUserLogin" (click)="toogleNewExperience()"><img
-          class="agregar-btn" src="../../../assets/img/agregar2.jpg" alt="Add-Img"></button>
+  <div class='details' cdkDropListGroup>
+    <h1 class='details__title'>Experiencia <button title="Agregar experiencia" *ngIf="isUserLogin"
+        (click)="toogleNewExperience()"><img class="agregar-btn" src="../../../assets/img/agregar2.jpg"
+          alt="Add-Img"></button>
     </h1>
     <div *ngIf="isNewExperience" class="details__new">
-      <form class="new__form" [formGroup]="experienceForm" (ngSubmit)="onNewExperience($event)">
+      <form class="new__form form-control" [formGroup]="experienceForm" (ngSubmit)="onNewExperience($event)"
+        [ngClass]="{'db-error':dataBaseError}">
         <ul class="form__input">
-          <li><strong>Puesto: </strong><input class="input__element" type="text" formControlName="experienceJobForm"
-              placeholder="Técnico en redes">
+
+          <li><strong>Puesto: </strong><input class="input__element form-control" type="text"
+              formControlName="experienceJobForm" placeholder="Técnico en redes"
+              [ngClass]="{'is-invalid': experienceForm.get('experienceJobForm')?.errors && experienceForm.get('experienceJobForm')?.touched}">
           </li>
-          <li><strong>Empresa:</strong> <input class="input__element" type="text"
-              formControlName="experienceCompanyForm" placeholder="Google">
+          <li><strong>Empresa:</strong> <input class="input__element form-control" type="text"
+              formControlName="experienceCompanyForm" placeholder="Google"
+              [ngClass]="{'is-invalid': experienceForm.get('experienceCompanyForm')?.errors && experienceForm.get('experienceCompanyForm')?.touched}">
           </li>
-          <li><strong>Fecha inicio: </strong><input class="input__element" type="month"
-              formControlName="experienceStartedForm" placeholder="YYYY-MM"> </li>
-          <li><strong>Fecha fin:</strong> <input class="input__element" type="month"
-              formControlName="experienceEndedForm" placeholder="YYYY-MM">
+          <li><strong>Fecha inicio: </strong><input class="input__element form-control" type="month"
+              formControlName="experienceStartedForm" placeholder="YYYY-MM"
+              [ngClass]="{'is-invalid': experienceForm.get('experienceStartedForm')?.errors && experienceForm.get('experienceStartedForm')?.touched}">
           </li>
-          <li><strong>Logo URL: </strong><input class="input__element" type="text" placeholder="www.cloud.com/imagen"
-              formControlName="experienceLogoForm">
+          <li><strong>Fecha fin:</strong> <input class="input__element form-control" type="month"
+              formControlName="experienceEndedForm" placeholder="YYYY-MM"
+              [ngClass]="{'is-invalid': experienceForm.get('experienceEndedForm')?.errors && experienceForm.get('experienceEndedForm')?.touched}">
+          </li>
+          <li><strong>Logo URL: </strong><input class="input__element form-control" type="text"
+              placeholder="www.cloud.com/imagen" formControlName="experienceLogoForm"
+              [ngClass]="{'is-invalid': experienceForm.get('experienceLogoForm')?.errors && experienceForm.get('experienceLogoForm')?.touched}">
           </li>
           <button class="butn-form guardar" type="submit" [disabled]="experienceForm.invalid">Guardar</button><button
             class="butn-form cancelar" type="reset" (click)="resetExtraVariables()">Cancelar</button>
+          <li *ngIf="experienceForm.invalid && experienceForm?.touched" class="error__text">Todos los campos son
+            obligatorios</li>
+          <li *ngIf="dataBaseError" class="error__text">Error: Los datos no se guardaron</li>
         </ul>
       </form>
     </div>
-    <div class='details__for' *ngFor="let experience of experienceList, index as i">
-      <div *ngIf="experience.id_exp!=0" class="for__card">
+    <div class='details__for' title="{{isUserLogin? 'Arraste y suelte los datos para ordenarlos':''}}"
+      *ngFor="let experience of experienceList, index as i" cdkDropList [cdkDropListData]="i" cdkDropListLockAxis="y">
+      <div *ngIf="experience.id_exp!=0" class="for__card"
+        [ngClass]="{'drag': isUserLogin && isExperienceEdit == 0, 'db-error':(dataBaseError && isExperienceEdit==experience.id_exp)}"
+        cdkDrag [cdkDragData]="i" (cdkDragEntered)="dragEntered($event, experienceList)"
+        (cdkDragMoved)="dragMoved($event)" (cdkDragDropped)="dragDropped($event,2, experienceList)"
+        [cdkDragDisabled]="!isUserLogin || isExperienceEdit != 0">
         <div class="card__img-div" *ngIf="isExperienceEdit!=experience.id_exp">
           <img class="img-div__img" src="../../../assets/img/{{experience.logo}}" alt="Co. Logo">
         </div>
@@ -94,27 +129,39 @@
         <form *ngIf="isExperienceEdit==experience.id_exp && isExperienceEdit!=0" class="details__edit"
           [formGroup]="experienceForm" (ngSubmit)="onSaveExperienceEdit($event, i)">
           <ul>
-            <li><strong>Puesto: </strong><input class="input__element" type="text" formControlName="experienceJobForm">
+            <li><strong>Puesto: </strong><input class="input__element form-control" type="text"
+                formControlName="experienceJobForm"
+                [ngClass]="{'is-invalid': experienceForm.get('experienceJobForm')?.errors && experienceForm.get('experienceJobForm')?.touched}">
             </li>
-            <li><strong>Empresa: </strong><input class="input__element" type="text"
-                formControlName="experienceCompanyForm"></li>
-            <li><strong>Fecha inicio: </strong><input class="input__element" type="month"
-                formControlName="experienceStartedForm" placeholder="YYYY-MM"></li>
-            <li><strong>Fecha fin:</strong> <input class="input__element" type="month"
-                formControlName="experienceEndedForm" placeholder="YYYY-MM"></li>
-            <li><strong>Logo URL:</strong> <input class="input__element" type="text"
-                formControlName="experienceLogoForm">
+            <li><strong>Empresa: </strong><input class="input__element form-control" type="text"
+                formControlName="experienceCompanyForm"
+                [ngClass]="{'is-invalid': experienceForm.get('experienceCompanyForm')?.errors && experienceForm.get('experienceCompanyForm')?.touched}">
+            </li>
+            <li><strong>Fecha inicio: </strong><input class="input__element form-control" type="month"
+                formControlName="experienceStartedForm" placeholder="YYYY-MM"
+                [ngClass]="{'is-invalid': experienceForm.get('experienceStartedForm')?.errors && experienceForm.get('experienceStartedForm')?.touched}">
+            </li>
+            <li><strong>Fecha fin:</strong> <input class="input__element form-control" type="month"
+                formControlName="experienceEndedForm" placeholder="YYYY-MM"
+                [ngClass]="{'is-invalid': experienceForm.get('experienceEndedForm')?.errors && experienceForm.get('experienceEndedForm')?.touched}">
+            </li>
+            <li><strong>Logo URL:</strong> <input class="input__element form-control" type="text"
+                formControlName="experienceLogoForm"
+                [ngClass]="{'is-invalid': experienceForm.get('experienceLogoForm')?.errors && experienceForm.get('experienceLogoForm')?.touched}">
             </li>
             <button class="butn-form guardar" type="submit" [disabled]="experienceForm.invalid">Guardar</button><button
               class="butn-form cancelar" type="reset" (click)="resetExtraVariables()">Cancelar</button>
+            <li *ngIf="experienceForm.invalid && experienceForm?.touched" class="error__text">Todos los campos son
+              obligatorios</li>
+            <li *ngIf="dataBaseError" class="error__text">Error: Los datos no se guardaron</li>
           </ul>
         </form>
       </div>
 
-      <div *ngIf="experience.id_exp==0 && !isUserLogin " class="for__no-element">
+      <div *ngIf="experienceList[0].id_exp == 0 && !isUserLogin " class="for__no-element">
         <h2>Inicie sesión para agregar una nueva experience laboral</h2>
       </div>
-      <div *ngIf="experience.id_exp==0 && isUserLogin && !isNewExperience" class="for__no-element">
+      <div *ngIf="experienceList[0].id_exp == 0 && isUserLogin && !isNewExperience" class="for__no-element">
         <h2>Agregue una nueva experience laboral para visualizarla aquí</h2>
       </div>
     </div>
@@ -122,44 +169,61 @@
   <hr>
 
   <!------------------------------------SECCION EDUCACION-------------------------------------------->
-  <div class="details">
-    <h1 class='details__title'>Educación <button *ngIf="isUserLogin" (click)="toogleNewEducation()">
+  <div class="details" cdkDropListGroup>
+    <h1 class='details__title'>Educación <button title="Agregar educación" *ngIf="isUserLogin"
+        (click)="toogleNewEducation()">
         <img class="agregar-btn" src="../../../assets/img/agregar2.jpg" alt="Add-img">
       </button>
     </h1>
-
     <div *ngIf="isNewEducation" class="details__new">
-      <form class="new__form" [formGroup]="educationForm" (ngSubmit)="onNewEducation($event)">
+      <form class="new__form" [formGroup]="educationForm" (ngSubmit)="onNewEducation($event)"
+        [ngClass]="{'db-error':(dataBaseError)}">
         <ul class="form__input">
-          <li><strong>Nivel:</strong> <input class="input__element" type="text"
-              placeholder="Curso/Secundario/Universitario" formControlName="educationGradeForm">
+          <li><strong>Nivel:</strong> <input class="input__element form-control" type="text"
+              placeholder="Curso/Secundario/Universitario" formControlName="educationGradeForm"
+              [ngClass]="{'is-invalid': educationForm.get('educationGradeForm')?.errors && educationForm.get('educationGradeForm')?.touched}">
           </li>
-          <li><strong>Título: </strong><input class="input__element" type="text"
-              placeholder="Ingeniero en telecomunicaciones" formControlName="educationDegreeForm">
+          <li><strong>Título: </strong><input class="input__element form-control" type="text"
+              placeholder="Ingeniero en telecomunicaciones" formControlName="educationDegreeForm"
+              [ngClass]="{'is-invalid': educationForm.get('educationDegreeForm')?.errors && educationForm.get('educationDegreeForm')?.touched}">
           </li>
-          <li><strong>Institución: </strong><input class="input__element" type="text"
-              formControlName="educationInstitutionForm" placeholder="Universidad Nacional">
+          <li><strong>Institución: </strong><input class="input__element form-control" type="text"
+              formControlName="educationInstitutionForm" placeholder="Universidad Nacional"
+              [ngClass]="{'is-invalid': educationForm.get('educationInstitutionForm')?.errors && educationForm.get('educationInstitutionForm')?.touched}">
           </li>
-          <li><strong>Fecha inicio:</strong><input class="input__element" type="month"
-              formControlName="educationStartedForm" placeholder="YYYY-MM"></li>
-          <li><strong>Fecha fin:</strong><input class="input__element" type="month" formControlName="educationEndedForm"
-              placeholder="YYYY-MM">
+          <li><strong>Fecha inicio:</strong><input class="input__element form-control" type="month"
+              formControlName="educationStartedForm" placeholder="YYYY-MM"
+              [ngClass]="{'is-invalid': educationForm.get('educationStartedForm')?.errors && educationForm.get('educationStartedForm')?.touched}">
           </li>
-          <li><strong>Logo URL:</strong><input class="input__element" type="text" formControlName="educationLogoForm"
-              placeholder="www.cloud.com/imagen"></li>
+          <li><strong>Fecha fin:</strong><input class="input__element form-control" type="month"
+              formControlName="educationEndedForm" placeholder="YYYY-MM"
+              [ngClass]="{'is-invalid': educationForm.get('educationEndedForm')?.errors && educationForm.get('educationEndedForm')?.touched}">
+          </li>
+          <li><strong>Logo URL:</strong><input class="input__element form-control" type="text"
+              formControlName="educationLogoForm" placeholder="www.cloud.com/imagen"
+              [ngClass]="{'is-invalid': educationForm.get('educationLogoForm')?.errors && educationForm.get('educationLogoForm')?.touched}">
+          </li>
           <button class="butn-form guardar" type="submit" [disabled]="educationForm.invalid">Guardar</button><button
             class="butn-form cancelar" type="reset" (click)="resetExtraVariables()">Cancelar</button>
+          <li *ngIf="educationForm.invalid && educationForm?.touched" class="error__text">Todos los campos son
+            obligatorios</li>
+          <li *ngIf="dataBaseError" class="error__text">Error: Los datos no se guardaron</li>
         </ul>
       </form>
     </div>
 
-    <div class='details__for' *ngFor="let education of educationList, index as i">
-      <div *ngIf="education.id_edu!=0" class="for__card">
+    <div class='details__for' title="{{isUserLogin? 'Arraste y suelte los datos para ordenarlos':''}}"
+      *ngFor="let education of educationList, index as i" cdkDropList [cdkDropListData]="i" cdkDropListLockAxis="y">
+      <div *ngIf="education.id_edu!=0" class="for__card"
+        [ngClass]="{'drag': (isUserLogin && isEducationEdit == 0), 'db-error':(dataBaseError && isEducationEdit==education.id_edu)}"
+        cdkDrag [cdkDragData]="i" (cdkDragEntered)="dragEntered($event, educationList)"
+        (cdkDragMoved)="dragMoved($event)" (cdkDragDropped)="dragDropped($event,1, educationList)"
+        [cdkDragDisabled]="!isUserLogin || isEducationEdit != 0">
         <div class="card__img-div" *ngIf="isEducationEdit!=education.id_edu">
           <img class="img-div__img" src="../../../assets/img/{{education.logo}}" alt="Edu Logo" width="70">
         </div>
-        <div class="card__data">
-          <ul *ngIf="isEducationEdit!=education.id_edu">
+        <div class="card__data" *ngIf="isEducationEdit!=education.id_edu">
+          <ul>
             <li><strong>Nivel:</strong> {{education.grade}}</li>
             <li><strong>Título:</strong> {{education.degree}}</li>
             <li><strong>Institución:</strong> {{education.institution}}</li>
@@ -178,33 +242,46 @@
         <div *ngIf="isEducationEdit==education.id_edu && isEducationEdit!=0" class="details__edit">
           <form [formGroup]="educationForm" (ngSubmit)="onSaveEducationEdit($event, i)">
             <ul class="form__input">
-              <li><strong>Nivel:</strong> <input class="input__element" type="text"
-                  formControlName="educationGradeForm">
+              <li><strong>Nivel:</strong> <input class="input__element form-control" type="text"
+                  formControlName="educationGradeForm"
+                  [ngClass]="{'is-invalid': educationForm.get('educationGradeForm')?.errors && educationForm.get('educationGradeForm')?.touched}">
               </li>
-              <li><strong>Título:</strong><input class="input__element" type="text"
-                  formControlName="educationDegreeForm">
+              <li><strong>Título:</strong><input class="input__element form-control" type="text"
+                  formControlName="educationDegreeForm"
+                  [ngClass]="{'is-invalid': educationForm.get('educationDegreeForm')?.errors && educationForm.get('educationDegreeForm')?.touched}">
               </li>
-              <li><strong>Institución:</strong> <input class="input__element" type="text"
-                  formControlName="educationInstitutionForm" required></li>
-              <li><strong>Fecha inicio:</strong><input class="input__element" type="month"
-                  formControlName="educationStartedForm" required></li>
-              <li><strong> Fecha fin:</strong><input class="input__element" type="month"
-                  formControlName="educationEndedForm"></li>
-              <li><strong>Logo URL:</strong><input class="input__element" type="text"
-                  formControlName="educationLogoForm">
+              <li><strong>Institución:</strong> <input class="input__element form-control" type="text"
+                  formControlName="educationInstitutionForm"
+                  [ngClass]="{'is-invalid': educationForm.get('educationInstitutionForm')?.errors && educationForm.get('educationInstitutionForm')?.touched}">
+              </li>
+              <li><strong>Fecha inicio:</strong><input class="input__element form-control" type="month"
+                  formControlName="educationStartedForm"
+                  [ngClass]="{'is-invalid': educationForm.get('educationStartedForm')?.errors && educationForm.get('educationStartedForm')?.touched}">
+              </li>
+              <li><strong> Fecha fin:</strong><input class="input__element form-control" type="month"
+                  formControlName="educationEndedForm"
+                  [ngClass]="{'is-invalid': educationForm.get('educationEndedForm')?.errors && educationForm.get('educationEndedForm')?.touched}">
+              </li>
+              <li><strong>Logo URL:</strong><input class="input__element form-control" type="text"
+                  formControlName="educationLogoForm"
+                  [ngClass]="{'is-invalid': educationForm.get('educationLogoForm')?.errors && educationForm.get('educationLogoForm')?.touched}">
               </li>
               <div class="card__align">
                 <button class="butn-form guardar" type="submit" [disabled]="educationForm.invalid">Guardar</button>
                 <button class="butn-form cancelar" type="reset" (click)="resetExtraVariables()">Cancelar</button>
               </div>
+              <li *ngIf="educationForm.invalid && educationForm?.touched" class="error__text">Todos los campos son
+                obligatorios</li>
+              <li *ngIf="dataBaseError" class="dberror__text">Error: Los datos no se guardaron</li>
+
             </ul>
           </form>
         </div>
       </div>
-      <div *ngIf="education.id_edu==0 && !isUserLogin " class="for__no-element">
+      <div *ngIf="educationList[0].id_edu == 0 && !isUserLogin " class="for__no-element">
         <h2>Inicie sesión para agregar una nuevo elemento de educación</h2>
       </div>
-      <div *ngIf="education.id_edu==0 && isUserLogin && !isNewEducation" class="for__no-element">
+      <div *ngIf="educationList[0].id_edu == 0 && isUserLogin && !isNewEducation" class="for__no-element">
         <h2>Agregue un nuevo elemento de educación para visualizarlo aquí</h2>
       </div>
     </div>

@@ -1,7 +1,7 @@
 <div class="login">
   <div class="login__int">
     <h1 class="m-5">Iniciar sesión</h1>
-    <form [formGroup]="loginForm" class="m-5" (ngSubmit)="onEnviar($event)">
+    <form [formGroup]="loginForm" class="form form-control" (ngSubmit)="onEnviar($event)" [ngClass]="{'is-invalid': errorCode !=200}" >
       <div class="mb-3">
         <label class="form-label">Email</label>
         <input type="email" formControlName="email" class="form-control" nameForm="email" aria-describedby="emailHelp"
@@ -33,6 +33,13 @@
         <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Enviar</button>
         <button type="reset" class="btn btn-secondary" (click)="onReturn()">Volver</button>
       </div>
+      <br *ngIf="errorCode !=200">
+      <p *ngIf="errorCode == 401" class="text-danger">
+        El email y/o la contraseña son incorrectos
+      </p>
+      <p *ngIf="errorCode == 0" class="text-danger">
+        Error de conexion con el servidor
+      </p>
     </form>
   </div>
 </div>

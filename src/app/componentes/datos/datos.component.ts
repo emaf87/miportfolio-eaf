@@ -1,6 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { ApiDbService } from 'src/app/servicios/api-db.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  CdkDragDrop,
+  CdkDragEnter,
+  CdkDragMove,
+  moveItemInArray
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-datos',
@@ -8,9 +14,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./datos.component.css']
 })
 export class DatosComponent implements OnInit {
+  @ViewChild('dropListContainer') dropListContainer?: ElementRef;
+  dropListReceiverElement?: HTMLElement;
+  dragDropInfo?: {
+    dragIndex: number;
+    dropIndex: number;
+  };
+  dataBaseError = false;
   personalDetailsList: any = [];
   educationList: any = [];
-  experienceList: any = [];
+  experienceList: any;
   isPersonalDetailsEdit = false;
   isEducationEdit: number = 0;
   isExperienceEdit: number = 0;
@@ -60,44 +73,42 @@ export class DatosComponent implements OnInit {
     }];
 
     this.educationList = [{
-      "id_edu": 0, "grade": "", "degree": "", "institution": "",
+      "id_edu": 0, "rowIndex": 0, "grade": "", "degree": "", "institution": "",
       "started": "", "ended": "", "logo": ""
     }];
 
     this.experienceList = [{
-      "id_exp": 0, "job": "", "company": "", "started": "", "ended": "", "logo": ""
+      "id_exp": 0, "rowIndex": 0, "job": "", "company": "", "started": "", "ended": "", "logo": ""
     }];
 
     this.apiDbService.readDataBase(0).subscribe({
       next: data => {
-        this.personalDetailsList = data;
         if (Object.values(data).length != 0) {
           this.personalDetailsList = data;
         }
       },
-      //error: () => alert("Base de datos no conectada")
+     // error: () => alert("Base de datos no conectada")
     });
 
     this.apiDbService.readDataBase(1).subscribe(data => {
       if (Object.values(data).length != 0) {
         this.educationList = data;
-        this.educationList.reverse();
+        this.educationList.sort((a: any, b: any) => a.rowIndex - b.rowIndex);
       }
-      console.log(this.educationList)
-
     });
 
     this.apiDbService.readDataBase(2).subscribe(data => {
       if (Object.values(data).length != 0) {
         this.experienceList = data;
-        this.experienceList.reverse();
+        this.experienceList.sort((a: any, b: any) => a.rowIndex - b.rowIndex);
       }
-      console.log(this.experienceList)
     });
 
     this.resetExtraVariables();
-    console.log("reset variables")
+  }
 
+  get Data(){
+    return this.experienceForm.get('job'), this.educationForm.get('logo');
   }
 
   /*------------------------ FUNCIONES PARA MODIFICACION DE VARIABLE PARA EDICION---------------------------*/
@@ -105,42 +116,33 @@ export class DatosComponent implements OnInit {
   tooglePersonalDetailsEdit() {
     this.resetExtraVariables();
     this.isPersonalDetailsEdit = !this.isPersonalDetailsEdit;
-
-    this.personalDetailsForm = this.formBuilder.group({
-      nameForm: [this.personalDetailsList[0].name, [Validators.required]],
-      lastnameForm: [this.personalDetailsList[0].lastname, [Validators.required]],
-      degreeForm: [this.personalDetailsList[0].degree, [Validators.required]],
-      cityForm: [this.personalDetailsList[0].city, [Validators.required]],
-      aboutMeForm: [this.personalDetailsList[0].aboutMe, [Validators.required]],
-      nationalityForm: [this.personalDetailsList[0].nationality, [Validators.required]]
-    })
+    this.personalDetailsForm.controls['nameForm'].setValue(this.personalDetailsList[0].name);
+    this.personalDetailsForm.controls['lastnameForm'].setValue(this.personalDetailsList[0].lastname);
+    this.personalDetailsForm.controls['degreeForm'].setValue(this.personalDetailsList[0].degree);
+    this.personalDetailsForm.controls['cityForm'].setValue(this.personalDetailsList[0].city);
+    this.personalDetailsForm.controls['aboutMeForm'].setValue(this.personalDetailsList[0].aboutMe);
+    this.personalDetailsForm.controls['nationalityForm'].setValue(this.personalDetailsList[0].nationality);
   }
 
   toogleEducationEdit(id: number, index: number) {
     this.resetExtraVariables();
     this.isEducationEdit = id;
-
-    this.educationForm = this.formBuilder.group({
-      educationGradeForm: [this.educationList[index].grade, [Validators.required]],
-      educationDegreeForm: [this.educationList[index].degree, [Validators.required]],
-      educationInstitutionForm: [this.educationList[index].institution, [Validators.required]],
-      educationStartedForm: [this.educationList[index].started, [Validators.required]],
-      educationEndedForm: [this.educationList[index].ended, [Validators.required]],
-      educationLogoForm: [this.educationList[index].logo, [Validators.required]],
-    });
+    this.educationForm.controls['educationGradeForm'].setValue(this.educationList[index].grade);
+    this.educationForm.controls['educationDegreeForm'].setValue(this.educationList[index].degree);
+    this.educationForm.controls['educationInstitutionForm'].setValue(this.educationList[index].institution);
+    this.educationForm.controls['educationStartedForm'].setValue(this.educationList[index].started);
+    this.educationForm.controls['educationEndedForm'].setValue(this.educationList[index].ended);
+    this.educationForm.controls['educationLogoForm'].setValue(this.educationList[index].logo);
   }
 
   toogleExperienceEdit(id: number, index: number) {
     this.resetExtraVariables();
     this.isExperienceEdit = id;
-
-    this.experienceForm = this.formBuilder.group({
-      experienceJobForm: [this.experienceList[index].job, [Validators.required]],
-      experienceCompanyForm: [this.experienceList[index].company, [Validators.required]],
-      experienceStartedForm: [this.experienceList[index].started, [Validators.required]],
-      experienceEndedForm: [this.experienceList[index].ended, [Validators.required]],
-      experienceLogoForm: [this.experienceList[index].logo, [Validators.required]]
-    })
+    this.experienceForm.controls['experienceJobForm'].setValue(this.experienceList[index].job);
+    this.experienceForm.controls['experienceCompanyForm'].setValue(this.experienceList[index].company);
+    this.experienceForm.controls['experienceStartedForm'].setValue(this.experienceList[index].started);
+    this.experienceForm.controls['experienceEndedForm'].setValue(this.experienceList[index].ended);
+    this.experienceForm.controls['experienceLogoForm'].setValue(this.experienceList[index].logo);
   }
 
   /*----------------------------------FUNCIONES EXTRAS-----------------------*/
@@ -178,6 +180,7 @@ export class DatosComponent implements OnInit {
     this.isExperienceEdit = 0;
     this.isNewEducation = false;
     this.isEducationEdit = 0;
+    this.dataBaseError = false;
   }
 
   toogleNewExperience() {
@@ -197,17 +200,23 @@ export class DatosComponent implements OnInit {
   onSavePersonalDetails(event: Event) {
     event.preventDefault;
     this.readPersonalDetailsForm();
-    this.isPersonalDetailsEdit = false;
+    
     if (this.personalDetailsList[0].id != 0) {
       this.apiDbService.editInformation(this.personalDetailsList[0], 0, this.personalDetailsList[0].id).subscribe({
-        next: () => window.location.reload(),
-        error: () => alert("Error: La edicion no se guardó en la base de datos")
+        next: () => {
+          this.isPersonalDetailsEdit = false;
+          window.location.reload();
+        },
+        error: () => this.dataBaseError = true
       });
     }
     else {
       this.apiDbService.newInformation(this.personalDetailsList[0], 0).subscribe({
-        next: () => window.location.reload(),
-        error: () => alert("Error: Los datos no se guardaron en la base de datos")
+        next: () => {
+          this.isPersonalDetailsEdit = false;
+          window.location.reload();
+        },
+        error: () => this.dataBaseError = true
       });
     }
   }
@@ -215,47 +224,55 @@ export class DatosComponent implements OnInit {
   onSaveEducationEdit(event: Event, index: number) {
     event.preventDefault;
     this.readEducationForm(index);
-    this.isEducationEdit = 0;
     this.apiDbService.editInformation(this.educationList[index], 1, this.educationList[index].id_edu).subscribe({
-      next: () => alert("Edición guardada!"),
-      error: () => alert("Error: Los datos no se guardaron en la base de datos")
+      next:()=> this.isEducationEdit = 0,
+      error: () => this.dataBaseError = true
     });
   }
 
   onSaveExperienceEdit(event: Event, index: number) {
     event.preventDefault;
     this.readExperienceForm(index);
-    this.isExperienceEdit = 0;
     this.apiDbService.editInformation(this.experienceList[index], 2, this.experienceList[index].id_exp).subscribe({
-      next: () => alert("Edición guardada!"),
-      error: () => alert("Error: Los datos no se guardaron en la base de datos")
+      next:()=>this.isExperienceEdit = 0,
+      error: () => this.dataBaseError = true
     });
   }
 
   onNewEducation(event: Event) {
     event.preventDefault;
-    this.isNewExperience = false;
-    this.readEducationForm(0);
-    this.educationList[0].id_edu = 0;
-    this.apiDbService.newInformation(this.educationList[0], 1).subscribe({
+    this.educationList.push({
+      "id_edu": 0, "rowIndex": this.educationList.length, "grade": "", "degree": "", "institution": "",
+      "started": "", "ended": "", "logo": ""
+    });
+    this.readEducationForm(this.educationList.length-1);
+    if (this.educationList[0].id_edu == 0) {
+      this.educationList[1].rowIndex = 0;
+    }
+    this.apiDbService.newInformation(this.educationList[this.educationList.length-1], 1).subscribe({
       next: () => {
-        alert("Nueva entrada de educación guardada");
-        this.ngOnInit();
+        this.isNewEducation = false;
+        this.ngOnInit()
       },
-      error: () => alert("Error: Los datos no se guardaron en la base de datos")
+      error: () => this.dataBaseError = true
     });
   }
 
   onNewExperience(event: Event) {
     event.preventDefault;
-    this.readExperienceForm(0);
-    this.experienceList[0].id_exp = 0;
-    this.apiDbService.newInformation(this.experienceList[0], 2).subscribe({
-      next: () => {
-        alert("Nueva entrada de experiencia guardada");
+    this.experienceList.push({
+      "id_exp": 0, "rowIndex": this.experienceList.length, "job": "", "company": "", "started": "", "ended": "", "logo": ""
+    });
+    this.readExperienceForm(this.experienceList.length-1);
+    if (this.experienceList[0].id_exp == 0) {
+      this.experienceList[1].rowIndex = 0;
+    }
+    this.apiDbService.newInformation(this.experienceList[this.experienceList.length-1], 2).subscribe({
+      complete: () => {
+        this.isNewExperience = false;
         this.ngOnInit();
       },
-      error: () => alert("Error: El dato no se guardó en la base de datos")
+      error: () => this.dataBaseError = true
     });
   }
 
@@ -265,7 +282,16 @@ export class DatosComponent implements OnInit {
   onDeleteExperience(index: number) {
     if (confirm("Deseas eliminar la experience con el puesto: " + this.experienceList[index].job + "?")) {
       this.apiDbService.deleteInformation(this.experienceList[index].id_exp, 2).subscribe({
-        next: () => this.ngOnInit(),
+        next: () => {
+          this.experienceList.splice(index, 1);
+          for (let i = 0; i < this.experienceList.length; i++) {
+            this.experienceList[i].rowIndex = i;
+          }
+          this.apiDbService.saveCompleteList(2, this.experienceList).subscribe({
+            error: () => alert("Error con la base de datos")
+          })
+          this.ngOnInit();
+        },
         error: () => alert("Error: El dato no se eliminó en la base de datos")
       });
     }
@@ -274,10 +300,80 @@ export class DatosComponent implements OnInit {
   onDeleteEducation(index: number) {
     if (confirm("Deseas eliminar la educación con el título: " + this.educationList[index].degree + "?")) {
       this.apiDbService.deleteInformation(this.educationList[index].id_edu, 1).subscribe({
-        next: () => this.ngOnInit(),
+        next: () => {
+          this.educationList.splice(index, 1);
+          for (let i = 0; i < this.educationList.length; i++) {
+            this.educationList[i].rowIndex = i;
+          }
+          this.apiDbService.saveCompleteList(1, this.educationList).subscribe({
+            error: () => alert("Error con la base de datos")
+          })
+          this.ngOnInit();
+        },
         error: () => alert("Error: El dato no se eliminó en la base de datos")
       });
     }
+  }
+
+
+  //------------------------------------DRAG&DROP---------------------------------
+
+  dragEntered(event: CdkDragEnter<number>, list: any) {
+    const drag = event.item;
+    const dropList = event.container;
+    const dragIndex = drag.data;
+    const dropIndex = dropList.data;
+
+    this.dragDropInfo = { dragIndex, dropIndex };
+   // console.log('dragEntered', { dragIndex, dropIndex });
+
+    const phContainer = dropList.element.nativeElement;
+    const phElement = phContainer.querySelector('.cdk-drag-placeholder');
+
+    if (phElement) {
+      phContainer.removeChild(phElement);
+      phContainer.parentElement?.insertBefore(phElement, phContainer);
+
+      moveItemInArray(list, dragIndex, dropIndex);
+    }
+  }
+
+  dragMoved(event: CdkDragMove<number>) {
+    if (!this.dropListContainer || !this.dragDropInfo) return;
+
+    const placeholderElement =
+      this.dropListContainer.nativeElement.querySelector(
+        '.cdk-drag-placeholder'
+      );
+
+    const receiverElement =
+      this.dragDropInfo.dragIndex > this.dragDropInfo.dropIndex
+        ? placeholderElement?.nextElementSibling
+        : placeholderElement?.previousElementSibling;
+
+    if (!receiverElement) {
+      return;
+    }
+
+    receiverElement.style.display = 'none';
+    this.dropListReceiverElement = receiverElement;
+  }
+
+  dragDropped(event: CdkDragDrop<number>, urlId: number, list: any) {
+    if (!this.dropListReceiverElement) {
+      console.log("soltar")
+      for (let i = 0; i < list.length; i++) {
+        list[i].rowIndex = i;
+      }
+      this.apiDbService.saveCompleteList(urlId, list).subscribe({
+        error: () => alert("Error: Los datos no se guardaron en la base de datos")
+      });
+      return;
+    }
+
+    this.dropListReceiverElement.style.removeProperty('display');
+    this.dropListReceiverElement = undefined;
+    this.dragDropInfo = undefined;
   }
 }
 

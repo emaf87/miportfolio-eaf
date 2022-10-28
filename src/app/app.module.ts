@@ -16,7 +16,7 @@ import { TokenInterceptorService } from './servicios/token-interceptor.service';
 import { CuerpoPortfolioComponent } from './componentes/cuerpo-portfolio/cuerpo-portfolio.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {DragDropModule} from '@angular/cdk/drag-drop'
-
+import { NgCircleProgressModule } from 'ng-circle-progress';
 
 
 
@@ -38,7 +38,30 @@ import {DragDropModule} from '@angular/cdk/drag-drop'
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    DragDropModule
+    DragDropModule,
+    NgCircleProgressModule.forRoot({
+      // set defaults here
+      radius: 100,
+      maxPercent: 100,
+      space:7,
+      backgroundStrokeWidth: 5,
+      backgroundStroke: 'black',
+      backgroundColor:'black',
+      outerStrokeWidth: 7,
+      innerStrokeWidth: 2,
+      outerStrokeColor: "white",
+      innerStrokeColor: "white",
+      animationDuration: 300,
+      titleColor: 'white',
+      titleFontSize: '4rem',
+      unitsColor: 'white',
+      unitsFontSize: '4rem',
+      subtitle:'Progress',
+      subtitleColor: 'white',
+      subtitleFontWeight: '800',
+      subtitleFontSize: '2rem',
+      responsive: true
+    })
    ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi:true}],
   bootstrap: [AppComponent]

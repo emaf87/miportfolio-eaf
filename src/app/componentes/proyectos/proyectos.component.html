@@ -1,68 +1,113 @@
-<section id='projects' class='section'>
+<section id='projects' class='section' cdkDropListGroup>
   <div class="projects__fondo">
     <div class='fondo__title'>
-      <p>Proyectos HTML & CSS <button *ngIf="isUserLogin" (click)="toogleNewproject()"><img class="agregar-btn"
-            src="../../../assets/img/agregar2.jpg" alt="Add-img"></button></p>
+      <p>Proyectos HTML & CSS <button *ngIf="isUserLogin" (click)="toogleNewproject()" title="Agregar proyecto"><img
+            class="agregar-btn" src="../../../assets/img/agregar2.jpg" alt="Add-img"></button></p>
     </div>
     <div *ngIf="isNewProject" class="fondo__new-element">
-      <form class="new-element__form" [formGroup]="projectForm" (ngSubmit)="onSaveNewproject($event)">
+      <form class="new-element__form" [formGroup]="projectForm" (ngSubmit)="onSaveNewproject($event)"
+        [ngClass]="{'db-error':dataBaseError}">
         <ul class="form__list">
-          <li>Nombre del nuevo projecto: <input class="list__input" placeholder="Calculadora de interés" type="text"
-              formControlName="nameForm"></li>
-          <li>Direccion URL: <input class="list__input" type="text" formControlName="urlForm"
-              placeholder="www.cloud.com/projecto/id"></li>
-          <li>Imagen URL: <input class="list__input" type="text" formControlName="imageForm"
-              placeholder="www.cloud.com/projecto/id/imagen"></li>
+          <li>Nombre del nuevo projecto: <input class="list__input form-control" placeholder="Calculadora de interés"
+              type="text" formControlName="nameForm" [ngClass]="{'is-invalid':Name?.errors && Name?.touched, 
+              'is-valid':!Name?.errors && Name?.touched}"></li>
+          <li>Descripción del proyecto: <input class="list__input form-control" placeholder="Proyecto realizado en Java"
+              type="text" formControlName="descriptionForm" [ngClass]="{'is-invalid': Description?.errors && Description?.touched, 
+                'is-valid':!Description?.errors && Description?.touched}"></li>
+          <li>Fecha de creación: <input class="list__input form-control" placeholder="YYYY-MM"
+              type="month" formControlName="dateForm" [ngClass]="{'is-invalid': Date?.errors && Date?.touched, 
+                    'is-valid':!Date?.errors && Date?.touched}" ></li>
+          <li>Direccion URL: <input class="list__input form-control" type="url" formControlName="urlForm"
+              placeholder="www.cloud.com/projecto/id" [ngClass]="{'is-invalid':Url?.errors && Url?.touched, 
+              'is-valid':!Url?.errors && Url?.touched}" title="Formas validas: http:// - https:// - www.cloud.com">
+          </li>
+          <li>Imagen URL: <input class="list__input form-control" type="text" formControlName="imageForm"
+              placeholder="www.cloud.com/projecto/id/imagen" [ngClass]="{'is-invalid':Image?.errors && Image?.touched, 
+              'is-valid':!Image?.errors && Image?.touched}" title="Formas validas: http:// - https:// - www.cloud.com">
+          </li>
           <button class="butn-form guardar" type="submit" [disabled]="projectForm.invalid">Guardar</button>
           <button class="butn-form cancelar" type="reset" (click)="toogleNewproject()">Cancelar</button>
+          <li *ngIf="projectForm.invalid && projectForm.touched" class="error__text">*Todos los campos son obligatorios
+          </li>
+          <li *ngIf="dataBaseError" class="error__text">Error: Los datos no se guardaron</li>
         </ul>
       </form>
     </div>
     <div class="fondo__board">
-      <div *ngFor="let proy of projectsList, index as i" class="board__card">
-        <div class="card__conjunto" *ngIf="proy.id!=0 && isProjectEdit==0">
+      <div *ngFor="let project of projectsList, index as i" class="board__card" cdkDropList [cdkDropListData]="i">
+        <div class="card__conjunto" *ngIf="project.id!=0 && isProjectEdit==0 && isShowDetails==0"
+          title="{{isUserLogin? 'Arraste y suelte los datos para ordenarlos':''}}" cdkDrag [cdkDragData]="i"
+          (cdkDragEntered)="dragEntered($event, projectsList)" (cdkDragMoved)="dragMoved($event)"
+          (cdkDragDropped)="dragDropped($event)" [cdkDragDisabled]="!isUserLogin">
           <div class="conjunto__buttons">
-            <button class="buttons__edit" *ngIf="isUserLogin && isProjectEdit!=proy.id"
-              (click)="toogleprojectEdit(proy.id, i)">
+            <button class="buttons__edit" *ngIf="isUserLogin && isProjectEdit!=project.id"
+              (click)="toogleprojectEdit(project.id, i)">
               <img src="../../../assets/img/edit2.png" alt="Edit-img">
             </button>
-            <button class="buttons__elim" *ngIf="isUserLogin && isProjectEdit!=proy.id" type="submit"
+            <button class="buttons__elim" *ngIf="isUserLogin && isProjectEdit!=project.id" type="submit"
               (click)="onDeleteproject(i)">
               <img src="../../../assets/img/eliminar.png" alt="Delete-img" class="elim__normal">
               <img src="../../../assets/img/eliminar-hover.png" alt="Delete-img" class="elim__hover">
             </button>
           </div>
           <div class=conjunto__interior>
-            <a [href]="proy.url">
+            <div class="interior__link" (click)="toogleShowDetails(project.id, i)" [ngClass]="{'drag': isUserLogin}">
               <div class='interior__proj-div'>
                 <div class='proj-div__img-div'>
-                  <img class='img-div__img' src="../../../assets/img/{{proy.image}}" alt="-----Proy-img">
+                  <img class='img-div__img' src="../../../assets/img/{{project.image}}" alt="-----Proy-img">
+                  <button class="img-div__button">ABRIR</button>
                 </div>
                 <div class='project-div__title'>
-                  <div class='title__transform'>{{proy.name}}</div>
+                  <div class='title__transform'>{{project.name}}</div>
                 </div>
               </div>
-            </a>
+            </div>
           </div>
         </div>
-        <div *ngIf="isProjectEdit==proy.id && proy.id!=0" class="fondo__new-element">
-          <form class="new-element__form" [formGroup]="projectForm" (ngSubmit)="onSaveprojectEdit($event, i)">
+        <div class="card__details" *ngIf="isShowDetails==project.id">
+          <img src="../../../assets/img/{{project.image}}" alt="Proy-img">
+          <ul class="details__list">
+            <li class="list__title"><strong>{{project.name}}</strong> </li>
+            <li class="list__description">{{project.description}}</li>
+            <li class="list__small-font">{{project.date}}</li>
+            <li class="list__small-font"><a href="{{project.url}}" target="_blank">Link al proyecto</a></li>
+            <li class="list__cerrar-btn"><button class="butn-form cancelar" (click)="toogleShowDetails(0,0)">Cerrar</button></li>
+          </ul>
+
+        </div>
+        <div *ngIf="isProjectEdit==project.id && project.id!=0" class="fondo__new-element">
+          <form class="new-element__form" [formGroup]="projectForm" (ngSubmit)="onSaveprojectEdit($event, i)"
+            [ngClass]="{'db-error':dataBaseError}">
             <ul class="form__list">
-              <li>Nombre del projecto: <input class="list__input" type="text" formControlName="nameForm">
+              <li>Nombre del projecto: <input class="list__input form-control" [ngClass]="{'is-invalid':Name?.errors && Name?.touched, 
+                'is-valid':!Name?.errors && Name?.touched}" type="text" formControlName="nameForm">
               </li>
-              <li>Direccion URL: <input class="list__input" type="text" formControlName="urlForm"></li>
-              <li>Imagen URL: <input class="list__input" type="text" formControlName="imageForm"></li>
+              <li>Descripción del projecto: <input class="list__input form-control" [ngClass]="{'is-invalid': Description?.errors && Description?.touched, 
+                'is-valid':!Description?.errors && Description?.touched}" type="text"
+                  formControlName="descriptionForm">
+              </li>
+              <li>Fecha de creación: <input class="list__input form-control" placeholder="YYYY-MM"
+                type="month" formControlName="dateForm" [ngClass]="{'is-invalid': Date?.errors && Date?.touched, 
+                      'is-valid':!Date?.errors && Date?.touched}"></li>
+              <li>Direccion URL: <input class="list__input form-control" [ngClass]="{'is-invalid':Url?.errors && Url?.touched, 
+                'is-valid':!Url?.errors && Url?.touched}" type="text" formControlName="urlForm"
+                  title="Formas validas: http:// - https:// - www.cloud.com"></li>
+              <li>Imagen URL: <input class="list__input form-control" type="text" formControlName="imageForm" [ngClass]="{'is-invalid':Image?.errors && Image?.touched, 
+                'is-valid':!Image?.errors && Image?.touched}"></li>
               <button class="butn-form guardar" type="submit" [disabled]="projectForm.invalid">Guardar</button><button
                 class="butn-form cancelar" type="reset" (click)="toogleprojectEdit(0,0)">Cancelar</button>
+              <li *ngIf="projectForm.invalid && projectForm.touched" class="error__text">*Todos los campos son
+                obligatorios</li>
+              <li *ngIf="dataBaseError" class="error__text">Error: Los datos no se guardaron</li>
             </ul>
           </form>
         </div>
-        <div *ngIf="proy.id==0 && !isUserLogin" class="div-cero">
-          <h2>Inicie sesión para agregar un nuevo projecto</h2>
-        </div>
-        <div *ngIf="proy.id==0 && isUserLogin && !isNewProject" class="div-cero">
-          <h2>Agregue un nuevo projecto para visualizarlo aquí</h2>
-        </div>
+      </div>
+      <div *ngIf="projectsList.length==0 && !isUserLogin" class="div-cero">
+        <h2>Inicie sesión para agregar un nuevo projecto</h2>
+      </div>
+      <div *ngIf="projectsList.length==0 && isUserLogin && !isNewProject" class="div-cero">
+        <h2>Agregue un nuevo projecto para visualizarlo aquí</h2>
       </div>
     </div>
   </div>

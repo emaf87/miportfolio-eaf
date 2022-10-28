@@ -5,6 +5,7 @@ section {
   background-color: rgba(88, 152, 220, 0.775);
   padding: 5rem 0;
   box-shadow: 0 0 10px 10px rgba(88, 152, 220, 0.775);
+  
 }
 
 input {
@@ -41,6 +42,7 @@ li {
 }
 
 .agregar-btn {
+  margin-left: 2rem;
   border-radius: 50%;
   border: rgb(0, 0, 0) 3px solid;
   width: 4rem;
@@ -162,7 +164,7 @@ strong {
   margin: 20px auto;
   padding: 15px;
   border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.5); 
 }
 
 .card__img-div {
@@ -210,6 +212,25 @@ strong {
   margin: 0;
   color: white;
   letter-spacing: 2px;
+}
+
+.form-control{
+  font-size: 2.5rem;
+}
+
+.is-invalid{
+  border: red 2px solid;
+}
+
+.db-error{
+  border: 3px red solid;
+  color: red;
+}
+
+.error__text{
+  margin-top: 2rem;
+  font-weight: normal;
+  color: red;
 }
 
 .guardar:disabled {
@@ -266,4 +287,8 @@ strong {
   background-color: red;
   padding: 5px 5px 15px 5px;
   border-radius: 25%;
+}
+
+.drag{
+  cursor: move;
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, transition, state, style, animate, keyframes } from '@angular/animations';
+import { ApiDbService } from 'src/app/servicios/api-db.service';
 
 @Component({
   selector: 'app-portfolio',
@@ -20,17 +21,27 @@ import { trigger, transition, state, style, animate, keyframes } from '@angular/
   ]
 })
 export class PortfolioComponent implements OnInit {
-
+  databaseTest = false;
   isUserLogin!: boolean;
 
-  constructor() { }
+  constructor(private apiDbService:ApiDbService) { }
 
   ngOnInit(): void {
+    this.apiDbService.dbTest().subscribe({
+      next:() => {this.databaseTest = true;
+      },
+      error: () =>{ this.databaseTest = false;
+        sessionStorage.clear();
+      }
+    });
+
     if (sessionStorage.getItem('token')) {
       this.isUserLogin = true;
     }
     else {
       this.isUserLogin = false;
     }
+
+
   }
 }

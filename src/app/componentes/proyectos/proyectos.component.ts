@@ -1,7 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { ApiDbService } from 'src/app/servicios/api-db.service';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  CdkDragDrop,
+  CdkDragEnter,
+  CdkDragMove,
+  moveItemInArray
+} from '@angular/cdk/drag-drop';
 @Component({
   selector: 'app-proyectos',
   templateUrl: './proyectos.component.html',
@@ -11,17 +16,27 @@ import { ApiDbService } from 'src/app/servicios/api-db.service';
 export class ProyectosComponent implements OnInit {
 
   @Input() isUserLogin!: boolean;
+  @ViewChild('dropListContainer') dropListContainer?: ElementRef;
+  dropListReceiverElement?: HTMLElement;
+  dragDropInfo?: {
+    dragIndex: number;
+    dropIndex: number;
+  };
 
   isProjectEdit = 0;
   isNewProject = false;
-  projectsList: any = [];
+  isShowDetails = 0;
+  projectsList: Array<any> = [];
   projectForm: FormGroup;
+  dataBaseError = false;
 
   constructor(private apiDbService: ApiDbService,
     private formBuilder: FormBuilder) {
     this.projectForm = this.formBuilder.group({
       nameForm: ['', Validators.required],
-      urlForm: ['', Validators.required],
+      descriptionForm: ['', Validators.required],
+      dateForm: ['', Validators.required],
+      urlForm: ['', [Validators.required, Validators.pattern(`(${'http://.*'})|(${'https://.*'})|(${'www.*'}|(${'WWW.*'}))`)]],
       imageForm: ['', Validators.required]
     })
   }
@@ -32,21 +47,45 @@ export class ProyectosComponent implements OnInit {
 
     this.apiDbService.readDataBase(4).subscribe(data => {
       this.projectsList = data;
-      if (Object.values(this.projectsList).length == 0) {
-        this.projectsList.push({ "id": 0, "name": '', "url": '', "image": '' });
-      }
+      this.projectsList.sort((a: any, b: any) => a.rowIndex - b.rowIndex);
     })
   }
+
+  get Name() {
+    return this.projectForm.get('nameForm');
+  }
+
+  get Description() {
+    return this.projectForm.get('descriptionForm');
+  }
+
+  get Date(){
+    return this.projectForm.get('dateForm');
+  }
+
+  get Url() {
+    return this.projectForm.get('urlForm');
+  }
+
+  get Image() {
+    return this.projectForm.get('imageForm');
+  }
+
+  setFormValues(index:number){
+    this.projectForm.controls['nameForm'].setValue(this.projectsList[index].name);
+    this.projectForm.controls['descriptionForm'].setValue(this.projectsList[index].description);
+    this.projectForm.controls['dateForm'].setValue(this.projectsList[index].date);
+    this.projectForm.controls['urlForm'].setValue(this.projectsList[index].url);
+    this.projectForm.controls['imageForm'].setValue(this.projectsList[index].image);
+  }
+
 
   toogleprojectEdit(id: number, index: number) {
     this.isNewProject = false;
     this.isProjectEdit = id;
+    this.dataBaseError = false;
     if (this.isProjectEdit != 0) {
-      this.projectForm = this.formBuilder.group({
-        nameForm: [this.projectsList[index].name, Validators.required],
-        urlForm: [this.projectsList[index].url, Validators.required],
-        imageForm: [this.projectsList[index].image, Validators.required]
-      });
+      this.setFormValues(index);
     }
   }
 
@@ -54,6 +93,13 @@ export class ProyectosComponent implements OnInit {
     this.isNewProject = !this.isNewProject;
     this.isProjectEdit = 0;
     this.projectForm.reset();
+    this.dataBaseError = false;
+  }
+
+  toogleShowDetails(id: number, index:number) {
+    console.log(id);
+    this.isShowDetails = id;
+    this.setFormValues(index);
   }
 
   /*------------------GUARDAR EDICION DE DATOS-------------------------*/
@@ -61,12 +107,19 @@ export class ProyectosComponent implements OnInit {
   onSaveprojectEdit(event: Event, index: number) {
     event.preventDefault;
     this.projectsList[index].name = this.projectForm.get('nameForm')?.value;
+    this.projectsList[index].description = this.projectForm.get('descriptionForm')?.value;
+    this.projectsList[index].date = this.projectForm.get('dateForm')?.value;
     this.projectsList[index].url = this.projectForm.get('urlForm')?.value;
     this.projectsList[index].image = this.projectForm.get('imageForm')?.value;
-    this.isProjectEdit = 0;
+    console.log(this.projectsList[index]);
     this.apiDbService.editInformation(this.projectsList[index], 4, this.projectsList[index].id).subscribe({
-      next: () => alert("Edición guardada"),
-      error: () => alert("Error: La edicion no se guardó en la base de datos")
+      next: () => {
+        this.isProjectEdit = 0;
+        this.projectForm.reset();
+        console.log(this.projectsList[index]);
+
+      },
+      error: () => this.dataBaseError = true
     });
   }
 
@@ -74,27 +127,98 @@ export class ProyectosComponent implements OnInit {
 
   onSaveNewproject(event: Event) {
     event.preventDefault;
-    this.projectsList[0].id = 0;
-    this.projectsList[0].name = this.projectForm.get('nameForm')?.value;
-    this.projectsList[0].url = this.projectForm.get('urlForm')?.value;
-    this.projectsList[0].image = this.projectForm.get('imageForm')?.value;
-    this.isNewProject = false;
     console.log(this.projectsList[0])
-    this.apiDbService.newInformation(this.projectsList[0], 4).subscribe({
+
+    this.projectsList.push({
+      "id": 0, "rowIndex": this.projectsList.length, "name": this.projectForm.get('nameForm')?.value,
+      "description": this.projectForm.get('descriptionForm')?.value, "date":this.projectForm.get('dateForm')?.value,
+       "url": this.projectForm.get('urlForm')?.value, "image": this.projectForm.get('imageForm')?.value
+    });
+    console.log(this.projectsList)
+    this.apiDbService.newInformation(this.projectsList[this.projectsList.length - 1], 4).subscribe({
       next: () => {
-        alert("projecto guardado!");
-        this.ngOnInit()
+        this.isNewProject = false;
+        this.ngOnInit();
       },
-      error: () => alert("Error: El projecto no se guardó en la base de datos")
+      error: () => this.dataBaseError = true
     });
   }
 
   onDeleteproject(index: number) {
     if (confirm("Deseas eliminar el projecto " + this.projectsList[index].nameForm + "?")) {
       this.apiDbService.deleteInformation(this.projectsList[index].id, 4).subscribe({
-        next: () => this.ngOnInit(),
+        next: () => {
+          this.projectsList.splice(index, 1);
+          for (let i = 0; i < this.projectsList.length; i++) {
+            this.projectsList[i].rowIndex = i;
+          }
+          this.apiDbService.saveCompleteList(4, this.projectsList).subscribe({
+            error: () => alert("Error con la base de datos")
+          })
+          this.ngOnInit();
+        },
         error: () => alert("Error: El projecto no se eliminó de la base de datos")
       });
     }
+  }
+
+  //------------------------------------DRAG&DROP---------------------------------
+
+  dragEntered(event: CdkDragEnter<number>, list: any) {
+    const drag = event.item;
+    const dropList = event.container;
+    const dragIndex = drag.data;
+    const dropIndex = dropList.data;
+
+    this.dragDropInfo = { dragIndex, dropIndex };
+    console.log('dragEntered', { dragIndex, dropIndex });
+
+    const phContainer = dropList.element.nativeElement;
+    const phElement = phContainer.querySelector('.cdk-drag-placeholder');
+
+    if (phElement) {
+      phContainer.removeChild(phElement);
+      phContainer.parentElement?.insertBefore(phElement, phContainer);
+
+      moveItemInArray(list, dragIndex, dropIndex);
+    }
+  }
+
+  dragMoved(event: CdkDragMove<number>) {
+    if (!this.dropListContainer || !this.dragDropInfo) return;
+
+    const placeholderElement =
+      this.dropListContainer.nativeElement.querySelector(
+        '.cdk-drag-placeholder'
+      );
+
+    const receiverElement =
+      this.dragDropInfo.dragIndex > this.dragDropInfo.dropIndex
+        ? placeholderElement?.nextElementSibling
+        : placeholderElement?.previousElementSibling;
+
+    if (!receiverElement) {
+      return;
+    }
+
+    receiverElement.style.display = 'none';
+    this.dropListReceiverElement = receiverElement;
+  }
+
+  dragDropped(event: CdkDragDrop<number>) {
+    if (!this.dropListReceiverElement) {
+      for (let i = 0; i < this.projectsList.length; i++) {
+        console.log(this.projectsList[i]);
+        this.projectsList[i].rowIndex = i;
+      }
+      this.apiDbService.saveCompleteList(4, this.projectsList).subscribe({
+        error: () => alert("Error: Los datos no se guardaron en la base de datos")
+      });
+      return;
+    }
+
+    this.dropListReceiverElement.style.removeProperty('display');
+    this.dropListReceiverElement = undefined;
+    this.dragDropInfo = undefined;
   }
 }

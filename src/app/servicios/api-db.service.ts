@@ -6,20 +6,26 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiDbService {
-
+/*
   urls = {
     urlDatos: "https://stormy-sea-00314.herokuapp.com/api/personaldetails", urlEdu: "https://stormy-sea-00314.herokuapp.com/api/education",
     urlExp: "https://stormy-sea-00314.herokuapp.com/api/experience", urlSkills: "https://stormy-sea-00314.herokuapp.com/api/skills",
     urlProy: "https://stormy-sea-00314.herokuapp.com/api/proyect"
-  }
-  /*
+  }*/
+  
     urls = {
        urlDatos: "http://localhost:8080/api/personaldetails", urlEdu: "http://localhost:8080/api/education",
        urlExp: "http://localhost:8080/api/experience", urlSkills: "http://localhost:8080/api/skills",
-       urlProy: "http://localhost:8080/api/proyect"
-     }*/
+       urlProy: "http://localhost:8080/api/proyect", dbTest: "http://localhost:8080/auth/test"
+     }
 
   constructor(private http: HttpClient) { }
+
+  //-------------------DATABASE CONNECTION TEST---------------------
+
+  dbTest(){
+    return this.http.get<String>(Object.values(this.urls)[5], { responseType: 'text' as 'json' });
+  }
 
   /*---------------LECTURA DE DATOS--------------------------*/
 
@@ -43,5 +49,11 @@ export class ApiDbService {
 
   deleteInformation(id: number, urlId: number) {
     return this.http.delete<any>(Object.values(this.urls)[urlId] + "/" + id, { responseType: 'text' as 'json' });
+  }
+
+  //--------------------GUARDAR LISTA COMPLETA------------------------
+
+  saveCompleteList(urlId:number, list:any){
+    return this.http.put<any>(Object.values(this.urls)[urlId] + "/savelist", list, { responseType: 'text' as 'json' });
   }
 }

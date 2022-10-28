@@ -1,4 +1,10 @@
 <app-encabezado [isUserLogin]="isUserLogin"></app-encabezado>
 <main>
-    <app-cuerpo-portfolio [isUserLogin]="isUserLogin" @oculto [@.disabled]="isUserLogin"></app-cuerpo-portfolio>
+    <div *ngIf="!databaseTest" @oculto class="main__div">
+        <img src='../assets/img/server.jpg' alt="server-error" class="div__img">
+        <h3>Hubo un problema y no sabemos que boton apretar</h3>
+        <h4>Aguarde unos minutos e intente nuevamente</h4>
+    </div>
+    <app-cuerpo-portfolio *ngIf="databaseTest"
+     [isUserLogin]="isUserLogin"  [@.disabled]="isUserLogin"></app-cuerpo-portfolio>
 </main>

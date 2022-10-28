@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -17,6 +18,7 @@ export class IniciarSesionComponent implements OnInit {
   public mensajeObservable!: Observable<boolean>;
   valor: any;
   loginForm: FormGroup;
+  errorCode?:number = 200;
 
   constructor(private formBuilder: FormBuilder,
     private authService: AutenticacionService,
@@ -51,7 +53,10 @@ export class IniciarSesionComponent implements OnInit {
         sessionStorage.setItem('token', this.valor);
         this.ruta.navigate(['portfolio']);
       },
-      error: () => alert("El usuario y/o la contraseña son incorrectas")
+      error: (error) => {
+        this.errorCode = error.status;
+        console.log(this.errorCode);
+      }
     })
   }
 

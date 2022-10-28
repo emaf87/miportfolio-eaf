@@ -1,52 +1,70 @@
-<section>
-    <p>Habilidades <button *ngIf="isUserLogin && !isNewSkill" (click)="toogleNewSkill()"><img class="agregar-btn"
-                src="../../../assets/img/agregar2.jpg" alt="Add-img" height="50" width="50"></button>
+<section cdkDropListGroup>
+    <p>Habilidades <button *ngIf="isUserLogin && !isNewSkill" (click)="toogleNewSkill()" title="Agregar habilidad"><img
+                class="agregar-btn" src="../../../assets/img/agregar2.jpg" alt="Add-img" height="50"
+                width="50"></button>
     </p>
-    <div *ngIf="isNewSkill" class="section__new-element">
+    <div *ngIf="isNewSkill" class="section__new-element" [ngClass]="{'db-error':dataBaseError}">
         <form class="new-element__new-form" [formGroup]="skillForm" (ngSubmit)="onNewSkill($event)">
             <ul class="new-form__form-list">
-                <li>Nombre de la nueva habilidad: <input class="form-list__form-input" type="text"
-                        formControlName="nameForm" placeholder="HTML/CSS/JAVA" [ngClass]="{'is-invalid':Name?.errors && Name?.touched, 
+                <li>Nombre de la nueva habilidad: <input class="form-list__form-input form-control" type="text"
+                        name="Name" id="Name" formControlName="nameForm" placeholder="HTML/CSS/JAVA" [ngClass]="{'is-invalid':Name?.errors && Name?.touched, 
                         'is-valid':!Name?.errors && Name?.touched}">
                 </li>
-                <li>Valor (0-100): <input class="form-list__form-input" type="number" min="0" max="100"
-                        formControlName="valueForm" placeholder="65" required>
+                <li>Valor (0-100): <input class="form-list__form-input form-control" type="number" min="0" max="100"
+                        formControlName="valueForm" placeholder="65" [ngClass]="{'is-invalid':Value?.errors && Value?.touched, 
+                        'is-valid':!Value?.errors && Value?.touched}">
                 </li>
                 <button class="butn-form guardar" type="submit" [disabled]="skillForm.invalid">Guardar</button>
                 <button class="butn-form cancelar" type="reset" (click)="toogleNewSkill()">Cancelar</button>
+                <li *ngIf="Name?.errors && Name?.touched" class="error__text">*Todos los campos son obligatorios</li>
+                <li *ngIf="dataBaseError" class="error__text">Error: Los datos no se guardaron</li>
             </ul>
         </form>
     </div>
-    <div class="section__skill" *ngFor="let skill of skillsList, index as i">
-        <div *ngIf="isSkillEdit!=skill.id" class="skill-space">
-            <h1>{{skill.name}}</h1>
-            <button class="btn-edit" *ngIf="isUserLogin && isSkillEdit!=skill.id"
-                (click)="toogleSkillEdit(skill.id, i)">
-                <img src="../../../assets/img/edit2.png" alt="Edit-img">
-            </button>
-            <button class="btn-elim" *ngIf="isUserLogin && isSkillEdit!=skill.id" type="submit"
-                (click)="onDeleteSkill(i)">
-                <img src="../../../assets/img/eliminar.png" alt="Delete-img" class="elim1">
-                <img src="../../../assets/img/eliminar-hover.png" alt="Delete-img" class="elim2">
-            </button>
-        </div>
-        <div class="skill__skillbar" *ngIf="skill.id!=0">
-            <div class="progress" *ngIf="isSkillEdit!=skill.id">
-                <div class="progress-bar progress-bar-striped" role="progressbar" aria-label="Example with label"
-                    [style.width]="skill.value" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{skill.value}}
+    <div class="section__board">
+        <div title="{{(isUserLogin && isSkillEdit == 0)? 'Arraste y suelte los datos para ordenarlos':''}}"
+            class="board__skill" [ngClass]="{'board__skillEdit': isSkillEdit==skill.id}"
+            *ngFor="let skill of skillsList, index as i" cdkDropList [cdkDropListData]="i">
+            <div class="skill__skill-div"
+                [ngClass]="{'drag': (isUserLogin && isSkillEdit == 0), 'skill__skill-divEdit': isUserLogin, 'db-error':(dataBaseError && isSkillEdit == skill.id)}"
+                cdkDrag [cdkDragData]="i" (cdkDragEntered)="dragEntered($event, skillsList)"
+                (cdkDragMoved)="dragMoved($event)" (cdkDragDropped)="dragDropped($event)"
+                [cdkDragDisabled]="isSkillEdit!=0 || !isUserLogin">
+                <div *ngIf="isSkillEdit!=skill.id" class="skill-div__text">
+                    <button class="btn-edit" *ngIf="isUserLogin && isSkillEdit!=skill.id"
+                        (click)="toogleSkillEdit(skill.id, i)">
+                        <img src="../../../assets/img/edit2.png" alt="Edit-img">
+                    </button>
+                    <button class="btn-elim" *ngIf="isUserLogin && isSkillEdit!=skill.id" type="submit"
+                        (click)="onDeleteSkill(i)">
+                        <img src="../../../assets/img/eliminar.png" alt="Delete-img" class="elim1">
+                        <img src="../../../assets/img/eliminar-hover.png" alt="Delete-img" class="elim2">
+                    </button>
                 </div>
+                <div class="skill__skillbar" *ngIf="skill.id!=0 && isSkillEdit!=skill.id">
+                    <circle-progress [percent]="skill.value" [outerStrokeColor]="ColorBarra(skill.value)"
+                        [subtitle]="skill.name">
+                    </circle-progress>
+                </div>
+                <form *ngIf="isSkillEdit==skill.id" class="skillbar__edit" [formGroup]="skillForm"
+                    (ngSubmit)="onSaveEditSkill($event, i)">
+                    <ul class="edit__list">
+                        <li>Nombre de habilidad: <input class="form-list__form-input form-control" type="text"
+                                formControlName="nameForm" [ngClass]="{'is-invalid':Name?.errors && Name?.touched, 
+                            'is-valid':!Name?.errors && Name?.touched}"></li>
+                        <li>Valor (0-100): <input class="form-list__form-input form-control" type="number" min="0"
+                                max="100" formControlName="valueForm" [ngClass]="{'is-invalid':Value?.errors && Value?.touched, 
+                        'is-valid':!Value?.errors && Value?.touched}">
+                        </li>
+                        <button class="butn-form guardar" type="submit" [disabled]="skillForm.invalid">Guardar</button>
+                        <button class="butn-form cancelar" type="reset"
+                            (click)="toogleSkillEdit(0, 0)">Cancelar</button>
+                        <li *ngIf="Name?.errors && Name?.touched" class="error__text">*Todos los campos son obligatorios
+                        </li>
+                        <li *ngIf="dataBaseError" class="error__text">Error: Los datos no se guardaron</li>
+                    </ul>
+                </form>
             </div>
-            <form *ngIf="isSkillEdit==skill.id" class="skillbar__edit" [formGroup]="skillForm"
-                (ngSubmit)="onSaveEditSkill($event, i)">
-                <ul class="edit__list">
-                    <li>Nombre de habilidad: <input class="form-list__form-input" type="text"
-                            formControlName="nameForm"></li>
-                    <li>Valor (0-100): <input class="form-list__form-input" type="text" formControlName="valueForm">
-                    </li>
-                    <button class="butn-form guardar" type="submit" [disabled]="skillForm.invalid">Guardar</button>
-                    <button class="butn-form cancelar" type="reset" (click)="toogleSkillEdit(0, 0)">Cancelar</button>
-                </ul>
-            </form>
         </div>
     </div>
     <div *ngIf=" !isUserLogin && skillsList.length==0" class="div-cero">

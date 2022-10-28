@@ -35,16 +35,26 @@ p {
   width: 75%;
 }
 
-.section__skill {
-  width: 70%;
+.section__board{
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.board__skill {
+  width: 30%;
   margin: 5rem auto;
-  text-align: center;
+}
+
+.board__skillEdit{
+  width: 80%;
 }
 
 button {
   background: none;
   border: none;
-  margin-left: 20px;
+  margin-left: 2rem;
   align-content: center;
 }
 
@@ -63,6 +73,7 @@ input {
   text-align: center;
   font-weight: bold;
 }
+
 
 h1 button {
   border: none;
@@ -98,8 +109,21 @@ h1 button {
   list-style: none;
   padding: 1.5rem 0;
 }
+.skill__skill-div{
+  width: 50%;
+  margin: 0 auto;
 
-.skill-space {
+}
+
+.skill__skill-divEdit {
+  border: solid black 2px;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  
+}
+
+.skill-div__text {
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
@@ -122,7 +146,6 @@ h1 button {
 }
 
 .skillbar__edit {
-  background-color: rgba(255, 255, 255, 0.5);
   margin: 0 auto;
   border-radius: 10px;
 }
@@ -188,6 +211,29 @@ h1 button {
   padding: 5px 5px 5px 5px;
   border-radius: 25%;
   background-color: red;
+}
+
+.drag {
+  cursor: move;
+}
+
+.db-error {
+  border: 3px red solid;
+  color: red;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+ 
+}
+
+.error__text {
+  margin-top: 2rem;
+  font-weight: normal;
+  color: red;
+}
+
+.form-control {
+  font-size: 2.5rem;
+  border-width: 3px;
 }
 
 @keyframes barra {

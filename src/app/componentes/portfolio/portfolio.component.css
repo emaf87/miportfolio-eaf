@@ -1,0 +1,14 @@
+.main__div{
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    text-align: center;
+}
+
+.div__img{
+    margin: 10rem auto 2rem auto;
+    width: 40%;
+}
