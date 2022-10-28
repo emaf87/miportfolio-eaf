@@ -10,7 +10,7 @@ export class ApiDbService {
   urls = {
     urlDatos: "https://stormy-sea-00314.herokuapp.com/api/personaldetails", urlEdu: "https://stormy-sea-00314.herokuapp.com/api/education",
     urlExp: "https://stormy-sea-00314.herokuapp.com/api/experience", urlSkills: "https://stormy-sea-00314.herokuapp.com/api/skills",
-    urlProy: "https://stormy-sea-00314.herokuapp.com/api/proyect"
+    urlProy: "https://stormy-sea-00314.herokuapp.com/api/proyect", dbTest: "https://stormy-sea-00314.herokuapp.com/auth/test"
   }
   /*
     urls = {
