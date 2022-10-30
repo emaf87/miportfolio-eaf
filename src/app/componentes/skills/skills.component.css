@@ -134,6 +134,13 @@ h1 button {
   margin: 0 auto;
 }
 
+.skillbar__name{
+  color:white;
+  text-shadow: black 1px 1px 1px;
+  font-size: 2.5rem;
+  font-family: 'Signika Negative', sans-serif;;
+}
+
 .progress {
   height: 3rem;
   font-size: 2rem;
@@ -148,6 +155,7 @@ h1 button {
 .skillbar__edit {
   margin: 0 auto;
   border-radius: 10px;
+ 
 }
 
 .edit__list {

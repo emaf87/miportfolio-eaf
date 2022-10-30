@@ -59,7 +59,7 @@ import { NgCircleProgressModule } from 'ng-circle-progress';
       subtitle:'Progress',
       subtitleColor: 'white',
       subtitleFontWeight: '800',
-      subtitleFontSize: '2rem',
+      subtitleFontSize: '2.5rem',
       responsive: true
     })
    ],

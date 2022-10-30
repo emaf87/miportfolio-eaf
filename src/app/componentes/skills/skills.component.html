@@ -43,8 +43,9 @@
                 </div>
                 <div class="skill__skillbar" *ngIf="skill.id!=0 && isSkillEdit!=skill.id">
                     <circle-progress [percent]="skill.value" [outerStrokeColor]="ColorBarra(skill.value)"
-                        [subtitle]="skill.name">
+                        >
                     </circle-progress>
+                    <p class="skillbar__name"><strong>{{skill.name}}</strong></p>
                 </div>
                 <form *ngIf="isSkillEdit==skill.id" class="skillbar__edit" [formGroup]="skillForm"
                     (ngSubmit)="onSaveEditSkill($event, i)">
