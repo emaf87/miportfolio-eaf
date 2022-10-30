@@ -6,8 +6,8 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class AutenticacionService {
-  url = "https://stormy-sea-00314.herokuapp.com/auth";
-  //url = "http://localhost:8080/auth";
+  url = "https://stormy-sea-00314.herokuapp.com/api/auth";
+
 
   constructor(private http: HttpClient) {
     

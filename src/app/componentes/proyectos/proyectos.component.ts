@@ -90,6 +90,7 @@ export class ProyectosComponent implements OnInit {
   }
 
   toogleNewproject() {
+    this.isShowDetails = 0;
     this.isNewProject = !this.isNewProject;
     this.isProjectEdit = 0;
     this.projectForm.reset();

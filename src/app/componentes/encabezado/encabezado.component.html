@@ -11,13 +11,13 @@
     </div>
     <div class='nav-bar__menu'>
       <a href='https://www.facebook.com/Emaf87/' target="_blank" class='menu__navlink' @oculto><img
-          src="../../../assets/img/social_media_facebook_fb_icon_129002.png" class="navlink__logo-fb"
+          src="../../../assets/img/facebook.png" class="navlink__logo-fb"
           alt="Facebook-logo"></a>
       <a href='https://www.linkedin.com/in/emmanuel-ferretti-693183a9/' target="_blank" class='menu__navlink'
-        @oculto><img src="../assets/img/linkedin_icon-icons.com_53609.png" alt="Linkedin-img"
+        @oculto><img src="../assets/img/linkedin.png" alt="Linkedin-img"
           class=navlink__logo-in></a>
       <a href='https://github.com/emaf87' target="_blank" class='menu__navlink' @oculto><img
-          src="../assets/img/github_git_icon_145985.png" alt="Github-logo" class=navlink__logo-git></a>
+          src="../assets/img/github.png" alt="Github-logo" class=navlink__logo-git></a>
       <a routerLink="/login" *ngIf="!isUserLogin" class='menu__navlink' @oculto>Login</a>
       <a class='menu__navlink' *ngIf="isUserLogin" (click)="onLogOut()">Logout</a>
     </div>

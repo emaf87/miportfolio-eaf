@@ -10,14 +10,9 @@ export class ApiDbService {
   urls = {
     urlDatos: "https://stormy-sea-00314.herokuapp.com/api/personaldetails", urlEdu: "https://stormy-sea-00314.herokuapp.com/api/education",
     urlExp: "https://stormy-sea-00314.herokuapp.com/api/experience", urlSkills: "https://stormy-sea-00314.herokuapp.com/api/skills",
-    urlProy: "https://stormy-sea-00314.herokuapp.com/api/proyect", dbTest: "https://stormy-sea-00314.herokuapp.com/auth/test"
+    urlProy: "https://stormy-sea-00314.herokuapp.com/api/proyect", dbTest: "https://stormy-sea-00314.herokuapp.com/api/auth/test"
   }
-  /*
-    urls = {
-       urlDatos: "http://localhost:8080/api/personaldetails", urlEdu: "http://localhost:8080/api/education",
-       urlExp: "http://localhost:8080/api/experience", urlSkills: "http://localhost:8080/api/skills",
-       urlProy: "http://localhost:8080/api/proyect", dbTest: "http://localhost:8080/auth/test"
-     }*/
+
 
   constructor(private http: HttpClient) { }
 
