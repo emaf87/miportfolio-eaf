@@ -11,9 +11,9 @@
           <li>Nombre del nuevo projecto: <input class="list__input form-control" placeholder="Calculadora de interés"
               type="text" formControlName="nameForm" [ngClass]="{'is-invalid':Name?.errors && Name?.touched, 
               'is-valid':!Name?.errors && Name?.touched}"></li>
-          <li>Descripción del proyecto: <input class="list__input form-control" placeholder="Proyecto realizado en Java"
+          <li>Descripción del proyecto: <textarea class="list__input form-control" placeholder="Proyecto realizado en Java"
               type="text" formControlName="descriptionForm" [ngClass]="{'is-invalid': Description?.errors && Description?.touched, 
-                'is-valid':!Description?.errors && Description?.touched}"></li>
+                'is-valid':!Description?.errors && Description?.touched}"></textarea></li>
           <li>Fecha de creación: <input class="list__input form-control" placeholder="YYYY-MM"
               type="month" formControlName="dateForm" [ngClass]="{'is-invalid': Date?.errors && Date?.touched, 
                     'is-valid':!Date?.errors && Date?.touched}" ></li>
@@ -82,9 +82,9 @@
               <li>Nombre del projecto: <input class="list__input form-control" [ngClass]="{'is-invalid':Name?.errors && Name?.touched, 
                 'is-valid':!Name?.errors && Name?.touched}" type="text" formControlName="nameForm">
               </li>
-              <li>Descripción del projecto: <input class="list__input form-control" [ngClass]="{'is-invalid': Description?.errors && Description?.touched, 
+              <li>Descripción del projecto: <textarea  class="list__input form-control" row="3" [ngClass]="{'is-invalid': Description?.errors && Description?.touched, 
                 'is-valid':!Description?.errors && Description?.touched}" type="text"
-                  formControlName="descriptionForm">
+                  formControlName="descriptionForm"></textarea>
               </li>
               <li>Fecha de creación: <input class="list__input form-control" placeholder="YYYY-MM"
                 type="month" formControlName="dateForm" [ngClass]="{'is-invalid': Date?.errors && Date?.touched, 

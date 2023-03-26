@@ -23,9 +23,9 @@
       *ngIf="isUserLogin && isPersonalDetailsEdit" [formGroup]="personalDetailsForm"
       (ngSubmit)="onSavePersonalDetails($event)">
       <ul>
-        <li class="edit__input"><strong>Acerca de mi:</strong><input class="input__element form-control" type="text"
+        <li class="edit__input"><strong>Acerca de mi:</strong><textarea class="input__element form-control" type="text"
             formControlName="aboutMeForm"
-            [ngClass]="{'is-invalid':personalDetailsForm.get('aboutMeForm')?.errors && personalDetailsForm.get('aboutMeForm')?.touched}">
+            [ngClass]="{'is-invalid':personalDetailsForm.get('aboutMeForm')?.errors && personalDetailsForm.get('aboutMeForm')?.touched}"></textarea>
         </li>
         <li class="edit__input"><strong>Nombre: </strong><input class="input__element form-control" type="text"
             formControlName="nameForm"
@@ -53,7 +53,7 @@
         </li>
         <li *ngIf="personalDetailsForm.invalid && personalDetailsForm?.touched" class="error__text">Todos los campos son
           obligatorios</li>
-          <br *ngIf="dataBaseError">
+        <br *ngIf="dataBaseError">
         <li *ngIf="dataBaseError" class="dberror__text">Error: Los datos no se guardaron</li>
       </ul>
     </form>
@@ -126,36 +126,38 @@
             <img src="../../../assets/img/eliminar-hover.png" alt="delete-img" class="btn-elim__hover">
           </button>
         </div>
-        <form *ngIf="isExperienceEdit==experience.id_exp && isExperienceEdit!=0" class="details__edit"
-          [formGroup]="experienceForm" (ngSubmit)="onSaveExperienceEdit($event, i)">
-          <ul>
-            <li><strong>Puesto: </strong><input class="input__element form-control" type="text"
-                formControlName="experienceJobForm"
-                [ngClass]="{'is-invalid': experienceForm.get('experienceJobForm')?.errors && experienceForm.get('experienceJobForm')?.touched}">
-            </li>
-            <li><strong>Empresa: </strong><input class="input__element form-control" type="text"
-                formControlName="experienceCompanyForm"
-                [ngClass]="{'is-invalid': experienceForm.get('experienceCompanyForm')?.errors && experienceForm.get('experienceCompanyForm')?.touched}">
-            </li>
-            <li><strong>Fecha inicio: </strong><input class="input__element form-control" type="month"
-                formControlName="experienceStartedForm" placeholder="YYYY-MM"
-                [ngClass]="{'is-invalid': experienceForm.get('experienceStartedForm')?.errors && experienceForm.get('experienceStartedForm')?.touched}">
-            </li>
-            <li><strong>Fecha fin:</strong> <input class="input__element form-control" type="month"
-                formControlName="experienceEndedForm" placeholder="YYYY-MM"
-                [ngClass]="{'is-invalid': experienceForm.get('experienceEndedForm')?.errors && experienceForm.get('experienceEndedForm')?.touched}">
-            </li>
-            <li><strong>Logo URL:</strong> <input class="input__element form-control" type="text"
-                formControlName="experienceLogoForm"
-                [ngClass]="{'is-invalid': experienceForm.get('experienceLogoForm')?.errors && experienceForm.get('experienceLogoForm')?.touched}">
-            </li>
-            <button class="butn-form guardar" type="submit" [disabled]="experienceForm.invalid">Guardar</button><button
-              class="butn-form cancelar" type="reset" (click)="resetExtraVariables()">Cancelar</button>
-            <li *ngIf="experienceForm.invalid && experienceForm?.touched" class="error__text">Todos los campos son
-              obligatorios</li>
-            <li *ngIf="dataBaseError" class="error__text">Error: Los datos no se guardaron</li>
-          </ul>
-        </form>
+        <div class="details__edit" *ngIf="isExperienceEdit==experience.id_exp && isExperienceEdit!=0">
+          <form [formGroup]="experienceForm" (ngSubmit)="onSaveExperienceEdit($event, i)">
+            <ul>
+              <li><strong>Puesto: </strong><input class="input__element form-control" type="text"
+                  formControlName="experienceJobForm"
+                  [ngClass]="{'is-invalid': experienceForm.get('experienceJobForm')?.errors && experienceForm.get('experienceJobForm')?.touched}">
+              </li>
+              <li><strong>Empresa: </strong><input class="input__element form-control" type="text"
+                  formControlName="experienceCompanyForm"
+                  [ngClass]="{'is-invalid': experienceForm.get('experienceCompanyForm')?.errors && experienceForm.get('experienceCompanyForm')?.touched}">
+              </li>
+              <li><strong>Fecha inicio: </strong><input class="input__element form-control" type="month"
+                  formControlName="experienceStartedForm" placeholder="YYYY-MM"
+                  [ngClass]="{'is-invalid': experienceForm.get('experienceStartedForm')?.errors && experienceForm.get('experienceStartedForm')?.touched}">
+              </li>
+              <li><strong>Fecha fin:</strong> <input class="input__element form-control" type="month"
+                  formControlName="experienceEndedForm" placeholder="YYYY-MM"
+                  [ngClass]="{'is-invalid': experienceForm.get('experienceEndedForm')?.errors && experienceForm.get('experienceEndedForm')?.touched}">
+              </li>
+              <li><strong>Logo URL:</strong> <input class="input__element form-control" type="text"
+                  formControlName="experienceLogoForm"
+                  [ngClass]="{'is-invalid': experienceForm.get('experienceLogoForm')?.errors && experienceForm.get('experienceLogoForm')?.touched}">
+              </li>
+              <button class="butn-form guardar" type="submit"
+                [disabled]="experienceForm.invalid">Guardar</button><button class="butn-form cancelar" type="reset"
+                (click)="resetExtraVariables()">Cancelar</button>
+              <li *ngIf="experienceForm.invalid && experienceForm?.touched" class="error__text">Todos los campos son
+                obligatorios</li>
+              <li *ngIf="dataBaseError" class="error__text">Error: Los datos no se guardaron</li>
+            </ul>
+          </form>
+        </div>
       </div>
 
       <div *ngIf="experienceList[0].id_exp == 0 && !isUserLogin " class="for__no-element">
@@ -241,7 +243,7 @@
         </div>
         <div *ngIf="isEducationEdit==education.id_edu && isEducationEdit!=0" class="details__edit">
           <form [formGroup]="educationForm" (ngSubmit)="onSaveEducationEdit($event, i)">
-            <ul class="form__input">
+            <ul>
               <li><strong>Nivel:</strong> <input class="input__element form-control" type="text"
                   formControlName="educationGradeForm"
                   [ngClass]="{'is-invalid': educationForm.get('educationGradeForm')?.errors && educationForm.get('educationGradeForm')?.touched}">

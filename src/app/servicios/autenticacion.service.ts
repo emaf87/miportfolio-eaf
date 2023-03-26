@@ -6,7 +6,8 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class AutenticacionService {
-  url = "https://stormy-sea-00314.herokuapp.com/api/auth";
+ 
+ url = "https://portfolio-backend-production-9b8b.up.railway.app/api/auth";
 
 
   constructor(private http: HttpClient) {

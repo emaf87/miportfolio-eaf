@@ -1,7 +1,7 @@
 <section cdkDropListGroup>
-    <p>Habilidades <button *ngIf="isUserLogin && !isNewSkill" (click)="toogleNewSkill()" title="Agregar habilidad"><img
-                class="agregar-btn" src="../../../assets/img/agregar2.jpg" alt="Add-img" height="50"
-                width="50"></button>
+    <p class="skill_title">Habilidades <button *ngIf="isUserLogin && !isNewSkill" (click)="toogleNewSkill()"
+            title="Agregar habilidad"><img class="agregar-btn" src="../../../assets/img/agregar2.jpg" alt="Add-img"
+                height="50" width="50"></button>
     </p>
     <div *ngIf="isNewSkill" class="section__new-element" [ngClass]="{'db-error':dataBaseError}">
         <form class="new-element__new-form" [formGroup]="skillForm" (ngSubmit)="onNewSkill($event)">
@@ -23,14 +23,13 @@
     </div>
     <div class="section__board">
         <div title="{{(isUserLogin && isSkillEdit == 0)? 'Arraste y suelte los datos para ordenarlos':''}}"
-            class="board__skill" [ngClass]="{'board__skillEdit': isSkillEdit==skill.id}"
-            *ngFor="let skill of skillsList, index as i" cdkDropList [cdkDropListData]="i">
-            <div class="skill__skill-div"
-                [ngClass]="{'drag': (isUserLogin && isSkillEdit == 0), 'skill__skill-divEdit': isUserLogin, 'db-error':(dataBaseError && isSkillEdit == skill.id)}"
+            class="board__skill" *ngFor="let skill of skillsList, index as i" cdkDropList [cdkDropListData]="i">
+            <div class="skill__skill-div" 
+                [ngClass]="{'drag': (isUserLogin && isSkillEdit == 0), 'skill__skill-divEdit': (isUserLogin && isSkillEdit!=skill.id)}"
                 cdkDrag [cdkDragData]="i" (cdkDragEntered)="dragEntered($event, skillsList)"
                 (cdkDragMoved)="dragMoved($event)" (cdkDragDropped)="dragDropped($event)"
                 [cdkDragDisabled]="isSkillEdit!=0 || !isUserLogin">
-                <div *ngIf="isSkillEdit!=skill.id" class="skill-div__text">
+                <div  class="skill-div__text">
                     <button class="btn-edit" *ngIf="isUserLogin && isSkillEdit!=skill.id"
                         (click)="toogleSkillEdit(skill.id, i)">
                         <img src="../../../assets/img/edit2.png" alt="Edit-img">
@@ -42,11 +41,12 @@
                     </button>
                 </div>
                 <div class="skill__skillbar" *ngIf="skill.id!=0 && isSkillEdit!=skill.id">
-                    <circle-progress [percent]="skill.value" [outerStrokeColor]="ColorBarra(skill.value)"
-                        >
+                    <circle-progress [percent]="skill.value" [outerStrokeColor]="ColorBarra(skill.value)">
                     </circle-progress>
                     <p class="skillbar__name"><strong>{{skill.name}}</strong></p>
                 </div>
+            </div>
+            <div [ngClass]="{'skill__skill-divEdit':isSkillEdit==skill.id, 'db-error':(dataBaseError && isSkillEdit == skill.id)}" >
                 <form *ngIf="isSkillEdit==skill.id" class="skillbar__edit" [formGroup]="skillForm"
                     (ngSubmit)="onSaveEditSkill($event, i)">
                     <ul class="edit__list">

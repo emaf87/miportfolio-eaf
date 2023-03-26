@@ -5,7 +5,6 @@ section {
   background-color: rgba(88, 152, 220, 0.775);
   padding: 5rem 0;
   box-shadow: 0 0 10px 10px rgba(88, 152, 220, 0.775);
-  
 }
 
 input {
@@ -75,13 +74,8 @@ li {
   padding: 15px;
   border-radius: 10px;
   margin: 0 auto;
-  max-width: 75%;
-}
 
-strong {
-  margin-right: 10px;
 }
-
 
 .input__element {
   display: block;
@@ -160,11 +154,11 @@ strong {
 
 .for__card {
   display: flex;
-  max-width: 70%;
+  width: 70%;
   margin: 20px auto;
   padding: 15px;
   border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.5); 
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .card__img-div {
@@ -182,7 +176,7 @@ strong {
 .card__data {
   display: flex;
   align-items: center;
-  width: 70%;
+  min-width: 70%;
 }
 
 .card__data ul {
@@ -190,18 +184,19 @@ strong {
 }
 
 .card__buttons {
-  width: 15%;
+  width: 120px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .details__edit {
-  min-width: 90%;
+  width: 90%;
   margin: 0 auto;
   text-align: center;
 }
 
+.details__datos ul,
 .details__edit ul {
   padding: 0;
 }
@@ -214,20 +209,20 @@ strong {
   letter-spacing: 2px;
 }
 
-.form-control{
+.form-control {
   font-size: 2.5rem;
 }
 
-.is-invalid{
+.is-invalid {
   border: red 2px solid;
 }
 
-.db-error{
+.db-error {
   border: 3px red solid;
   color: red;
 }
 
-.error__text{
+.error__text {
   margin-top: 2rem;
   font-weight: normal;
   color: red;
@@ -255,10 +250,11 @@ strong {
 
 .btn-elim__hover {
   display: none;
+  margin-left: 0.5rem;
   overflow: hidden;
   width: 3.2rem;
   height: 4rem;
-  background-color: rgba(180, 174, 174, 0);
+
 }
 
 .btn-elim:hover .btn-elim__normal {
@@ -284,11 +280,151 @@ strong {
 }
 
 .btn-elim:hover {
-  background-color: red;
+
   padding: 5px 5px 15px 5px;
   border-radius: 25%;
 }
 
-.drag{
+.drag {
   cursor: move;
+}
+
+
+/*--------------------------------------------*/
+
+@media only screen and (max-width:940px) {
+
+
+  .for__card {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .card__img-div {
+    width: 20%;
+  }
+
+  .card__buttons {
+    margin-top: 2rem;
+    width: 30%;
+  }
+}
+
+@media only screen and (max-width:840px) {
+  .details__title {
+    font-size: 4.5rem;
+  }
+
+  .details {
+    font-size: 2rem;
+  }
+
+  .img-div__img {
+    width: 7rem;
+  }
+
+  .form-control {
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (max-width:700px) {
+  .details__title {
+    font-size: 4rem;
+  }
+
+  .details {
+    font-size: 1.8rem;
+  }
+
+  .img-div__img {
+    width: 6rem;
+  }
+
+  .btn-edit img {
+    width: 5rem;
+    height: 2rem;
+  }
+
+  .btn-elim__normal {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .btn-elim__hover {
+    width: 2.4rem;
+    height: 3rem;
+    margin-top: -0.8rem;
+  }
+
+  .form-control {
+    font-size: 1.8rem;
+  }
+
+  .butn-form {
+    letter-spacing: normal;
+  }
+
+  .for__card,
+  .details__datos {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width:550px) {
+  .details__title {
+    font-size: 3rem;
+  }
+
+  .card__data {
+    width: 90%;
+    margin-top: 2rem;
+  }
+
+  .for__card,
+  .new__form {
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width:420px) {
+  .agregar-btn {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .card__buttons {
+    width: 40%;
+  }
+
+  .form__input {
+    width: 100%;
+  }
+
+  .form-control {
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width:310px) {
+  .details__datos, .details__datos p, .form__input{
+    width: 90%;
+  }
+
+
+  .details__datos p, .details__datos ul, .details__datos{
+    padding: 0.5rem;
+  }
+
+  .details__datos ul li{
+    width: 100%;
+  }
+
+  .details__edit, .form-control {
+    width: 100%;
+  }
+
+  .details__datos, .details__datos p, .form__input, .new__form{
+    width: 90%;
+  }
 }

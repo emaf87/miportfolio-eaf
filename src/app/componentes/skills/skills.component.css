@@ -16,7 +16,7 @@ section {
   letter-spacing: 2px;
 }
 
-p {
+.skill_title {
   font-size: 5rem;
   font-family: 'Titan One', cursive;
   font-weight: normal;
@@ -35,7 +35,7 @@ p {
   width: 75%;
 }
 
-.section__board{
+.section__board {
   width: 100%;
   display: flex;
   justify-content: space-evenly;
@@ -43,18 +43,17 @@ p {
 }
 
 .board__skill {
-  width: 30%;
   margin: 5rem auto;
+  width: 30%;
 }
 
-.board__skillEdit{
+.board__skillEdit {
   width: 80%;
 }
 
 button {
   background: none;
   border: none;
-  margin-left: 2rem;
   align-content: center;
 }
 
@@ -64,6 +63,7 @@ button {
   width: 4rem;
   height: 4rem;
   box-shadow: 0px 0px 7px 5px rgba(120, 9, 9, 0.789);
+  margin-left: 2rem;
 }
 
 input {
@@ -109,10 +109,10 @@ h1 button {
   list-style: none;
   padding: 1.5rem 0;
 }
-.skill__skill-div{
+
+.skill__skill-div {
   width: 50%;
   margin: 0 auto;
-
 }
 
 .skill__skill-divEdit {
@@ -120,12 +120,12 @@ h1 button {
   padding: 1rem;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 10px;
-  
+
 }
 
 .skill-div__text {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   margin-bottom: 10px;
   align-items: center;
 }
@@ -134,11 +134,12 @@ h1 button {
   margin: 0 auto;
 }
 
-.skillbar__name{
-  color:white;
+.skillbar__name {
+  color: white;
   text-shadow: black 1px 1px 1px;
   font-size: 2.5rem;
-  font-family: 'Signika Negative', sans-serif;;
+  font-family: 'Signika Negative', sans-serif;
+  ;
 }
 
 .progress {
@@ -155,7 +156,7 @@ h1 button {
 .skillbar__edit {
   margin: 0 auto;
   border-radius: 10px;
- 
+
 }
 
 .edit__list {
@@ -175,6 +176,8 @@ h1 button {
   overflow: hidden;
   height: 4rem;
   width: 3rem;
+  margin-top: -0.7rem;
+  margin-left: 1rem;
 }
 
 .guardar:disabled {
@@ -215,10 +218,10 @@ h1 button {
 }
 
 .btn-elim:hover {
-  margin-top: -10px;
+  
   padding: 5px 5px 5px 5px;
   border-radius: 25%;
-  background-color: red;
+  
 }
 
 .drag {
@@ -230,7 +233,7 @@ h1 button {
   color: red;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 10px;
- 
+
 }
 
 .error__text {
@@ -251,5 +254,106 @@ h1 button {
 
   100% {
     transform: translate(0%);
+  }
+}
+
+
+/*----------------------------------*/
+@media only screen and (max-width:1350px) {
+  .butn-form {
+    letter-spacing: normal;
+  }
+}
+
+@media only screen and (max-width:1080px) {
+.board__skill{
+  width: 45%;
+}
+}
+
+@media only screen and (max-width:850px) {
+  .btn-edit img {
+    width: 5rem;
+    height: 2rem;
+  }
+
+  .elim1 {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .elim2 {
+    width: 2.5rem;
+    height: 3.3rem;
+  }
+}
+
+@media only screen and (max-width:840px) {
+  .skill__title {
+    font-size: 4.5rem;
+  }
+
+  .new-element__new-form,
+  .form-control {
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (max-width:750px) {
+  .skillbar__name {
+    font-size: 2rem;
+  }
+}
+
+@media only screen and (max-width:710px) {
+  .skill_title {
+    font-size: 4rem;
+  }
+
+  .new-element__new-form,
+  .form-control {
+    font-size: 1.8rem;
+  }
+
+  .section__new-element {
+    width: 80%;
+  }
+
+  .new-element__new-form {
+    width: 90%;
+  }
+
+  .skillbar__edit{
+    font-size: 2rem;
+  }
+  
+}
+
+@media only screen and (max-width:650px) {
+  .board__skill {
+    width: 70%;
+    margin: 4rem auto 2rem auto;
+  }
+}
+
+@media only screen and (max-width:420px) {
+  .board__skill {
+    width: 90%;
+  }
+  .skill_title {
+    font-size: 3rem;
+  }
+
+  .agregar-btn {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .skillbar__edit {
+    font-size: 1.8rem;
+  }
+
+  .guardar {
+    margin-right: 1rem;
   }
 }

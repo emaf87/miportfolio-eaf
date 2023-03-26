@@ -25,6 +25,7 @@ html {
   font-size: 62.5%;
   overflow-x: hidden;
   min-width: 100vw;
+  box-sizing: border-box;
 }
 
 a {
@@ -44,19 +45,22 @@ hr {
 
 /*--------------------------------MEDIA QUERY--------------------------------------------*/
 
-@media only screen and (max-width:1150px) {
+
+
+/*
+@media only screen and (max-width:900px) {
   html {
     font-size: 55%;
   }
 }
-
-@media only screen and (max-width:960px) {
+/*
+@media only screen and (max-width:870px) {
   html {
     font-size: 45%;
   }
 
 }
-
+/*
 @media only screen and (max-width:768px) {
   html {
     font-size: 38%;
@@ -80,4 +84,4 @@ hr {
   html {
     font-size: 20%;
   }
-}
+}*/

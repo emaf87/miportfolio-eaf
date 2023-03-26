@@ -7,18 +7,17 @@ import { Observable } from 'rxjs';
 })
 export class ApiDbService {
 
-  urls = {
-    urlDatos: "https://stormy-sea-00314.herokuapp.com/api/personaldetails", urlEdu: "https://stormy-sea-00314.herokuapp.com/api/education",
-    urlExp: "https://stormy-sea-00314.herokuapp.com/api/experience", urlSkills: "https://stormy-sea-00314.herokuapp.com/api/skills",
-    urlProy: "https://stormy-sea-00314.herokuapp.com/api/proyect", dbTest: "https://stormy-sea-00314.herokuapp.com/api/auth/test"
-  }
-
-
+urls = {
+  urlDatos: "https://portfolio-backend-production-9b8b.up.railway.app/api/personaldetails", urlEdu: "https://portfolio-backend-production-9b8b.up.railway.app/api/education",
+  urlExp: "https://portfolio-backend-production-9b8b.up.railway.app/api/experience", urlSkills: "https://portfolio-backend-production-9b8b.up.railway.app/api/skills",
+  urlProy: "https://portfolio-backend-production-9b8b.up.railway.app/api/proyect", dbTest: "https://portfolio-backend-production-9b8b.up.railway.app/api/auth/test"
+}
   constructor(private http: HttpClient) { }
 
   //-------------------DATABASE CONNECTION TEST---------------------
 
   dbTest(){
+    
     return this.http.get<String>(Object.values(this.urls)[5], { responseType: 'text' as 'json' });
   }
 

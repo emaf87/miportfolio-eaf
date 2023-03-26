@@ -76,6 +76,10 @@ button {
   padding: 0;
 }
 
+.form__list li{
+  margin-top: 1rem;
+}
+
 li {
   list-style: none;
 }
@@ -293,7 +297,7 @@ animation: abrir 1s;
   display: flex;
   justify-content: center;
   margin-left: 4rem;
-  width: 25rem;
+  
 }
 
 .drag {
@@ -352,9 +356,7 @@ animation: abrir 1s;
   margin-right: 10px;
 }
 
-.buttons__elim:hover {
-  background-color: red;
-}
+
 
 .buttons__edit:hover {
   transform: scale(110%, 110%);
@@ -377,4 +379,71 @@ animation: abrir 1s;
 .cancelar:hover {
   background-color: white;
   color: black;
+}
+
+/*----------------------------------------*/
+
+@media only screen and (max-width:480px) and (orientation:portrait) {
+  .fondo__title  p{
+    font-size: 4rem;
+  }
+  .new-element__form, .form-control{
+    font-size: 2rem;
+  }
+  .butn-form{
+    letter-spacing: normal;
+  }
+  .buttons__edit img{
+    width: 5rem;
+    height: 2rem;
+  }
+  .elim__normal{
+    height: 3rem;
+    width: 3rem;
+  }
+  .elim__hover{
+    width: 2.4rem;
+    height: 3rem;
+  }
+}
+
+
+@media only screen and (max-width:420px) and (orientation:portrait) {
+  .fondo__title  p{
+    font-size: 3rem;
+  }
+
+  .agregar-btn{
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .new-element__form, .form-control{
+    font-size: 1.8rem;
+  }
+  .new-element__form{
+    width: 90%;
+    margin:auto;
+  }
+.fondo__board{
+  width: 100%;
+  margin: 0;
+}
+  
+}
+
+@media only screen and (max-width:400px) and (orientation:portrait) {
+  .fondo__board{
+    justify-content: center;
+  }
+
+  .conjunto__interior{
+    margin: 0.5rem auto 3rem auto;
+  }
+}
+
+@media only screen and (max-width:350px) and (orientation:portrait) {
+.card__conjunto{
+  width: 25rem;
+}
 }

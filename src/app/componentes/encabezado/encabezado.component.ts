@@ -14,7 +14,7 @@ import { trigger, transition, state, style, animate, keyframes } from '@angular/
       style({ transform: 'translate(0,0) rotate(-360deg)', offset: 0.99 })
     ]))])]),
     trigger('oculto', [transition(':enter', [style({}), animate('5s', keyframes([
-      style({ opacity: 0, offset: 0 }),
+      style({display:'none', opacity: 0, offset: 0 }),
       style({ opacity: 0, offset: 0.75 }),
       style({ opacity: 1, offset: 1 })
     ]))])])

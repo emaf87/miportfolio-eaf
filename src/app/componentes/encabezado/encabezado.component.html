@@ -1,25 +1,26 @@
 <header [@.disabled]="isUserLogin">
   <nav class="nav-bar">
     <div class='nav-bar__logo'>
-      <div @logo class="logo__divImg"> 
+      <div @logo class="logo__divImg">
         <img class='divImg__img' src="../../../assets/img/arg.png" alt="">
       </div>
       <div class='logo__text' @oculto>
-        <p class='t1'>Argentina Programa</p>
+        <p>Argentina Programa</p>
         <p>#YoProgramo</p>
       </div>
     </div>
-    <div class='nav-bar__menu'>
-      <a href='https://www.facebook.com/Emaf87/' target="_blank" class='menu__navlink' @oculto><img
-          src="../../../assets/img/facebook.png" class="navlink__logo-fb"
-          alt="Facebook-logo"></a>
-      <a href='https://www.linkedin.com/in/emmanuel-ferretti-693183a9/' target="_blank" class='menu__navlink'
-        @oculto><img src="../assets/img/linkedin.png" alt="Linkedin-img"
-          class=navlink__logo-in></a>
-      <a href='https://github.com/emaf87' target="_blank" class='menu__navlink' @oculto><img
-          src="../assets/img/github.png" alt="Github-logo" class=navlink__logo-git></a>
-      <a routerLink="/login" *ngIf="!isUserLogin" class='menu__navlink' @oculto>Login</a>
-      <a class='menu__navlink' *ngIf="isUserLogin" (click)="onLogOut()">Logout</a>
+    <div class='nav-bar__menu' @oculto>
+      <p class="menu__display">MENU</p>
+      <ul class="menu__content" >
+        <a href='https://www.facebook.com/Emaf87/' target="_blank" class='menu__navlink' ><img
+            src="../../../assets/img/facebook.png" class="navlink__logo" alt="Facebook-logo"></a>
+        <a href='https://www.linkedin.com/in/emmanuel-ferretti-693183a9/' target="_blank" class='menu__navlink'
+          @oculto><img src="../assets/img/linkedin.png" alt="Linkedin-img" class=navlink__logo></a>
+        <a href='https://github.com/emaf87' target="_blank" class='menu__navlink' @oculto><img
+            src="../assets/img/github.png" alt="Github-logo" class=navlink__logo></a>
+        <a routerLink="/login" *ngIf="!isUserLogin" class='menu__navlink' @oculto>Login</a>
+        <a class='menu__navlink' *ngIf="isUserLogin" (click)="onLogOut()">Logout</a>
+      </ul>
     </div>
     <div class='italia'></div>
   </nav>
